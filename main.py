@@ -1,4 +1,4 @@
-import sl_sys
+import util.sl_sys as sl_sys
 import scr
 
 # Show the main menu
