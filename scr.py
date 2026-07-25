@@ -1,7 +1,7 @@
 from colorama import Fore, Back, Style, init
 
-import sl_sys
-import help_func as helper
+import util.sl_sys as sl_sys
+import util.help_func as helper
 
 # Main menu screen
 def scr_main_menu() -> str:
