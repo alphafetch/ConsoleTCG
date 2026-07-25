@@ -53,3 +53,6 @@ def clean_input(prompt: str, requirements: list[str]) -> str:
             
             # Print a newline so the error message goes underneath the input
             sys.stdout.write("\n")
+
+def quit():
+    pass
