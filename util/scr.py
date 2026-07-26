@@ -64,4 +64,9 @@ def scr_collection() -> None:
 
         pass # [^] Stub
     except FileNotFoundError:
-        raise FileNotFoundError("The save file could not be found and previous checks returned false.")
+        # [;] Function failed, wait for the user to confirm
+        print(styles.format_style("The save file could not be found and previous checks returned false.", "error"))
+        input(styles.format_style("Press any key to continue...", "warn"))
+
+        # [^] Return to the main menu
+        scr_main_menu()
