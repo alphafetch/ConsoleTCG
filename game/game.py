@@ -19,7 +19,7 @@ def new_game() -> None:
     # Create the data dictionary to save to the new file.
     data = {
         "user": {
-            "items": [
+            "attack": [
 
             ],
             "weapons": [
