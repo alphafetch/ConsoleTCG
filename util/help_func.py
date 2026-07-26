@@ -65,8 +65,23 @@ def clean_input(prompt: str, requirements: list[str], disallowances: list[str]) 
             # Print a newline so the error message goes underneath the input
             sys.stdout.write("\n")
 
-def quit() -> None:
+def clear() -> None:
     '''
-    Exits with exit code 0.
+    Quickly and efficiently clears the screen
+
+    :rtype: None
     '''
-    sys.exit(0)
+
+    subprocess.run("cls")
+
+def quit(code:str | int) -> None:
+    '''
+    Exits with exit code 0
+
+    :param code: The exit code for the program
+    :type code: str | int
+
+    :rtype: None
+    '''
+
+    sys.exit(code)
