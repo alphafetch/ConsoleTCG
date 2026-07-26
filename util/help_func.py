@@ -1,5 +1,3 @@
-from colorama import Fore, Style
-
 import sys
 import subprocess
 from . import styles

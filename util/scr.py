@@ -1,5 +1,3 @@
-from colorama import Fore, Back, Style, init
-from pathlib import Path
 import os
 
 import util.sl_sys as sl
@@ -21,9 +19,6 @@ def scr_main_menu() -> str:
 
     # Clear the screen
     helper.clear()
-
-    # [*] This init() function is for colorama
-    init(autoreset=True)
 
     # Print the menu
     print(styles.format_style("| Welcome to Console TCG! |", "bold_cyan"))
