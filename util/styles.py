@@ -3,7 +3,8 @@ from colorama import Fore, Back, Style
 styles = {
     "error": Fore.RED + Style.BRIGHT,
     "success": Fore.GREEN + Style.BRIGHT,
-    "bold_cyan": Fore.CYAN + Style.BRIGHT
+    "bold_cyan": Fore.CYAN + Style.BRIGHT,
+    "warn": Fore.YELLOW + Style.NORMAL
 }
 
 # Used to print a styled message
@@ -26,5 +27,9 @@ def format_style(text: str, style: str) -> str:
             return styles["error"] + text
         case "success":
             return styles["success"] + text
+        case "warn":
+            return styles["warn"] + text
+        case "bold_cyan":
+            return styles["bold_cyan"] + text
         case _:
             return text
