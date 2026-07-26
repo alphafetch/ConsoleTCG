@@ -1,10 +1,15 @@
-import util.sl_sys as sl
 import util.scr as scr
 import game as g
 import util.key_vars as keyvars
 import os
 
+from colorama import init
+
+# This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
+
+# [*] This init() function is for colorama
+init(autoreset=True)
 
 while True:
     # Show the main menu

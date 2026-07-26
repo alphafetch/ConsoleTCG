@@ -1,4 +1,3 @@
-from pathlib import Path
 from util.help_func import quit
 
 import util.sl_sys as sl
