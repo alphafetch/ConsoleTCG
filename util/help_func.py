@@ -73,7 +73,7 @@ def clear() -> None:
     :rtype: None
     '''
 
-    subprocess.run("cls")
+    subprocess.run("cls", shell=True)
 
 def quit(code:str | int) -> None:
     '''
