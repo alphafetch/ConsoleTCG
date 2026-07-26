@@ -41,7 +41,13 @@ def new_game() -> None:
 def game():
     pass
 
-def collection():
+def collection() -> None:
+    '''
+    Open the collection menu.
+
+    :rtype: None
+    '''
+
     scr.scr_collection()
 
 def quit_cli():
