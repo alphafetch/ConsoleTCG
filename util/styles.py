@@ -12,7 +12,7 @@ def format_style(text: str, style: str) -> str:
     Return a styled message.
 
     :param text: The text to join with the style
-    :param type: Types: error, success
+    :param style: Types: error, success
 
     :type text: str
     :type style: str
