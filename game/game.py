@@ -35,6 +35,7 @@ def new_game() -> None:
 
     # Save the dictionary to the user data TOML file for future use.
     sl.save(data, imp.user_data_toml)
+    
     game()
 
 def game() -> None:
