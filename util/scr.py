@@ -1,6 +1,6 @@
 import os
 
-import util.sl_sys as sl
+import util.sl as sl
 import util.help_func as helper
 import util.key_vars as keyvars
 import util.styles as styles
