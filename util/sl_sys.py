@@ -79,7 +79,7 @@ def modify_nested(keys: list[Any], new: Any, f: str) -> str:
         with open(f, 'r', encoding="utf-8") as file:
             data = tmlk.parse(file.read())
     else:
-        # Return error
+        # [;] Return error
         raise FileNotFoundError("File was not found at the given location.")
 
     # 2. LOCATE AND UPDATE DATA POINT
@@ -98,14 +98,14 @@ def modify_nested(keys: list[Any], new: Any, f: str) -> str:
         return f"{e}"
 
     # 3. REWRITE TOML FILE WITH NEW DATA USING TEMP FILE
-    # Create and dump to temp file
-    # INFO: Temp file prevents data loss
+    # [^] Create and dump to temp file
+    # [*] Temp file prevents data loss
     temp_name = f + '.tmp'
     with open(temp_name, 'w', encoding="utf-8") as file:
         file.write(tmlk.dumps(data))
-    # Replace old main file with new temp file
+    # [^] Replace old main file with new temp file
     os.replace(temp_name, f)
 
     # [!] 4. RETURN SUCCESSFUL MODIFICATION
-    return 'Success'
+    return "Success"
 
