@@ -1,13 +1,12 @@
-
 from typing import Any
 
-import json
+import tomlkit as tmlk
 import os
 
 # Saving functionality
-def save(text, f) -> None:
+def save(data, f) -> None:
     '''
-    Save to a JSON file from a dictionary.
+    Save to a TOML file from a dictionary.
 
     :param text: The dictionary to save to the specified file.
     :param f: The file to write to.
@@ -18,20 +17,25 @@ def save(text, f) -> None:
     > **Warning:** This will overwrite the file, or create a new file in the current directory.
     '''
 
-    # Dump dictionary to a JSON file
-    with open(f, 'w') as file:
-        json.dump(text, file, indent=2)
+    # Dump dictionary to a TOML file
+    if os.path.exists(f):
+        with open(f, 'w') as file:
+            file.write(tmlk.dumps(data))
+    else:
+        os.makedirs(os.path.dirname(f), exist_ok=True)
+        with open(f, "w") as file:
+            file.write(tmlk.dumps(data))
 
 # Loading functionality
 def load(f: str) -> dict:
     '''
-    Loads a JSON file to a dictionary.
+    Loads a TOML file to a dictionary.
 
     :param f: The file to read from.
 
     :type f: str
 
-    :return: Dictionary of JSON file.
+    :return: Dictionary of TOML file.
 
     :rtype: dict
 
@@ -44,13 +48,13 @@ def load(f: str) -> dict:
         raise FileNotFoundError("File was not found at the given location.")
 
     # Read the file and return as a dictionary
-    with open(f, 'r') as file:
-        return json.load(file)
+    with open(f, 'r', encoding="utf-8") as file:
+        return tmlk.parse(file.read())
 
 # Modify a specific key
 def modify_nested(keys: list[Any], new: Any, f: str) -> str:
     '''
-    Can update a key at any depth in JSON.
+    Can update a key at any depth in TOML.
 
     :param keys: A *list* of keys leading to the target key.
     :param new: The value to update the targeted key/value with.
@@ -72,8 +76,8 @@ def modify_nested(keys: list[Any], new: Any, f: str) -> str:
 
     # 1. CHECK IF FILE EXISTS
     if os.path.exists(f):
-        with open(f, 'r') as file:
-            data = json.load(file)
+        with open(f, 'r', encoding="utf-8") as file:
+            data = tmlk.parse(file.read())
     else:
         # Return error
         raise FileNotFoundError("File was not found at the given location.")
@@ -81,7 +85,7 @@ def modify_nested(keys: list[Any], new: Any, f: str) -> str:
     # 2. LOCATE AND UPDATE DATA POINT
     current_depth = data
     try:
-        # Loop through key list and navigate through JSON file
+        # Loop through key list and navigate through TOML file
         for key in keys[:-1]:
             current_depth = current_depth[key]
 
@@ -93,12 +97,12 @@ def modify_nested(keys: list[Any], new: Any, f: str) -> str:
         # [;] Return error if failure
         return f"{e}"
 
-    # 3. REWRITE JSON FILE WITH NEW DATA USING TEMP FILE
+    # 3. REWRITE TOML FILE WITH NEW DATA USING TEMP FILE
     # Create and dump to temp file
     # INFO: Temp file prevents data loss
     temp_name = f + '.tmp'
-    with open(temp_name, 'w') as file:
-        json.dump(data, file, indent=2)
+    with open(temp_name, 'w', encoding="utf-8") as file:
+        file.write(tmlk.dumps(data))
     # Replace old main file with new temp file
     os.replace(temp_name, f)
 
