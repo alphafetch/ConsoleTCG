@@ -19,5 +19,3 @@ match u_input:
         g.collection()
     case 4:
         g.quit_cli()
-    case _: 
-        raise ValueError("Value not accepted.")
