@@ -1,7 +1,6 @@
 import util.scr as scr
 import game as g
 import util.key_vars as keyvars
-import os
 
 from colorama import init
 

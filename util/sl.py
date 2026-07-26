@@ -8,10 +8,10 @@ def save(data, f) -> None:
     '''
     Save to a TOML file from a dictionary.
 
-    :param text: The dictionary to save to the specified file.
+    :param data: The dictionary to save to the specified file.
     :param f: The file to write to.
 
-    :type text: dict
+    :type data: dict
     :type f: str
 
     > **Warning:** This will overwrite the file, or create a new file in the current directory.
