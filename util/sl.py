@@ -52,7 +52,7 @@ def load(f: str) -> dict:
         return tmlk.parse(file.read())
 
 # Modify a specific key
-def modify_nested(keys: list[Any], new: Any, f: str) -> str:
+def modify_nested(keys: list[Any], new: Any, f: str) -> bool:
     '''
     Can update a key at any depth in TOML.
 
@@ -64,9 +64,9 @@ def modify_nested(keys: list[Any], new: Any, f: str) -> str:
     :type new: arr | int | str | float | dict
     :type f: str
 
-    :return: String "Success"
+    :return: Returns True or False
 
-    :rtype: str
+    :rtype: bool
 
     :raises FileNotFoundError: If the file cannot be found at the given location.
     :raises Exception: Such as KeyError, TypeError, or FileNotFoundError when writing the change.
@@ -94,8 +94,8 @@ def modify_nested(keys: list[Any], new: Any, f: str) -> str:
         # Set the value of the target key
         current_depth[final] = new
     except(KeyError, TypeError, FileNotFoundError) as e:
-        # [;] Return error if failure
-        return f"{e}"
+        # [;] Return False if failure
+        return False
 
     # 3. REWRITE TOML FILE WITH NEW DATA USING TEMP FILE
     # [^] Create and dump to temp file
@@ -107,5 +107,5 @@ def modify_nested(keys: list[Any], new: Any, f: str) -> str:
     os.replace(temp_name, f)
 
     # [!] 4. RETURN SUCCESSFUL MODIFICATION
-    return "Success"
+    return True
 
