@@ -1,6 +1,7 @@
 from colorama import Fore, Style
 
 import sys
+import subprocess
 from . import styles
 
 def clean_input(prompt: str, requirements: list[str], disallowances: list[str]) -> str:
@@ -23,29 +24,29 @@ def clean_input(prompt: str, requirements: list[str], disallowances: list[str]) 
     
     while True:
         # 1. Clear the error line from the previous iteration.
-        # INFO: \033[K clears from the cursor to the end of the line
+        # [*] \033[K clears from the cursor to the end of the line
         sys.stdout.write("\033[K" + error + "\r")
         
         # 2. If there was an error, move the cursor back to the input line
-        # INFO: \033[#A moves the cursor up # line(s)
+        # [*] \033[#A moves the cursor up # line(s)
         if has_error:
             sys.stdout.write("\033[2A")
         
         # 3. Clear the input line and replace with the prompt
         sys.stdout.write("\033[K" + prompt)
-        # INFO: Flush buffer
+        # [*] Flush buffer
         sys.stdout.flush()
         
         # 4. Get input from the user
         u_input = sys.stdin.readline().strip()
         
         # 5. Validate the input
-        # INFO: Uses the requirements parameter to determine if the input
-        # *     can be accepted or not.
+        # [*] Uses the requirements parameter to determine if the input
+        # [*] can be accepted or not.
         if u_input in requirements:
             # [!] User input passes requirements, clear error slot
             if u_input in disallowances:
-                # [;] Input was disallowed
+                # [^] Input was disallowed
                 has_error = True
                 error = styles.format_style(f"Error: No user data. Please select a different option.", "error")
 
