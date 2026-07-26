@@ -14,6 +14,8 @@ while True:
     # Show the main menu
     u_input = scr.scr_main_menu()
 
+    # Match/case statement to determine correct course of action
+    # for the user's input
     u_input = int(u_input)
     match u_input:
         case 1:
