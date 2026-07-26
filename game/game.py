@@ -3,6 +3,8 @@ from util.help_func import quit
 import util.sl as sl
 import util.scr as scr
 import util.key_vars as keyvars
+import util.styles as styles
+from . import tutorial
 
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
