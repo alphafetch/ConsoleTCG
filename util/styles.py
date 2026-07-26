@@ -7,7 +7,7 @@ styles = {
 }
 
 # Used to print a styled message
-def format_style(text: str, style: str):
+def format_style(text: str, style: str) -> str:
     '''
     Return a styled message.
 

@@ -38,7 +38,7 @@ def new_game() -> None:
     sl.save(data, imp.user_data_toml)
     game()
 
-def game():
+def game() -> None:
     pass
 
 def collection() -> None:
@@ -50,5 +50,5 @@ def collection() -> None:
 
     scr.scr_collection()
 
-def quit_cli():
+def quit_cli() -> None:
     quit()
