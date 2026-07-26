@@ -4,6 +4,7 @@ import util.sl as sl
 import util.scr as scr
 import util.key_vars as keyvars
 
+# This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
 
 def new_game() -> None:

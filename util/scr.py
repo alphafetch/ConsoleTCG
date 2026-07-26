@@ -5,7 +5,7 @@ import util.help_func as helper
 import util.key_vars as keyvars
 import util.styles as styles
 
-# [*] Important variable storage (such as user data directories and files)
+# This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
 
 # Main menu screen
