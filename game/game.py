@@ -42,8 +42,38 @@ def new_game() -> None:
     game()
 
 def game() -> None:
-    pass
+    '''
+    Runs the main game.
 
+    :rtype: None
+    '''
+
+    # 1. LOAD THE USER DATA FROM THE USERDATA.TOML FILE
+    try:
+        data = sl.load(imp.user_data_toml)
+    except FileNotFoundError:
+        # [;] Function failed, wait for the user to confirm
+        print(styles.format_style("The save file could not be found and previous checks returned false.", "error"))
+        input(styles.format_style("Press any key to continue...", "warn"))
+
+        # [^] Return to the main menu
+        return
+
+    # 2. CHECK IF THE USER IS A NEW PLAYER
+    if data["user"]["stats"]["new_game"] == 1:
+        # [!] User is a new player, run the tutorial
+        t_success = tutorial.run()
+
+        if t_success:
+            pass # ...
+        else:
+            # [;] Function failed, wait for the user to confirm
+            print(styles.format_style("The data edit did not succeed.", "error"))
+            input(styles.format_style("Press any key to continue...", "warn"))
+
+            # [^] Return to the main menu
+            return
+        
 def collection() -> None:
     '''
     Open the collection menu.
