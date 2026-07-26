@@ -69,4 +69,4 @@ def scr_collection() -> None:
         input(styles.format_style("Press any key to continue...", "warn"))
 
         # [^] Return to the main menu
-        scr_main_menu()
+        return
