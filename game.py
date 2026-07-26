@@ -51,4 +51,4 @@ def collection() -> None:
     scr.scr_collection()
 
 def quit_cli() -> None:
-    quit()
+    quit(0)
