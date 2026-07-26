@@ -7,7 +7,7 @@ import util.help_func as helper
 import util.key_vars as keyvars
 import util.styles as styles
 
-# INFO: Important variable storage (such as user data directories and files)
+# [*] Important variable storage (such as user data directories and files)
 imp = keyvars.KeyVars()
 
 # Main menu screen
@@ -19,8 +19,13 @@ def scr_main_menu() -> str:
     :rtype: str
     '''
 
+    # Clear the screen
+    helper.clear()
+
+    # [*] This init() function is for colorama
     init(autoreset=True)
 
+    # Print the menu
     print(styles.format_style("| Welcome to Console TCG! |", "bold_cyan"))
     print(styles.format_style("---------------------------", "bold_cyan"))
     print()
@@ -31,9 +36,12 @@ def scr_main_menu() -> str:
 
     print()
 
+    # Get user input and return it
     if os.path.exists(imp.user_data_toml):
+        # [!] User has a save file
         u_input = helper.clean_input("> ", ["1", "2", "3", "4"], [])
     else:
+        # [^] User does not have a save file
         u_input = helper.clean_input("> ", ["1", "2", "3", "4"], ["1", "3"])
 
     return u_input
@@ -43,11 +51,17 @@ def scr_collection() -> None:
     Show the collection screen.
     '''
 
-    # Set user data file path for quick access
+    # [*] Clears the screen
+    helper.clear()
+
+    # 1. SET USER DATA PATH FOR QUICK ACCESS
     path = imp.user_data_toml
 
-    data = sl.load(path)
-    if data is None:
-        raise FileNotFoundError("Save file missing or unreadable.")
-    else:
-        pass
+    # 2. ATTEMPT TO SHOW COLLECTIONS SCREEN
+    try:
+        # 3. LOAD THE USER DATA FROM THE USERDATA.TOML FILE
+        data = sl.load(path)
+
+        pass # [^] Stub
+    except FileNotFoundError:
+        raise FileNotFoundError("The save file could not be found and previous checks returned false.")
