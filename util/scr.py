@@ -21,8 +21,8 @@ def scr_main_menu() -> str:
     helper.clear()
 
     # Print the menu
-    print(styles.format_style("| Welcome to Console TCG! |", "bold_cyan"))
-    print(styles.format_style("---------------------------", "bold_cyan"))
+    print(styles.format_style("│ Welcome to Console TCG! │", "bold_cyan"))
+    print(styles.format_style("└─────────────────────────┘", "bold_cyan"))
     print()
     print("1. Play Game")
     print("2. New Game (OVERWRITES)")
@@ -44,6 +44,8 @@ def scr_main_menu() -> str:
 def scr_collection() -> None:
     '''
     Show the collection screen.
+
+    :rtype: None
     '''
 
     # [*] Clears the screen
@@ -65,3 +67,30 @@ def scr_collection() -> None:
 
         # [^] Return to the main menu
         return
+
+def scr_tutorial() -> None:
+    '''
+    Show tutorial screen.
+
+    :rtype: None
+    '''
+
+    print(styles.format_style("""
+    │  Console TCG  │
+    ├───────────────┤
+    │   The first   │
+    │  CLI trading  │
+    │   card game!  │
+    └───────────────┘
+    
+    """, "bold_cyan")) 
+
+    print()
+
+    print("How to play:")
+    print("Roll cards for tokens!")
+    print("Fight enemy cards!")
+    print("Win tokens!")
+    print("Repeat!")
+
+    return
