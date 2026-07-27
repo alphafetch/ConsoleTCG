@@ -1,9 +1,10 @@
 import os
+import time
 
-import util.sl as sl
-import util.help_func as helper
-import util.key_vars as keyvars
-import util.styles as styles
+from . import sl
+from . import help_func as helper
+from . import key_vars as keyvars
+from . import styles
 
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()

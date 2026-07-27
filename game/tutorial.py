@@ -1,6 +1,7 @@
 import util.sl as sl
 import util.key_vars as keyvars
 import util.scr as scr
+import util.help_func as helper
 
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()

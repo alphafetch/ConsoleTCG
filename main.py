@@ -1,8 +1,9 @@
+from colorama import init
+
 import util.scr as scr
-import game.game as g
 import util.key_vars as keyvars
 
-from colorama import init
+import game.menu_logic as g
 
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
