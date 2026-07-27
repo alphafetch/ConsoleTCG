@@ -8,17 +8,19 @@ from . import key_vars as keyvars
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
 
-def clean_input(prompt: str, requirements: list[str], disallowances: list[str]) -> str:
+def clean_input(prompt: str, requirements: list[str], disallowances: list[str] = [], disallow_message: str = "") -> str:
     '''
     Get output that (if the wrong input is entered) resets the line with a customizable error message.
 
     :param prompt: The prompt used for the input
     :param requirements: What the user input must satisfy to continue
     :param disallowances: What the user input cannot be
+    :param disallow_message: What the output is if the user inputs a value that is disallowed
 
     :type prompt: str
     :type requirements: list[str]
     :type disallowances: list[str]
+    :type disallow_message: str
 
     :return: Returns the correct user input, iterates until it returns this.
     :rtype: str
@@ -52,7 +54,7 @@ def clean_input(prompt: str, requirements: list[str], disallowances: list[str]) 
             if u_input in disallowances:
                 # [^] Input was disallowed
                 has_error = True
-                error = styles.format_style(f"Error: No user data. Please select a different option.", "error")
+                error = str(disallow_message)
 
                 # Print a newline so the error message goes underneath the input
                 sys.stdout.write("\n")
