@@ -8,7 +8,7 @@ from . import key_vars as keyvars
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
 
-def clean_input(prompt: str, requirements: list[str], disallowances: list[str] = [], disallow_message: str = "") -> str:
+def clean_input(prompt: str, requirements: list[str], disallowances: list[str] | None = None, disallow_message: str = "") -> str:
     '''
     Get output that (if the wrong input is entered) resets the line with a customizable error message.
 
@@ -25,6 +25,12 @@ def clean_input(prompt: str, requirements: list[str], disallowances: list[str] =
     :return: Returns the correct user input, iterates until it returns this.
     :rtype: str
     '''
+
+    # Check if there are no disallowances first 
+    # and if it is, set it to an empty list
+    if disallowances is None:
+        disallowances = []
+
     error = ""
     has_error = False
     
