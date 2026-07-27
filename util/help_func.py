@@ -1,6 +1,12 @@
 import sys
 import subprocess
+
 from . import styles
+from . import sl
+from . import key_vars as keyvars
+
+# This contains important variables such as the user data directory
+imp = keyvars.KeyVars()
 
 def clean_input(prompt: str, requirements: list[str], disallowances: list[str]) -> str:
     '''
