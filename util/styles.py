@@ -25,14 +25,4 @@ def format_style(text: str, style: str) -> str:
     :rtype: str
     '''
 
-    match style:
-        case "error":
-            return styles["error"] + text
-        case "success":
-            return styles["success"] + text
-        case "warn":
-            return styles["warn"] + text
-        case "bold_cyan":
-            return styles["bold_cyan"] + text
-        case _:
-            return text
+    return styles[style] + text
