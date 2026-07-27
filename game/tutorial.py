@@ -16,6 +16,12 @@ def run() -> bool:
 
     scr.scr_tutorial()
 
+    helper.clear()
+
+    scr.scr_starter_card()
+
+    helper.clear()
+
     nested_success = sl.modify_nested(["user", "stats", "new_game"], 0, imp.user_data_toml)
     if nested_success:
         # [!] Edit was successful, continue with game()

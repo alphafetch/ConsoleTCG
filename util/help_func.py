@@ -70,6 +70,51 @@ def clean_input(prompt: str, requirements: list[str], disallowances: list[str]) 
             # Print a newline so the error message goes underneath the input
             sys.stdout.write("\n")
 
+def save_card(card: dict) -> None:
+    '''
+    Saves a card to the userdata.toml file.
+
+    :param card: A dictionary in the correct format for the card
+    :type card: dict
+
+    :rtype: None
+    '''
+
+    # [*] This function cannot be util.sl.modify_nested because
+    # [*] this appends a dict to a list in a dictionary, instead
+    # [*] of just modifying a key inside of a dictionary
+
+    # 1. LOAD THE USER DATA
+    user = sl.load(imp.user_data_toml)
+
+    # 2. MODIFY IT TO ADD THE NEW CARD
+    user["user"]["attack"].append(dict(card))
+
+    # 3. SAVE THE USER DATA
+    sl.save(user, imp.user_data_toml)
+
+
+def print_card(card: dict) -> None:
+    '''
+    Print a given card to the console.
+
+    :param card: A dictionary in the correct format for the card
+    :type card: dict
+
+    :rtype: None
+    '''
+
+    # This uses the inputted dictionary 
+    # to show the card info to the user
+    print(styles.format_style(f"""┌───────────────┐
+{card["name"]}
+DMG: {card["damage"]}
+MANA: {card["mana_cost"]}
+TOK: {card["cost"]}
+TYPE: {card["type"]}
+└───────────────┘
+DESC: {card["desc"]}""", "bold_cyan"))
+
 def clear() -> None:
     '''
     Quickly and efficiently clears the screen
