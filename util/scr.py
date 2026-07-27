@@ -147,6 +147,7 @@ def scr_status() -> bool:
     '''
     The status menu for the main game.
 
+    :return: Returns a bool signaling if game() should continue or not
     :rtype: bool
     '''
 
