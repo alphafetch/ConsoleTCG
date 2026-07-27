@@ -91,3 +91,88 @@ def scr_tutorial() -> None:
     print("Repeat!")
 
     return
+
+def scr_starter_card() -> None:
+    '''
+    A small menu to choose the player's starting card.
+
+    :rtype: None
+    '''
+
+    # Clear the screen
+    helper.clear()
+
+    # 1. LOAD THE CARDS TOML FILE
+    cards = sl.load(imp.cards_toml)
+
+    # 2. CREATE AN EMPTY STARTER DECK LIST
+    starters = []
+
+    # 3. ITERATE THROUGH ATTACK CARDS, IF IT IS A STARTER
+    #    APPEND THE CARD TO THE LIST
+    for id, card in cards["atk"].items():
+        if card["starter"] == True:
+            card["id"] = id
+            starters.append(card)
+        else: continue
+
+    # 4. FOR EVERY STARTER CARD, PRINT IT AND ASK THE USER
+    #    TO TAKE IT OR LEAVE IT
+    for card in starters:
+        helper.clear()
+        helper.print_card(card)
+        print()
+        input(styles.format_style("Press any key to continue to the next card...", "warn"))
+        continue
+
+    helper.clear()
+
+    # 5. ASK THE USER TO CHOOSE THE CARD THEY WANT
+    card = helper.clean_input("Which card would you like to choose? (1-5): ", ["1", "2", "3", "4", "5"])
+
+    # 6. SAVE THE CARD TO THE USER'S DATA FILE
+    helper.clear() 
+    print(styles.format_style("Saving card...", "progress"))
+
+    # [*] This function is a helper function to save
+    # [*] any and all cards to the userdata.toml file
+    helper.save_card(starters[int(card) - 1])
+
+    # Sleep so the user sees the "Saving card..." line
+    time.sleep(0.5)
+
+    return
+
+def scr_status() -> bool:
+    '''
+    The status menu for the main game.
+
+    :rtype: bool
+    '''
+
+    # Clear the screen
+    helper.clear()
+
+    # Load the user data
+    data = sl.load(imp.user_data_toml)
+
+    # Print the stat menu
+    print(styles.format_style(f"""┌───────────────┐
+│ Statistics:
+│ Wins: {data["user"]["stats"]["wins"]}
+│ Losses: {data["user"]["stats"]["losses"]}
+│ XP: {data["user"]["stats"]["xp"]}
+│ Max HP: {data["user"]["stats"]["max_hp"]}
+└───────────────┘\n""", "bold_cyan"))
+    print("""1. Career (TBA)
+2. Exhibition (WIP)
+3. Decks (TBA)
+4. Main Menu\n""")
+
+    u_input = helper.clean_input("> ", ["1", "2", "3", "4"], ["1", "2", "3"], styles.format_style("Error: That option is not ready yet.", "error"))
+
+    match int(u_input):
+        case 4:
+            return True
+        case _:
+            return False
