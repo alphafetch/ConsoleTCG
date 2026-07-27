@@ -4,7 +4,10 @@ styles = {
     "error": Fore.RED + Style.BRIGHT,
     "success": Fore.GREEN + Style.BRIGHT,
     "bold_cyan": Fore.CYAN + Style.BRIGHT,
-    "warn": Fore.YELLOW + Style.NORMAL
+    "warn": Fore.YELLOW + Style.NORMAL,
+    "progress": Fore.MAGENTA + Style.NORMAL,
+    "cyan_back": Fore.BLACK + Back.CYAN + Style.NORMAL,
+    "cyan": Fore.CYAN + Style.NORMAL
 }
 
 # Used to print a styled message
