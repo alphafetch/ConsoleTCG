@@ -4,6 +4,7 @@ import util.sl as sl
 import util.scr as scr
 import util.key_vars as keyvars
 import util.styles as styles
+
 from . import tutorial
 
 # This contains important variables such as the user data directory
@@ -29,9 +30,11 @@ def new_game() -> None:
 
             ],
             "stats": {
-                "health": 0,
                 "new_game": 1,
-                "xp": 0
+                "xp": 0,
+                "wins": 0,
+                "losses": 0,
+                "max_hp": 100
             }
         },
     }
@@ -48,31 +51,40 @@ def game() -> None:
     :rtype: None
     '''
 
-    # 1. LOAD THE USER DATA FROM THE USERDATA.TOML FILE
-    try:
-        data = sl.load(imp.user_data_toml)
-    except FileNotFoundError:
-        # [;] Function failed, wait for the user to confirm
-        print(styles.format_style("The save file could not be found and previous checks returned false.", "error"))
-        input(styles.format_style("Press any key to continue...", "warn"))
-
-        # [^] Return to the main menu
-        return
-
-    # 2. CHECK IF THE USER IS A NEW PLAYER
-    if data["user"]["stats"]["new_game"] == 1:
-        # [!] User is a new player, run the tutorial
-        t_success = tutorial.run()
-
-        if t_success:
-            pass # ...
-        else:
+    while True:
+        # 1. LOAD THE USER DATA FROM THE USERDATA.TOML FILE
+        try:
+            data = sl.load(imp.user_data_toml)
+        except FileNotFoundError:
             # [;] Function failed, wait for the user to confirm
-            print(styles.format_style("The data edit did not succeed.", "error"))
+            print(styles.format_style("The save file could not be found and previous checks returned false.", "error"))
             input(styles.format_style("Press any key to continue...", "warn"))
 
             # [^] Return to the main menu
             return
+
+        # 2. CHECK IF THE USER IS A NEW PLAYER
+        if data["user"]["stats"]["new_game"] == 1:
+            # [!] User is a new player, run the tutorial
+            t_success = tutorial.run()
+
+            if t_success:
+                # 3. IF THE TUTORIAL WAS SUCCESSFUL, RETURN TO THE MENU
+                return
+            else:
+                # [;] Function failed, wait for the user to confirm
+                print(styles.format_style("The data edit did not succeed.", "error"))
+                input(styles.format_style("Press any key to continue...", "warn"))
+
+                # [^] Return to the main menu
+                return
+        else:
+            # Move to the status menu
+            ret = scr.scr_status()
+            if ret:
+                return
+            else:
+                continue
         
 def collection() -> None:
     '''
