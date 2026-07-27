@@ -76,17 +76,13 @@ def scr_tutorial() -> None:
     :rtype: None
     '''
 
-    print(styles.format_style("""
-    │  Console TCG  │
-    ├───────────────┤
-    │   The first   │
-    │  CLI trading  │
-    │   card game!  │
-    └───────────────┘
-    
-    """, "bold_cyan")) 
-
-    print()
+    print(styles.format_style("""┌───────────────┐
+│  Console TCG  │
+├───────────────┤
+│   The first   │
+│  CLI trading  │
+│   card game!  │
+└───────────────┘""", "bold_cyan")) 
 
     print("How to play:")
     print("Roll cards for tokens!")
