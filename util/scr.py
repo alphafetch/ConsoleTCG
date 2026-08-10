@@ -374,9 +374,11 @@ def scr_show_card_in_deck(card: int, deck: int) -> None:
         category = helper.get_category_from_id(card_id)
         # Print the card and ask if the user wants to select a new one or quit
         helper.print_card(cards[category][card_id], category)
-        u_input = helper.clean_input("\nEdit card? (Y/n): ", ["Y", "N", "y", "n"])
+        u_input = helper.clean_input("\nEdit card? (Y/n, D/d to delete): ", ["Y", "N", "D", "d", "y", "n"])
         if u_input.upper() == "N":
             return
+        elif u_input.upper() == "D":
+            scr_delete_card_in_deck(card, "deck" + str(deck))
         else: scr_edit_card_in_deck(card_id, "deck" + str(deck), card) # Edit the card
     else:
         scr_edit_card_in_deck(card_id, "deck" + str(deck), card)
@@ -471,5 +473,29 @@ def scr_edit_card_in_deck(card_id: str, deck: str, index: int) -> None:
     helper.clear()
 
     print(styles.format_style("Card saved!", "progress"))
+    time.sleep(1)
+    return
+
+def scr_delete_card_in_deck(card: int, deck: str) -> None:
+    '''
+    Deletes a card in a deck.
+
+    :param card: The card index to remove
+    :type card: int
+
+    :param deck: The deck to remove it from
+    :type deck: str
+
+    :rtype: None
+    '''
+
+    # Clear the screen
+    helper.clear()
+
+    # Find the correct card in the decks file and remove it
+    sl.modify_nested(["decks", deck, "cards", card], "empty", imp.user_decks_toml)
+
+    # Give output to the user
+    print(styles.format_style("Card removed from deck!", "progress"))
     time.sleep(1)
     return
