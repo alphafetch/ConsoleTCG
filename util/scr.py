@@ -206,3 +206,143 @@ def scr_diff_select_exhibition() -> int:
     diff = helper.clean_input("> ", ["1", "2", "3", "4", "5"])
 
     return int(diff)
+
+def scr_decks() -> None:
+    '''
+    Customize decks. Empty slots (in a new OR old file) are represented by "empty".
+
+    :rtype: None
+    '''
+
+    # Clear the screen
+    helper.clear()
+
+    # Deck Selection
+    if not os.path.exists(imp.user_decks_toml):
+        decks = {
+            "decks": {
+                "deck1": {
+                    "cards": [
+                        "empty", "empty", "empty", "empty", 
+                        "empty", "empty", "empty", "empty"
+                    ]
+                },
+                "deck2": {
+                    "cards": [
+                        "empty", "empty", "empty", "empty", 
+                        "empty", "empty", "empty", "empty"
+                    ]
+                },
+                "deck3": {
+                    "cards": [
+                        "empty", "empty", "empty", "empty", 
+                        "empty", "empty", "empty", "empty"
+                    ]
+                }
+            }
+        }
+
+        sl.save(decks, imp.user_decks_toml)
+
+    decks = sl.load(imp.user_decks_toml)
+
+    # Check if decks are empty or not
+    deck1_empty = None
+    deck2_empty = None
+    deck3_empty = None
+
+    for id in decks["decks"]["deck1"]["cards"]:
+        if id == "empty":
+            continue
+        else:
+            deck1_empty = "In Use"
+            break
+
+    for id in decks["decks"]["deck2"]["cards"]:
+            if id == "empty":
+                continue
+            else:
+                deck2_empty = "In Use"
+                break
+
+    for id in decks["decks"]["deck3"]["cards"]:
+            if id == "empty":
+                continue
+            else:
+                deck3_empty = "In Use"
+                break
+
+    # Set the decks to empty if they haven't already been in use
+    if deck1_empty is None: deck1_empty = "Empty"
+    if deck2_empty is None: deck2_empty = "Empty"
+    if deck3_empty is None: deck3_empty = "Empty"
+
+    # Print decks (empty or in use)
+    print(styles.format_style(f"Deck 1: {deck1_empty}", "cyan"))
+    print(styles.format_style(f"Deck 2: {deck2_empty}", "cyan"))
+    print(styles.format_style(f"Deck 3: {deck3_empty}\n", "cyan"))
+
+    # Ask which deck to edit
+    deck = helper.clean_input("Deck # to Edit (Q to quit): ", ["1", "2", "3", "Q", "q"])
+
+    # If the user wants to quit, return
+    if deck == "Q" or deck == "q":
+        # [^] Return to the menu
+        return
+
+    # Move to deck-specific menu
+    scr_show_deck(int(deck))
+
+def scr_show_deck(deck_num: int) -> None:
+    '''
+    Show the specified deck.
+
+    :param deck_num: The deck number to show
+    :type deck_num: int
+
+    :rtype: None
+    '''
+
+    while True:
+        # Clear the screen
+        helper.clear()
+
+        # Load the deck
+        decks = sl.load(imp.user_decks_toml)
+        cards = sl.load(imp.cards_toml)
+
+        # Load each card in deck to a list
+        for i, card in enumerate(decks["decks"]["deck" + str(deck_num)]["cards"]):
+            if card == "empty":
+                # Prints: #. Empty [CAT]
+                print(f"{i + 1}. Empty [{helper.get_category_from_index(i)}]")
+            else:
+                # Prints: #. [NAME] [CAT]
+                correct_color = (
+                    "red" if helper.get_category_from_index(i) == "ATK"
+                    else "yellow" if helper.get_category_from_index(i) == "WPN"
+                    else "cyan" if helper.get_category_from_index(i) == "AMR"
+                    else "cyan"
+                )
+                
+                print(
+                    styles.format_style(
+                        f"{i + 1}. {cards[helper.get_category_from_index(i)][card]["name"]} [{helper.get_category_from_index(i)}]",
+                        correct_color,
+                    ),
+                )
+
+        print()
+
+        # See what card the user wants to edit (or quit)
+        u_input = helper.clean_input(
+            "Select card to edit (Q to quit): ", 
+            ["1", "2", "3", "4", "5", "6", "7", "8", "Q", "q"],
+        )
+
+        if u_input.upper() == "Q":
+            break
+        else:
+            scr_show_card_in_deck(int(u_input) - 1, deck_num)
+
+    return
