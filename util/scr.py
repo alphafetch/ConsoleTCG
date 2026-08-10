@@ -231,11 +231,12 @@ def scr_diff_select_exhibition() -> int:
 
     return int(diff)
 
-def scr_career() -> None:
+def scr_career() -> bool | None:
     '''
     The main career menu with worlds.
 
-    :rtype: None
+    :return: The execution success
+    :rtype: bool | None
     '''
 
     # Clear the screen
@@ -292,7 +293,7 @@ def scr_career() -> None:
         readchar.readkey()
         return
 
-    return
+    return scr_world_select()
 
 def scr_win_career(world: int, opp: dict[str, Any], num: int) -> None:
     '''
