@@ -113,7 +113,7 @@ def scr_starter_card() -> None:
 
     # 3. ITERATE THROUGH ATTACK CARDS, IF IT IS A STARTER
     #    APPEND THE CARD TO THE LIST
-    for id, card in cards["atk"].items():
+    for id, card in cards["ATK"].items():
         if card["starter"] == True:
             card["id"] = id
             starters.append(card)
@@ -139,7 +139,7 @@ def scr_starter_card() -> None:
 
     # [*] This function is a helper function to save
     # [*] any and all cards to the userdata.toml file
-    helper.save_card(starters[int(card) - 1])
+    helper.save_card(starters[int(card) - 1], "ATK")
 
     # Sleep so the user sees the "Saving card..." line
     time.sleep(0.5)
