@@ -22,8 +22,10 @@ def run() -> bool:
 
     helper.clear()
 
-    nested_success = sl.modify_nested(["user", "stats", "new_game"], 0, imp.user_data_toml)
-    if nested_success:
+    nested_success = sl.modify_nested(["user", "stats", "new_game"], False, imp.user_data_toml)
+    nested_unlock = sl.modify_nested(["unlocks", "decks"], True, imp.user_data_toml)
+    nested_career = sl.modify_nested(["unlocks", "career", "unlocked"], True, imp.user_data_toml)
+    if nested_success and nested_unlock and nested_career:
         # [!] Edit was successful, continue with game()
         return True
     else:
