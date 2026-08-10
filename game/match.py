@@ -13,7 +13,7 @@ from math import ceil
 
 imp = keyvars.KeyVars()
 
-def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
+def start_match(world: int, enemy: Opponent, number: int) -> bool:
     '''
     Play a match using an Opponent class.
 
@@ -21,7 +21,7 @@ def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
     :type world: int
 
     :param enemy: The enemy the user is fighting against
-    :type enemy: dict[str, Any]
+    :type enemy: Opponent
 
     :param number: The enemy's number in the world
     :type number: int
@@ -38,7 +38,7 @@ def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
     decks = sl.load(imp.user_decks_toml)
     cards = sl.load(imp.cards_toml)
     u_health_max = user["user"]["stats"]["max_hp"]
-    op_health_max = enemy["health"]
+    op_health_max = enemy.health
     u_health = 0
     op_health = 0
 
@@ -121,7 +121,7 @@ def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
                 print("Enemy Poison: " + str(poison_e))
                 # 1f. Show player colored deck
                 print(styles.format_style("ENEMY DECK:", "red"))
-                for card in enemy["deck"]:
+                for card in enemy.deck:
                     formatted_card = "| " + helper.format_card_line(card, cards)
                     if card in used_cards_e:
                         formatted_card += styles.format_style(" [USED]", "error")
@@ -155,7 +155,7 @@ def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
                     case "ATK":
                         # 3. DAMAGE THE ENEMY
                         damage = int(target["damage"])
-                        name = enemy["name"]
+                        name = enemy.name
 
                         dmg_random1 = round(damage / 12) - random.randint(-3, 2)
                         dmg_random2 = round(damage / 10) + random.randint(-2, 3)
@@ -169,7 +169,7 @@ def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
 
                         damage += damage_inc_u + poison_e
 
-                        match enemy["diff"]:
+                        match enemy.diff:
                             case 1: name = styles.format_style(name, "green")
                             case 2: name = styles.format_style(name, "cyan")
                             case 3: name = styles.format_style(name, "yellow")
@@ -235,7 +235,7 @@ def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
             enemy_wpns = []
             enemy_amrs = []
             # Get how many of each category there is
-            for card_id in enemy["deck"]:
+            for card_id in enemy.deck:
                 match card_id[3:6].upper():
                     case "ATK": 
                         if not card_id in used_cards_e: enemy_atks.append(card_id)
@@ -244,9 +244,9 @@ def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
                     case "AMR": 
                         if not card_id in used_cards_e: enemy_amrs.append(card_id)
             # Calculate percentages for each category
-            atk_percent = len(enemy_atks) / len(enemy["deck"])
-            wpn_percent = len(enemy_wpns) / len(enemy["deck"]) 
-            amr_percent = len(enemy_amrs) / len(enemy["deck"])
+            atk_percent = len(enemy_atks) / len(enemy.deck)
+            wpn_percent = len(enemy_wpns) / len(enemy.deck) 
+            amr_percent = len(enemy_amrs) / len(enemy.deck)
 
             # Decide which category to use a card from
             # [*]                                  V This list has the options to select based on the weights
@@ -266,11 +266,11 @@ def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
                     # 3. DAMAGE THE PLAYER
                     damage = int(target["damage"])
                     name = "You"
-                    e_name = enemy["name"]
+                    e_name = enemy.name
 
                     dmg_random1 = round(damage / 12) - random.randint(-3, 2)
                     dmg_random2 = round(damage / 10) + random.randint(-2, 3)
-                    crit = True if random.randint(1, 100) <= enemy["crit"] else False
+                    crit = True if random.randint(1, 100) <= enemy.crit else False
 
                     # Randomize the damage
                     damage += random.randint(min(dmg_random1, dmg_random2), max(dmg_random1, dmg_random2))
@@ -280,7 +280,7 @@ def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
 
                     damage += damage_inc_e + poison_u
 
-                    match enemy["diff"]:
+                    match enemy.diff:
                         case 1: e_name = styles.format_style(e_name, "green")
                         case 2: e_name = styles.format_style(e_name, "cyan")
                         case 3: e_name = styles.format_style(e_name, "yellow")
@@ -325,7 +325,7 @@ def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
                     effects = helper.parse_effect(effect)
 
             # Enemy reshuffling
-            if set(used_cards_e) == set(enemy["deck"]):
+            if set(used_cards_e) == set(enemy.deck):
                 # [;] Enemy deck is used up, reshuffle
                 helper.clear()
                 used_cards_e = []

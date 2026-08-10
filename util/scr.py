@@ -3,8 +3,6 @@ import time
 import readchar
 import random
 
-from typing import Any
-
 from . import sl
 from . import help_func as helper
 from . import key_vars as keyvars
@@ -12,6 +10,7 @@ from . import styles
 
 from game import exhibition as exhib
 from game import match as matchmaker
+from game import opponent as opp
 
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
@@ -295,15 +294,15 @@ def scr_career() -> bool | None:
 
     return scr_world_select()
 
-def scr_win_career(world: int, opp: dict[str, Any], num: int) -> None:
+def scr_win_career(world: int, opponent: opp.Opponent, num: int) -> None:
     '''
     Win screen after a battle.
 
     :param world: The world the player just beat an enemy in
     :type world: int
 
-    :param opp: The opponent dictionary
-    :type opp: dict[str, Any]
+    :param opponent: The opponent object
+    :type opponent: Opponent
 
     :param num: The enemy number
     :type num: int
@@ -337,11 +336,11 @@ def scr_win_career(world: int, opp: dict[str, Any], num: int) -> None:
 
     # 4. PAYOUT
     # Tokens
-    plus_toks = opp["tokens"]
+    plus_toks = opponent.tokens
     new_toks = data["user"]["stats"]["tokens"] + plus_toks
     sl.modify_nested(["user", "stats", "tokens"], new_toks, imp.user_data_toml)
     # XP
-    plus_xp = round(opp["xp"] * random.uniform(0.8, 1.2))
+    plus_xp = round(opponent.xp * random.uniform(0.8, 1.2))
     new_xp = data["user"]["stats"]["xp"] + plus_xp
     sl.modify_nested(["user", "stats", "xp"], new_xp, imp.user_data_toml)
 
@@ -378,6 +377,9 @@ def scr_win_career(world: int, opp: dict[str, Any], num: int) -> None:
     readchar.readkey()
 
     return
+
+def scr_lose_career():
+    pass
 
 def scr_world_select() -> None | bool:
     '''
@@ -468,10 +470,19 @@ def scr_enemy_select(world: int) -> None | bool:
     enemy = helper.clean_input("Select enemy: ", [(str(x + 1)) for x in range(len(career["world" + str(world)]))], disallowed_list, "Defeat the previous enemy first!")
 
     opponent = allowed_list[int(enemy) - 1]
+    opponent_ = opp.Opponent(
+        opponent["diff"], opponent["name"],
+        opponent["health"], opponent["reward"],
+        opponent["deck"], opponent["tokens"],
+        opponent["xp"], opponent["id"],
+        opponent["weak-el"], opponent["res-el"],
+        opponent["weak-mat"], opponent["res-mat"],
+        opponent["crit"]
+    )
 
-    return scr_show_enemy(world, opponent, int(enemy))
+    return scr_show_enemy(world, opponent_, int(enemy))
 
-def scr_show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | bool:
+def scr_show_enemy(world: int, opponent: opp.Opponent, enemy: int) -> None | bool:
     '''
     Shows an enemy's stats before a battle.
 
@@ -479,7 +490,7 @@ def scr_show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | b
     :type world: int
 
     :param opponent: The enemy to display
-    :type opponent: dict[str, Any]
+    :type opponent: Opponent
 
     :param enemy: The enemy's number in the world
     :type enemy: int
@@ -496,19 +507,19 @@ def scr_show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | b
 
     # Show enemy statistics
     # 1. Main stats
-    print(styles.format_style(f"{opponent["name"]} | STATS:", "bold_cyan"))
-    print(styles.format_style(f"HP: {opponent["health"]}", "cyan"))
-    print(styles.format_style(f"CRIT %: {str(opponent["crit"])}%", "cyan"))
-    print(styles.format_style(f"TOK: {str(opponent["tokens"])}", "cyan"))
-    print(styles.format_style(f"REW: {helper.format_card_line(opponent["reward"], cards)}", "cyan"))
+    print(styles.format_style(f"{opponent.name} | STATS:", "bold_cyan"))
+    print(styles.format_style(f"HP: {opponent.health}", "cyan"))
+    print(styles.format_style(f"CRIT %: {str(opponent.crit)}%", "cyan"))
+    print(styles.format_style(f"TOK: {str(opponent.tokens)}", "cyan"))
+    print(styles.format_style(f"REW: {helper.format_card_line(opponent.reward, cards)}", "cyan"))
 
     # 2. Difficulty level
     stars = ""
-    for star in range(opponent["diff"]):
+    for _ in range(opponent.diff):
         stars += "★"
-    for blank in range(5 - len(stars)):
+    for _ in range(5 - len(stars)):
         stars += "☆"
-    match opponent["diff"]:
+    match opponent.diff:
         case 1: stars = styles.format_style(stars, "green")
         case 2: stars = styles.format_style(stars, "cyan")
         case 3: stars = styles.format_style(stars, "yellow")
@@ -520,15 +531,15 @@ def scr_show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | b
 
     # 3. Deck
     print(styles.format_style("DECK:", "red"))
-    for card in opponent["deck"]:
+    for card in opponent.deck:
         print(helper.format_card_line(card, cards))
 
     print("----------------------")
 
     # 4. Resistances and weaknesses
-    print(styles.format_style("ELEMENTAL WEAKNESSES:", "green"))
-    if opponent["weak-el"]:
-        for weakness in opponent["weak-el"]:
+    print(styles.format_style("WEAKNESSES:", "green"))
+    if opponent.weak_el or opponent.weak_mat:
+        for weakness in opponent.weak_el + opponent.weak_mat:
             weakness_formatted = weakness.capitalize()
             match weakness_formatted:
                 case "Fire": weakness_formatted = styles.format_style(weakness_formatted, "red")
@@ -536,13 +547,17 @@ def scr_show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | b
                 case "Earth": weakness_formatted = styles.format_style(weakness_formatted, "green")
                 case "Nature": weakness_formatted = weakness_formatted
                 case "Sun": weakness_formatted = styles.format_style(weakness_formatted, "error")
+                case "Blade": weakness_formatted = weakness_formatted
+                case "Blunt": weakness_formatted = styles.format_style(weakness_formatted, "red")
+                case "Hard": weakness_formatted = styles.format_style(weakness_formatted, "cyan")
+                case "Wood":  weakness_formatted = styles.format_style(weakness_formatted, "progress")
             print(weakness_formatted)
     else:
-        print(styles.format_style("No elemental weaknesses.", "red"))
+        print(styles.format_style("No elemental/material weaknesses.", "red"))
     print("----------------------")
-    print(styles.format_style("ELEMENTAL RESISTANCES:", "red"))
-    if opponent["res-el"]:
-        for res in opponent["res-el"]:
+    print(styles.format_style("RESISTANCES:", "red"))
+    if opponent.res_el or opponent.res_mat:
+        for res in opponent.res_el + opponent.res_mat:
             res_formatted = res.capitalize()
             match res_formatted:
                 case "Fire": res_formatted = styles.format_style(res_formatted, "red")
@@ -550,42 +565,21 @@ def scr_show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | b
                 case "Earth": res_formatted = styles.format_style(res_formatted, "green")
                 case "Nature": res_formatted = res_formatted
                 case "Sun": res_formatted = styles.format_style(res_formatted, "error")
-            print(res_formatted)
-    else:
-        print(styles.format_style("No elemental resistances.", "green"))
-    print("----------------------")
-    print(styles.format_style("MATERIAL WEAKNESSES:", "green"))
-    if opponent["weak-mat"]:
-        for weakness in opponent["weak-mat"]:
-            weakness_formatted = weakness.capitalize()
-            match weakness_formatted:
-                case "Blade": weakness_formatted = weakness_formatted
-                case "Blunt": weakness_formatted = styles.format_style(weakness_formatted, "red")
-                case "Hard": weakness_formatted = styles.format_style(weakness_formatted, "cyan")
-                case "Wood":  weakness_formatted = styles.format_style(weakness_formatted, "progress")
-            print(weakness_formatted)
-    else:
-        print(styles.format_style("No material weaknesses.", "red"))
-    print("----------------------")
-    print(styles.format_style("MATERIAL RESISTANCES:", "green"))
-    if opponent["res-mat"]:
-        for res in opponent["res-mat"]:
-            res_formatted = res.capitalize()
-            match res_formatted:
                 case "Blade": res_formatted = res_formatted
                 case "Blunt": res_formatted = styles.format_style(res_formatted, "red")
                 case "Hard": res_formatted = styles.format_style(res_formatted, "cyan")
                 case "Wood":  res_formatted = styles.format_style(res_formatted, "progress")
             print(res_formatted)
     else:
-        print(styles.format_style("No material resistances.", "green"))
+        print(styles.format_style("No elemental/material resistances.", "green"))
 
     # Ask if the user wants to fight the opponent
     print()
     u_input = helper.clean_input("Would you like to fight this opponent? (Y/n): ", ["y", "n", "Y", "N"])
     if u_input.lower() == "y":
         win = matchmaker.start_match(world, opponent, enemy)
-        scr_win_career(world, opponent, enemy)
+        if win: scr_win_career(world, opponent, enemy)
+        else: scr_lose_career()
         return win
     else: return
 
