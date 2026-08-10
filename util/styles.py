@@ -20,9 +20,9 @@ def format_style(text: str, style: str) -> str:
     Return a styled message.
 
     :param text: The text to join with the style
-    :param style: Types: error, success
-
     :type text: str
+    
+    :param style: Types: error, success
     :type style: str
 
     :return: The joined text of the style and the text parameter
