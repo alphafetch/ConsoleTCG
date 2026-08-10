@@ -1,6 +1,9 @@
 import os
 import time
 import readchar
+import random
+
+from typing import Any
 
 from . import sl
 from . import help_func as helper
@@ -169,28 +172,41 @@ def scr_status() -> bool:
 │ Losses: {data["user"]["stats"]["losses"]}
 │ XP: {data["user"]["stats"]["xp"]}
 │ Max HP: {data["user"]["stats"]["max_hp"]}
+│ Crit %: {data["user"]["stats"]["crit"]}
 └───────────────┘\n""", "bold_cyan"))
-    print("""1. Career (TBA)
+    print("""1. Career
 2. Exhibition
 3. Decks
-4. Main Menu\n""")
+4. Roll Card (TBA)
+5. Main Menu\n""")
 
-    u_input = helper.clean_input("> ", ["1", "2", "3", "4"], ["1"], styles.format_style("Error: That option is not ready yet.", "error"))
+    # Get the user's input on what they would like to do
+    u_input = helper.clean_input("> ", ["1", "2", "3", "4", "5"], ["4"], styles.format_style("Error: That option is not ready yet.", "error")) 
 
-    match int(u_input):
+    u_input = int(u_input)
+    if not u_input in [1, 2, 3, 4, 5]:
+        raise ValueError("User input did not pass clean_input() and is not a correct value.")
+
+    match u_input:
+        case 1:
+            scr_career()
+
+            return False
         case 2:
             # Start the exhibition script
             exhib.start_exhibition()
 
             return False
-        case 3:
+        case 3: 
             scr_decks()
 
             return False
         case 4:
-            return True
-        case _:
             return False
+        case 5:
+            return True
+    # Fallback return to satisfy error messages - unreachable
+    return False
 
 def scr_diff_select_exhibition() -> int:
     '''
@@ -213,6 +229,69 @@ def scr_diff_select_exhibition() -> int:
     diff = helper.clean_input("> ", ["1", "2", "3", "4", "5"])
 
     return int(diff)
+
+def scr_career() -> None:
+    '''
+    The main career menu with worlds.
+
+    :rtype: None
+    '''
+
+    # Clear the screen
+    helper.clear()
+
+    # 1. FLOODGATES FOR NEW PLAYERS
+    if not os.path.exists(imp.user_data_toml): # User data missing
+        # [;] User data file is missing
+        print(styles.format_style("You have not set up your data. Please visit the new game menu.", "error"))
+        print(styles.format_style("Press any key to return...", "warn"))
+        readchar.readkey()
+        return
+    elif not os.path.exists(imp.user_decks_toml): # User deck file is missing
+        # [;] User deck file is missing
+        print(styles.format_style("You have not set up your decks. Please visit the decks menu.", "error"))
+        print(styles.format_style("Press any key to return...", "warn"))
+        readchar.readkey()
+        return
+
+    # 1a. LOAD RELEVANT FILES
+    userdata = sl.load(imp.user_data_toml)
+    userdecks = sl.load(imp.user_decks_toml)
+
+    if userdata["unlocks"]["career"]["unlocked"] == False: # Check if career is unlocked yet
+        # [;] User has not unlocked career yet
+        print(styles.format_style("You have not unlocked career mode yet.", "error"))
+        print(styles.format_style("Press any key to return...", "warn"))
+        readchar.readkey()
+        return
+    elif len(userdata["user"]["ATK"]) == 0: # Even if user has WPN or AMR cards, they can't deal damage w/o ATK cards
+        # [;] User does not have enough cards
+        print(styles.format_style("You do not have enough ATK cards to continue (req: 1).", "error"))
+        print(styles.format_style("Press any key to return...", "warn"))
+        readchar.readkey()
+        return
+
+    deck1_empty = True
+    for i in userdecks["decks"]["deck1"]["cards"]:
+        if i != "empty": deck1_empty = False; break
+        else: continue
+    deck2_empty = True
+    for i in userdecks["decks"]["deck2"]["cards"]:
+        if i != "empty": deck2_empty = False; break
+        else: continue
+    deck3_empty = True
+    for i in userdecks["decks"]["deck3"]["cards"]:
+        if i != "empty": deck3_empty = False; break
+        else: continue
+
+    if deck1_empty and deck2_empty and deck3_empty: # The user hasn't set any decks even after visiting the menu
+        # [;] User has not set any decks
+        print(styles.format_style("You have not set any decks. Please visit the decks menu.", "error"))
+        print(styles.format_style("Press any key to return...", "warn"))
+        readchar.readkey()
+        return
+
+    return
 
 def scr_decks() -> None:
     '''
