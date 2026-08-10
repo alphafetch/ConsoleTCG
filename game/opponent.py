@@ -61,3 +61,4 @@ class Opponent():
         self.res_el = res_el
         self.weak_mat = weak_mat
         self.res_mat = res_mat
+        self.crit = crit
