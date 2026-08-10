@@ -1,5 +1,6 @@
 import os
 import time
+import readchar
 
 from . import sl
 from . import help_func as helper
@@ -441,7 +442,7 @@ def scr_edit_card_in_deck(card_id: str, deck: str, index: int) -> None:
     # 6. CHECK IF FILTER IS EMPTY
     if not tally:
         print(styles.format_style("No cards available. Press any key to continue...", "warn"))
-        input()
+        readchar.readkey()
         return
 
     # 7. FORMAT THE CARDS AND ADD THEM TO A LIST
