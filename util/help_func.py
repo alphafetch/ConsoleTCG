@@ -350,59 +350,63 @@ def create_randomized_opponent(diff: int) -> Opponent:
         profiles["xp"][str(diff)]["max"]
     )
 
-    # 8. WEAKNESSES
-    # Elemental
-    randomized_weaksel = set()
-    for _ in range(diff + random.randint(-2, -1)) if diff <= 3 else range(0):
-        randomized_weaksel.add(random.randint(1, 5))
-    weaksel = set()
-    for type in randomized_weaksel:
-        match type:
-            case 1: weaksel.add("water")
-            case 2: weaksel.add("fire")
-            case 3: weaksel.add("earth")
-            case 4: weaksel.add("sun")
-            case 5: weaksel.add("nature")
-    # Material
-    randomized_weakmat = set()
-    for _ in range(diff + random.randint(-2, -1)) if diff <= 2 else range(diff):
-        num = random.randint(1, 4)
-        if num not in randomized_weakmat:
-            randomized_weakmat.add(num)
-    weakmat = set()
-    for type in randomized_weakmat:
-        match type:
-            case 1: weakmat.add("blade")
-            case 2: weakmat.add("blunt")
-            case 3: weakmat.add("hard")
-            case 4: weakmat.add("wood")
+    # 8. ELEMENTAL WEAK/RES
+    elements = ["water", "fire", "sun", "nature", "earth"]
+    match diff:
+        case 1:
+            weaksel = random.sample(elements, random.randint(2, 5))
+            for weak in weaksel:
+                elements.remove(weak)
+            ressel = random.sample(elements, random.randint(0, len(elements) - 1 if len(elements) > 0 else len(elements)))
+        case 2:
+            weaksel = random.sample(elements, random.randint(1, 4))
+            for weak in weaksel:
+                elements.remove(weak)
+            ressel = random.sample(elements, random.randint(0, len(elements) - 1))
+        case 3:
+            weaksel = random.sample(elements, random.randint(1, 3))
+            for weak in weaksel:
+                elements.remove(weak)
+            ressel = random.sample(elements, random.randint(1, len(elements)))
+        case 4:
+            weaksel = random.sample(elements, random.randint(0, 2))
+            for weak in weaksel:
+                elements.remove(weak)
+            ressel = random.sample(elements, random.randint(2, len(elements)))
+        case 5:
+            weaksel = random.sample(elements, random.randint(0, 1))
+            for weak in weaksel:
+                elements.remove(weak)
+            ressel = random.sample(elements, random.randint(3, len(elements)))
 
-    # 9. RESISTANCES
-    # Elemental
-    randomized_ressel = set()
-    for _ in range(diff + random.randint(-2, -1)) if diff <= 3 else range(0):
-        randomized_ressel.add(random.randint(1, 5))
-    ressel = set()
-    for type in randomized_ressel:
-        match type:
-            case 1: ressel.add("water")
-            case 2: ressel.add("fire")
-            case 3: ressel.add("earth")
-            case 4: ressel.add("sun")
-            case 5: ressel.add("nature")
-    # Material
-    randomized_resmat = set()
-    for _ in range(diff + random.randint(-2, -1)) if diff <= 2 else range(diff):
-        num = random.randint(1, 4)
-        if num not in randomized_resmat:
-            randomized_resmat.add(num)
-    resmat = set()
-    for type in randomized_resmat:
-        match type:
-            case 1: resmat.add("blade")
-            case 2: resmat.add("blunt")
-            case 3: resmat.add("hard")
-            case 4: resmat.add("wood")
+    # 8. MATERIAL WEAK/RES
+    materials = ["blade", "blunt", "hard", "wood"]
+    match diff:
+        case 1:
+            weakmat = random.sample(materials, random.randint(2, 4))
+            for weak in weakmat:
+                materials.remove(weak)
+            resmat = random.sample(materials, random.randint(0, len(materials) - 1 if len(materials) > 0 else len(materials)))
+        case 2:
+            weakmat = random.sample(materials, random.randint(1, 4))
+            for weak in weakmat:
+                materials.remove(weak)
+            resmat = random.sample(materials, random.randint(0, len(materials) - 1 if len(materials) > 0 else len(materials)))
+        case 3:
+            weakmat = random.sample(materials, random.randint(1, 3))
+            for weak in weakmat:
+                materials.remove(weak)
+            resmat = random.sample(materials, random.randint(1, len(materials)))
+        case 4:
+            weakmat = random.sample(materials, random.randint(0, 2))
+            for weak in weakmat:
+                materials.remove(weak)
+            resmat = random.sample(materials, random.randint(2, len(materials)))
+        case 5:
+            weakmat = random.sample(materials, random.randint(0, 1))
+            for weak in weakmat:
+                materials.remove(weak)
+            resmat = random.sample(materials, random.randint(3, len(materials)))
 
     # 10. CRIT CHANCE
     crit = random.randint(
