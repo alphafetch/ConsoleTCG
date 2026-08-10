@@ -105,21 +105,45 @@ def save_card(card: dict) -> None:
     sl.save(user, imp.user_data_toml)
 
 
-def print_card(card: dict) -> None:
+def print_card(card: dict, cat: str) -> None:
     '''
     Print a given card to the console.
 
     :param card: A dictionary in the correct format for the card
     :type card: dict
 
+    :param cat: The category in which the card is in.
+    :type cat: str
+
     :rtype: None
     '''
 
+    cat = cat.upper()
+
     # This uses the inputted dictionary 
     # to show the card info to the user
-    print(styles.format_style(f"""┌───────────────┐
+    if cat == "ATK":
+        print(styles.format_style(f"""┌───────────────┐
 {card["name"]}
 DMG: {card["damage"]}
+MANA: {card["mana_cost"]}
+TOK: {card["cost"]}
+TYPE: {card["type"]}
+└───────────────┘
+DESC: {card["desc"]}""", "bold_cyan"))
+    elif cat == "WPN":
+        print(styles.format_style(f"""┌───────────────┐
+{card["name"]}
+MODIF: TBA
+MANA: {card["mana_cost"]}
+TOK: {card["cost"]}
+TYPE: {card["type"]}
+└───────────────┘
+DESC: {card["desc"]}""", "bold_cyan")) # TODO ADD MODIFIER DECODER
+    elif cat == "AMR":
+        print(styles.format_style(f"""┌───────────────┐
+{card["name"]}
+MODIF: TBA
 MANA: {card["mana_cost"]}
 TOK: {card["cost"]}
 TYPE: {card["type"]}
