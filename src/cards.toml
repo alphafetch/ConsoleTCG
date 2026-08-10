@@ -1,5 +1,5 @@
-[atk]
-[atk.id-atk-0000]
+[ATK]
+[ATK.id-atk-0000]
 name="Droplet"
 damage=5
 mana_cost=3
@@ -7,8 +7,9 @@ cost=0
 desc="A small droplet of water that can help you on your journey."
 type="water"
 starter=true
+diff=1
 
-[atk.id-atk-0001]
+[ATK.id-atk-0001]
 name="Ember"
 damage=7
 mana_cost=4
@@ -16,8 +17,9 @@ cost=0
 desc="A strong burning ember with a will to kill."
 type="fire"
 starter=true
+diff=1
 
-[atk.id-atk-0002]
+[ATK.id-atk-0002]
 name="Dirt"
 damage=4
 mana_cost=2
@@ -25,8 +27,9 @@ cost=0
 desc="Blinding dirt with passion."
 type="earth"
 starter=true
+diff=1
 
-[atk.id-atk-0003]
+[ATK.id-atk-0003]
 name="Solar Flare"
 damage=6
 mana_cost=6
@@ -34,8 +37,9 @@ cost=0
 desc="A flare with a passion for genocide."
 type="sun"
 starter=true
+diff=1
 
-[atk.id-atk-0004]
+[ATK.id-atk-0004]
 name="Instinct"
 damage=6
 mana_cost=4
@@ -43,3 +47,4 @@ cost=0
 desc="Instinctual desire to kill and feast."
 type="nature"
 starter=true
+diff=1
