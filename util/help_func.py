@@ -81,12 +81,15 @@ def clean_input(prompt: str, requirements: list[str], disallowances: list[str] |
             # Print a newline so the error message goes underneath the input
             sys.stdout.write("\n")
 
-def save_card(card: dict) -> None:
+def save_card(card: dict, cat: str) -> None:
     '''
     Saves a card to the userdata.toml file.
 
     :param card: A dictionary in the correct format for the card
     :type card: dict
+
+    :param cat: The category to save to
+    :type cat: str
 
     :rtype: None
     '''
@@ -99,7 +102,7 @@ def save_card(card: dict) -> None:
     user = sl.load(imp.user_data_toml)
 
     # 2. MODIFY IT TO ADD THE NEW CARD
-    user["user"]["attack"].append(dict(card))
+    user["user"][cat.upper()].append(dict(card))
 
     # 3. SAVE THE USER DATA
     sl.save(user, imp.user_data_toml)
@@ -296,9 +299,9 @@ def create_opponent(diff: int) -> Opponent:
     # Iterate through attack cards until one is found 
     # that is in the difficulty then add it to the 
     # cards_in_diff list
-    for card in cards["atk"]:
-        if int(cards["atk"][card]["diff"]) == diff:
-            cards_in_diff.append(cards["atk"][card])
+    for card in cards["ATK"]:
+        if int(cards["ATK"][card]["diff"]) == diff:
+            cards_in_diff.append(cards["ATK"][card])
 
     # Collect a sample of 4 from the cards in diff list
     # and add them to the deck
@@ -308,9 +311,9 @@ def create_opponent(diff: int) -> Opponent:
 
     # Do the same for weapons
     cards_in_diff = []
-    for card in cards["wpn"]:
-        if int(cards["wpn"][card]["diff"]) == diff:
-            cards_in_diff.append(cards["wpn"][card])
+    for card in cards["WPN"]:
+        if int(cards["WPN"][card]["diff"]) == diff:
+            cards_in_diff.append(cards["WPN"][card])
 
     rand_wpn_cards = random.sample(list(cards_in_diff), 2)
     for card in rand_wpn_cards:
@@ -318,9 +321,9 @@ def create_opponent(diff: int) -> Opponent:
 
     # Do the same for armor
     cards_in_diff = []
-    for card in cards["amr"]:
-        if int(cards["amr"][card]["diff"]) == diff:
-            cards_in_diff.append(cards["amr"][card])
+    for card in cards["AMR"]:
+        if int(cards["AMR"][card]["diff"]) == diff:
+            cards_in_diff.append(cards["AMR"][card])
 
     rand_amr_cards = random.sample(list(cards_in_diff), 2)
     for card in rand_amr_cards:
