@@ -804,9 +804,13 @@ def scr_edit_card_in_deck(card_id: str, deck: str, index: int) -> None:
     # 4. TALLY UP USED CARDS
     used_tally = {}
     for card in player_decks["decks"][deck]["cards"]:
-        if card in used_tally and card != "empty":
+        if card == "empty":
+            continue
+        if helper.get_category_from_id(card) != cat:
+            continue
+        if card in used_tally:
             used_tally[card] += 1
-        elif not card in used_tally and card != "empty":
+        else:
             used_tally[card] = 1
 
     # 5. FILTER FOR SELECTION
