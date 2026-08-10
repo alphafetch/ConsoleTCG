@@ -275,7 +275,7 @@ def reconstruct_id(four_digit: str, cat: str) -> str:
 
     return "" # Satisfy type checker
 
-def create_opponent(diff: int) -> Opponent:
+def create_randomized_opponent(diff: int) -> Opponent:
     '''
     Create a randomized opponent for exhibition mode.
 
@@ -344,13 +344,81 @@ def create_opponent(diff: int) -> Opponent:
         profiles["token"][str(diff)]["max"],
     )
 
-    # 7. SET UP THE OPPONENT CLASS
-    opponent = Opponent(
-        diff, name, health, 
-        rew, deck, tok_rew
+    # 7. SET THE XP REWARD
+    xp = random.randint(
+        profiles["xp"][str(diff)]["min"],
+        profiles["xp"][str(diff)]["max"]
     )
 
-    # 8. RETURN THE OPPONENT
+    # 8. WEAKNESSES
+    # Elemental
+    randomized_weaksel = set()
+    for _ in range(diff + random.randint(-1, -2)) if diff <= 3 else range(0):
+        randomized_weaksel.add(random.randint(1, 5))
+    weaksel = set()
+    for type in randomized_weaksel:
+        match type:
+            case "water": weaksel.add("water")
+            case "fire": weaksel.add("fire")
+            case "earth": weaksel.add("earth")
+            case "sun": weaksel.add("sun")
+            case "nature": weaksel.add("nature")
+    # Material
+    randomized_weakmat = set()
+    for _ in range(diff + random.randint(-1, -2)) if diff <= 2 else range(diff):
+        num = random.randint(1, 4)
+        if num not in randomized_weakmat:
+            randomized_weakmat.add(num)
+    weakmat = set()
+    for type in randomized_weakmat:
+        match type:
+            case "blade": weaksel.add("blade")
+            case "blunt": weaksel.add("blunt")
+            case "hard": weaksel.add("hard")
+            case "wood": weaksel.add("wood")
+
+    # 9. RESISTANCES
+    # Elemental
+    randomized_ressel = set()
+    for _ in range(diff + random.randint(-1, -2)) if diff <= 3 else range(0):
+        randomized_ressel.add(random.randint(1, 5))
+    ressel = set()
+    for type in randomized_ressel:
+        match type:
+            case "water": ressel.add("water")
+            case "fire": ressel.add("fire")
+            case "earth": ressel.add("earth")
+            case "sun": ressel.add("sun")
+            case "nature": ressel.add("nature")
+    # Material
+    randomized_resmat = set()
+    for _ in range(diff + random.randint(-1, -2)) if diff <= 2 else range(diff):
+        num = random.randint(1, 4)
+        if num not in randomized_resmat:
+            randomized_resmat.add(num)
+    resmat = set()
+    for type in randomized_resmat:
+        match type:
+            case "blade": resmat.add("blade")
+            case "blunt": resmat.add("blunt")
+            case "hard": resmat.add("hard")
+            case "wood": resmat.add("wood")
+
+    # 10. CRIT CHANCE
+    crit = random.randint(
+        profiles["crit"][str(diff)]["min"],
+        profiles["crit"][str(diff)]["max"]
+    )
+
+    # 11. SET UP THE OPPONENT
+    opponent = Opponent(
+        diff, name, health, 
+        rew, deck, tok_rew,
+        xp, 0, list(weaksel), list(ressel),
+        list(weakmat), list(resmat), crit
+    )
+
+    # 12. RETURN THE OPPONENT
     return opponent
 
 def parse_effect(effect_str: str) -> dict[str, Any]:
