@@ -11,6 +11,7 @@ from . import key_vars as keyvars
 from . import styles
 
 from game import exhibition as exhib
+from game import match as matchmaker
 
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
@@ -293,6 +294,86 @@ def scr_career() -> None:
 
     return
 
+def scr_win_career(world: int, opp: dict[str, Any], num: int) -> None:
+    '''
+    Win screen after a battle.
+
+    :param world: The world the player just beat an enemy in
+    :type world: int
+
+    :param opp: The opponent dictionary
+    :type opp: dict[str, Any]
+
+    :param num: The enemy number
+    :type num: int
+
+    :rtype: None
+    '''
+
+    # 1. LOAD RELEVANT FILES
+    data = sl.load(imp.user_data_toml)
+    cards = sl.load(imp.cards_toml)
+    career = sl.load(imp.career_toml)
+
+    # Clear the screen
+    helper.clear()
+
+    # 2. GIVE CARD REWARD
+    # Determine whether this is the first time fighting
+    if data["unlocks"]["career"]["progress"]["world" + str(world)][str(num)]:
+        card_data = helper.draw_random_card()
+        id = card_data["key"]
+        card = card_data["value"]
+        cat = id[3:6].upper()
+    else:
+        cat = career["world" + str(world)][str(num)]["reward"][3:6].upper()
+        card = cards[cat][career["world" + str(world)][str(num)]["reward"]]
+
+    # 3. SAVE THE CARD
+    helper.save_card(card, cat)
+
+    # 4. PAYOUT
+    # Tokens
+    plus_toks = opp["tokens"]
+    new_toks = data["user"]["stats"]["tokens"] + plus_toks
+    sl.modify_nested(["user", "stats", "tokens"], new_toks, imp.user_data_toml)
+    # XP
+    plus_xp = round(opp["xp"] * random.uniform(0.8, 1.2))
+    new_xp = data["user"]["stats"]["xp"] + plus_xp
+    sl.modify_nested(["user", "stats", "xp"], new_xp, imp.user_data_toml)
+
+    # 5. INCREMENT WINS
+    new_wins = data["user"]["stats"]["wins"] + 1
+    sl.modify_nested(["user", "stats", "wins"], new_wins, imp.user_data_toml)
+
+    # 6. CHECK FOR A WORLD UNLOCK
+    complete = True
+    for k, v in data["unlocks"]["career"]["progress"]["world" + str(world)].items():
+        if k == "unlocked": continue
+        if v == True:
+            complete = True
+            continue
+        else:
+            complete = False
+            break
+
+    if complete:
+        data["unlocks"]["career"]["progress"]["world" + str(world + 1)]["unlocked"] = True
+        sl.save(data, imp.user_data_toml)
+
+    # 7. PRINT
+    print(styles.format_style("You won!", "success"))
+    print(styles.format_style("Reward:", "bold_cyan"))
+    helper.print_card(card, cat)
+    print(f"Tokens: {styles.format_style("+" + str(plus_toks), "green")} - TOTAL: {styles.format_style(str(new_toks), "green")}")
+    print(f"XP: {styles.format_style("+" + str(plus_xp), "progress")} - TOTAL: {styles.format_style(str(new_xp), "progress")}")
+    print(f"+1 Win - TOTAL: {styles.format_style(str(new_wins), "yellow")}")
+    if complete: print(f"Unlocked {styles.format_style("World " + str(world + 1), "cyan")}!")
+    print("Press any key to continue...")
+    readchar.readkey()
+
+    return
+
 def scr_world_select() -> None | bool:
     '''
     Select a world to enter.
@@ -384,6 +465,98 @@ def scr_enemy_select(world: int) -> None | bool:
     opponent = allowed_list[int(enemy) - 1]
 
     return show_enemy(world, opponent, int(enemy))
+
+def show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | bool:
+    '''
+    Shows an enemy's stats before a battle.
+
+    :param world: The world that the user is in
+    :type world: int
+
+    :param opponent: The enemy to display
+    :type opponent: dict[str, Any]
+
+    :param enemy: The enemy's number in the world
+    :type enemy: int
+
+    :return: If the player won or not
+    :rtype: None | bool
+    '''
+
+    # Clear the screen
+    helper.clear()
+
+    # Load relevant files
+    cards = sl.load(imp.cards_toml)
+
+    # Show enemy statistics
+    # 1. Main stats
+    print(styles.format_style(f"{opponent["name"]} | STATS:", "bold_cyan"))
+    print(styles.format_style(f"HP: {opponent["health"]}", "cyan"))
+    print(styles.format_style(f"CRIT %: {str(opponent["crit"])}%", "cyan"))
+    print(styles.format_style(f"TOK: {str(opponent["tokens"])}", "cyan"))
+    print(styles.format_style(f"REW: {helper.format_card_line(opponent["reward"], cards)}", "cyan"))
+
+    # 2. Difficulty level
+    stars = ""
+    for star in range(opponent["diff"]):
+        stars += "★"
+    for blank in range(5 - len(stars)):
+        stars += "☆"
+    match opponent["diff"]:
+        case 1: stars = styles.format_style(stars, "green")
+        case 2: stars = styles.format_style(stars, "cyan")
+        case 3: stars = styles.format_style(stars, "yellow")
+        case 4: stars = styles.format_style(stars, "progress")
+        case 5: stars = styles.format_style(stars, "red")
+    print(f"DIFF: {stars}")
+
+    print("----------------------")
+
+    # 3. Deck
+    print(styles.format_style("DECK:", "red"))
+    for card in opponent["deck"]:
+        print(helper.format_card_line(card, cards))
+
+    print("----------------------")
+
+    # 4. Resistances and weaknesses
+    print(styles.format_style("WEAKNESSES:", "green"))
+    if opponent["weak"]:
+        for weakness in opponent["weak"]:
+            weakness_formatted = weakness.capitalize()
+            match weakness_formatted:
+                case "Fire": weakness_formatted = styles.format_style(weakness_formatted, "red")
+                case "Water": weakness_formatted = styles.format_style(weakness_formatted, "cyan")
+                case "Earth": weakness_formatted = styles.format_style(weakness_formatted, "green")
+                case "Nature": weakness_formatted = weakness_formatted
+                case "Sun": weakness_formatted = styles.format_style(weakness_formatted, "error")
+            print(weakness_formatted)
+    else:
+        print(styles.format_style("No weaknesses.", "red"))
+    print("----------------------")
+    print(styles.format_style("RESISTANCES:", "red"))
+    if opponent["res"]:
+        for res in opponent["res"]:
+            res_formatted = res.capitalize()
+            match res_formatted:
+                case "Fire": res_formatted = styles.format_style(res_formatted, "red")
+                case "Water": res_formatted = styles.format_style(res_formatted, "cyan")
+                case "Earth": res_formatted = styles.format_style(res_formatted, "green")
+                case "Nature": res_formatted = res_formatted
+                case "Sun": res_formatted = styles.format_style(res_formatted, "error")
+            print(res_formatted)
+    else:
+        print(styles.format_style("No resistances.", "green"))
+
+    # Ask if the user wants to fight the opponent
+    print()
+    u_input = helper.clean_input("Would you like to fight this opponent? (Y/n): ", ["y", "n", "Y", "N"])
+    if u_input.lower() == "y":
+        win = matchmaker.start_match(world, opponent, enemy)
+        scr_win_career(world, opponent, enemy)
+        return win
+    else: return
 
 def scr_decks() -> None:
     '''

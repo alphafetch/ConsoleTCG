@@ -351,7 +351,51 @@ def create_opponent(diff: int) -> Opponent:
     # 8. RETURN THE OPPONENT
     return opponent
 
-def clear() -> None:
+def parse_effect(effect_str: str) -> dict[str, Any]:
+    '''
+    Parse an effect from cards.toml.
+
+    :param effect_str: The effect to parse
+    :type effect_str: str
+
+    :return: The dictionary with the effects of the selected card
+    :rtype: dict[str, Any]
+    '''
+
+    effects = effect_str.split(",")
+
+    parsed = {}
+    for effect in effects:
+        effect_pieces = effect.split("+")
+        parsed[effect_pieces[0]] = int(effect_pieces[1])
+
+    return parsed
+
+def draw_random_card() -> dict[str, Any]:
+    '''
+    Draw a random card.
+
+    :return: A dictionary with the card
+    :rtype: dict[str, Any]
+    '''
+
+    cards = sl.load(imp.cards_toml)
+
+    randomized = random.choices([1, 2, 3, 4, 5], weights=[59, 20, 10, 5, 1], k=1)[0]
+    allowed_draw = {}
+
+    randomized_cat = random.choice(["ATK", "WPN", "AMR"])
+
+    for id, card in cards[randomized_cat].items():
+        if card["diff"] == randomized:
+            allowed_draw[id] = card
+
+    ids = list(allowed_draw.keys())
+    key = random.choice(ids)
+    card = allowed_draw[key]
+    return {"key": key, "value": card}
+
+def clear() -> None: # REVIEW Spawns subprocess every time, may change
     '''
     Quickly and efficiently clears the screen
 
@@ -359,6 +403,7 @@ def clear() -> None:
     '''
 
     subprocess.run("cls", shell=True)
+    sys.stdout.write(styles.clear_styles())
 
 def quit_game(code: str | int) -> None:
     '''
