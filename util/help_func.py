@@ -1,9 +1,12 @@
 import sys
 import subprocess
+import random
 
 from . import styles
 from . import sl
 from . import key_vars as keyvars
+
+from game.opponent import Opponent
 
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
@@ -122,6 +125,84 @@ TOK: {card["cost"]}
 TYPE: {card["type"]}
 └───────────────┘
 DESC: {card["desc"]}""", "bold_cyan"))
+
+def create_opponent(diff: int) -> Opponent:
+    '''
+    Create a randomized opponent for exhibition mode.
+
+    :param diff: The difficulty of the opponent
+    :type diff: int
+
+    :rtype: Opponent
+    :return: An Opponent class initialization
+    '''
+
+    # 1. LOAD THE PROFILES TOML
+    profiles = sl.load(imp.profiles_toml)
+
+    # 2. CHOOSE A NAME
+    name = random.choice(profiles["names"])
+
+    # 3. SET HEALTH
+    health = random.randint(
+        profiles["health"][str(diff)]["min"], 
+        profiles["health"][str(diff)]["max"],
+    )
+
+    # 4. SET DECK
+    deck = []
+    cards = sl.load(imp.cards_toml)
+    cards_in_diff = []
+    # Iterate through attack cards until one is found 
+    # that is in the difficulty then add it to the 
+    # cards_in_diff list
+    for card in cards["atk"]:
+        if int(cards["atk"][card]["diff"]) == diff:
+            cards_in_diff.append(cards["atk"][card])
+
+    # Collect a sample of 4 from the cards in diff list
+    # and add them to the deck
+    rand_atk_cards = random.sample(list(cards_in_diff), 4)
+    for card in rand_atk_cards:
+        deck.append(card)
+
+    # Do the same for weapons
+    cards_in_diff = []
+    for card in cards["wpn"]:
+        if int(cards["wpn"][card]["diff"]) == diff:
+            cards_in_diff.append(cards["wpn"][card])
+
+    rand_wpn_cards = random.sample(list(cards_in_diff), 2)
+    for card in rand_wpn_cards:
+        deck.append(card)
+
+    # Do the same for armor
+    cards_in_diff = []
+    for card in cards["amr"]:
+        if int(cards["amr"][card]["diff"]) == diff:
+            cards_in_diff.append(cards["amr"][card])
+
+    rand_amr_cards = random.sample(list(cards_in_diff), 2)
+    for card in rand_amr_cards:
+        deck.append(card)
+
+    # 5. SET REWARD
+    rew = random.choice(deck)
+
+    # 6. SET THE TOKEN REWARD
+    tok_rew = random.randint(
+        profiles["token"][str(diff)]["min"], 
+        profiles["token"][str(diff)]["max"],
+    )
+
+    # 7. SET UP THE OPPONENT CLASS
+    opponent = Opponent(
+        diff, name, health, 
+        rew, deck, tok_rew
+    )
+
+    # 8. RETURN THE OPPONENT
+    return opponent
 
 def clear() -> None:
     '''
