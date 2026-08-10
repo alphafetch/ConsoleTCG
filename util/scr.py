@@ -466,6 +466,98 @@ def scr_enemy_select(world: int) -> None | bool:
 
     return show_enemy(world, opponent, int(enemy))
 
+def show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | bool:
+    '''
+    Shows an enemy's stats before a battle.
+
+    :param world: The world that the user is in
+    :type world: int
+
+    :param opponent: The enemy to display
+    :type opponent: dict[str, Any]
+
+    :param enemy: The enemy's number in the world
+    :type enemy: int
+
+    :return: If the player won or not
+    :rtype: None | bool
+    '''
+
+    # Clear the screen
+    helper.clear()
+
+    # Load relevant files
+    cards = sl.load(imp.cards_toml)
+
+    # Show enemy statistics
+    # 1. Main stats
+    print(styles.format_style(f"{opponent["name"]} | STATS:", "bold_cyan"))
+    print(styles.format_style(f"HP: {opponent["health"]}", "cyan"))
+    print(styles.format_style(f"CRIT %: {str(opponent["crit"])}%", "cyan"))
+    print(styles.format_style(f"TOK: {str(opponent["tokens"])}", "cyan"))
+    print(styles.format_style(f"REW: {helper.format_card_line(opponent["reward"], cards)}", "cyan"))
+
+    # 2. Difficulty level
+    stars = ""
+    for star in range(opponent["diff"]):
+        stars += "★"
+    for blank in range(5 - len(stars)):
+        stars += "☆"
+    match opponent["diff"]:
+        case 1: stars = styles.format_style(stars, "green")
+        case 2: stars = styles.format_style(stars, "cyan")
+        case 3: stars = styles.format_style(stars, "yellow")
+        case 4: stars = styles.format_style(stars, "progress")
+        case 5: stars = styles.format_style(stars, "red")
+    print(f"DIFF: {stars}")
+
+    print("----------------------")
+
+    # 3. Deck
+    print(styles.format_style("DECK:", "red"))
+    for card in opponent["deck"]:
+        print(helper.format_card_line(card, cards))
+
+    print("----------------------")
+
+    # 4. Resistances and weaknesses
+    print(styles.format_style("WEAKNESSES:", "green"))
+    if opponent["weak"]:
+        for weakness in opponent["weak"]:
+            weakness_formatted = weakness.capitalize()
+            match weakness_formatted:
+                case "Fire": weakness_formatted = styles.format_style(weakness_formatted, "red")
+                case "Water": weakness_formatted = styles.format_style(weakness_formatted, "cyan")
+                case "Earth": weakness_formatted = styles.format_style(weakness_formatted, "green")
+                case "Nature": weakness_formatted = weakness_formatted
+                case "Sun": weakness_formatted = styles.format_style(weakness_formatted, "error")
+            print(weakness_formatted)
+    else:
+        print(styles.format_style("No weaknesses.", "red"))
+    print("----------------------")
+    print(styles.format_style("RESISTANCES:", "red"))
+    if opponent["res"]:
+        for res in opponent["res"]:
+            res_formatted = res.capitalize()
+            match res_formatted:
+                case "Fire": res_formatted = styles.format_style(res_formatted, "red")
+                case "Water": res_formatted = styles.format_style(res_formatted, "cyan")
+                case "Earth": res_formatted = styles.format_style(res_formatted, "green")
+                case "Nature": res_formatted = res_formatted
+                case "Sun": res_formatted = styles.format_style(res_formatted, "error")
+            print(res_formatted)
+    else:
+        print(styles.format_style("No resistances.", "green"))
+
+    # Ask if the user wants to fight the opponent
+    print()
+    u_input = helper.clean_input("Would you like to fight this opponent? (Y/n): ", ["y", "n", "Y", "N"])
+    if u_input.lower() == "y":
+        win = matchmaker.start_match(world, opponent, enemy)
+        scr_win_career(world, opponent, enemy)
+        return win
+    else: return
+
 def scr_decks() -> None:
     '''
     Customize decks. Empty slots (in a new OR old file) are represented by "empty".
