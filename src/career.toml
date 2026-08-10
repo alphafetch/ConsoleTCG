@@ -13,12 +13,17 @@
     "id-atk-0006",
     "id-wpn-0000"
 ]
-"weak"=[
+"weak-el"=[
     "fire",
     "sun",
     "nature"
 ]
-"res"=[]
+"res-el"=[]
+"weak-mat"=[
+    "blade",
+    "blunt"
+]
+"res-mat"=[]
 "crit"=1
 
 [world1.2]
@@ -36,13 +41,17 @@
     "id-wpn-0004",
     "id-atk-0010"
 ]
-"weak"=[
+"weak-el"=[
     "sun",
     "water"
 ]
-"res"=[
+"res-el"=[
     "fire"
 ]
+"weak-mat"=[
+    "wood"
+]
+"res-mat"=[]
 "crit"=5
 
 [world2]

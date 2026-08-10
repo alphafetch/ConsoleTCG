@@ -526,9 +526,9 @@ def show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | bool:
     print("----------------------")
 
     # 4. Resistances and weaknesses
-    print(styles.format_style("WEAKNESSES:", "green"))
-    if opponent["weak"]:
-        for weakness in opponent["weak"]:
+    print(styles.format_style("ELEMENTAL WEAKNESSES:", "green"))
+    if opponent["weak-el"]:
+        for weakness in opponent["weak-el"]:
             weakness_formatted = weakness.capitalize()
             match weakness_formatted:
                 case "Fire": weakness_formatted = styles.format_style(weakness_formatted, "red")
@@ -538,11 +538,11 @@ def show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | bool:
                 case "Sun": weakness_formatted = styles.format_style(weakness_formatted, "error")
             print(weakness_formatted)
     else:
-        print(styles.format_style("No weaknesses.", "red"))
+        print(styles.format_style("No elemental weaknesses.", "red"))
     print("----------------------")
-    print(styles.format_style("RESISTANCES:", "red"))
-    if opponent["res"]:
-        for res in opponent["res"]:
+    print(styles.format_style("ELEMENTAL RESISTANCES:", "red"))
+    if opponent["res-el"]:
+        for res in opponent["res-el"]:
             res_formatted = res.capitalize()
             match res_formatted:
                 case "Fire": res_formatted = styles.format_style(res_formatted, "red")
@@ -552,7 +552,33 @@ def show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | bool:
                 case "Sun": res_formatted = styles.format_style(res_formatted, "error")
             print(res_formatted)
     else:
-        print(styles.format_style("No resistances.", "green"))
+        print(styles.format_style("No elemental resistances.", "green"))
+    print("----------------------")
+    print(styles.format_style("MATERIAL WEAKNESSES:", "green"))
+    if opponent["weak-mat"]:
+        for weakness in opponent["weak-mat"]:
+            weakness_formatted = weakness.capitalize()
+            match weakness_formatted:
+                case "Blade": weakness_formatted = weakness_formatted
+                case "Blunt": weakness_formatted = styles.format_style(weakness_formatted, "red")
+                case "Hard": weakness_formatted = styles.format_style(weakness_formatted, "cyan")
+                case "Wood":  weakness_formatted = styles.format_style(weakness_formatted, "progress")
+            print(weakness_formatted)
+    else:
+        print(styles.format_style("No material weaknesses.", "red"))
+    print("----------------------")
+    print(styles.format_style("MATERIAL RESISTANCES:", "green"))
+    if opponent["res-mat"]:
+        for res in opponent["res-mat"]:
+            res_formatted = res.capitalize()
+            match res_formatted:
+                case "Blade": res_formatted = res_formatted
+                case "Blunt": res_formatted = styles.format_style(res_formatted, "red")
+                case "Hard": res_formatted = styles.format_style(res_formatted, "cyan")
+                case "Wood":  res_formatted = styles.format_style(res_formatted, "progress")
+            print(res_formatted)
+    else:
+        print(styles.format_style("No material resistances.", "green"))
 
     # Ask if the user wants to fight the opponent
     print()
