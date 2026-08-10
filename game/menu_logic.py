@@ -9,6 +9,7 @@ import os
 import readchar
 
 from . import tutorial
+from util import help_func as helper
 
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
@@ -105,6 +106,14 @@ def new_game() -> None:
             "decks": False
         }
     }
+
+    if os.path.exists(imp.user_data_toml):
+        helper.clear()
+        u_input = input(styles.format_style("You already have save data. Overwrite it? (Y/n): ", "error"))
+        if u_input.upper() == "Y":
+            os.remove(imp.user_data_toml)
+        else:
+            return
 
     # Save the dictionary to the user data TOML file for future use.
     sl.save(data, imp.user_data_toml)
