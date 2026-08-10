@@ -307,7 +307,7 @@ def create_randomized_opponent(diff: int) -> Opponent:
     # cards_in_diff list
     for card in cards["ATK"]:
         if int(cards["ATK"][card]["diff"]) == diff:
-            cards_in_diff.append(cards["ATK"][card])
+            cards_in_diff.append(card)
 
     # Collect a sample of 4 from the cards in diff list
     # and add them to the deck
@@ -319,7 +319,7 @@ def create_randomized_opponent(diff: int) -> Opponent:
     cards_in_diff = []
     for card in cards["WPN"]:
         if int(cards["WPN"][card]["diff"]) == diff:
-            cards_in_diff.append(cards["WPN"][card])
+            cards_in_diff.append(card)
 
     rand_wpn_cards = random.sample(list(cards_in_diff), 2)
     for card in rand_wpn_cards:
@@ -329,7 +329,7 @@ def create_randomized_opponent(diff: int) -> Opponent:
     cards_in_diff = []
     for card in cards["AMR"]:
         if int(cards["AMR"][card]["diff"]) == diff:
-            cards_in_diff.append(cards["AMR"][card])
+            cards_in_diff.append(card)
 
     rand_amr_cards = random.sample(list(cards_in_diff), 2)
     for card in rand_amr_cards:
