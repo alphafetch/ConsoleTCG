@@ -9,7 +9,8 @@ styles = {
     "cyan_back": Fore.BLACK + Back.CYAN + Style.NORMAL,
     "cyan": Fore.CYAN + Style.NORMAL,
     "red": Fore.RED + Style.NORMAL,
-    "yellow": Fore.YELLOW + Style.NORMAL
+    "yellow": Fore.YELLOW + Style.NORMAL,
+    "green": Fore.GREEN + Style.NORMAL
 }
 
 # Used to print a styled message
