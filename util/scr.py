@@ -469,9 +469,9 @@ def scr_enemy_select(world: int) -> None | bool:
 
     opponent = allowed_list[int(enemy) - 1]
 
-    return show_enemy(world, opponent, int(enemy))
+    return scr_show_enemy(world, opponent, int(enemy))
 
-def show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | bool:
+def scr_show_enemy(world: int, opponent: dict[str, Any], enemy: int) -> None | bool:
     '''
     Shows an enemy's stats before a battle.
 
