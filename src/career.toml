@@ -1,0 +1,58 @@
+[world1]
+[world1.1]
+"name"="Shattered Joe"
+"health"=10
+"tokens"=115
+"reward"="id-atk-0006"
+"xp"=100
+"id"=11
+"diff"=1
+"deck"=[
+    "id-atk-0004",
+    "id-atk-0002",
+    "id-atk-0006",
+    "id-wpn-0000"
+]
+"weak"=[
+    "fire",
+    "sun",
+    "nature"
+]
+"res"=[]
+"crit"=1
+
+[world1.2]
+"name"="Copperhead"
+"health"=14
+"tokens"=122
+"reward"="id-atk-0010"
+"xp"=200
+"id"=12
+"diff"=1
+"deck"=[
+    "id-atk-0009",
+    "id-atk-0006",
+    "id-atk-0002",
+    "id-wpn-0004",
+    "id-atk-0010"
+]
+"weak"=[
+    "sun",
+    "water"
+]
+"res"=[
+    "fire"
+]
+"crit"=5
+
+[world2]
+
+[world3]
+
+[world4]
+
+[world5]
+
+[world6]
+
+[world7]
