@@ -364,8 +364,10 @@ def scr_win_career(world: int, opp: dict[str, Any], num: int) -> None:
 
     # 7. PRINT
     print(styles.format_style("You won!", "success"))
+    print("------------------")
     print(styles.format_style("Reward:", "bold_cyan"))
     helper.print_card(card, cat)
+    print("------------------")
     print(f"Tokens: {styles.format_style("+" + str(plus_toks), "green")} - TOTAL: {styles.format_style(str(new_toks), "green")}")
     print(f"XP: {styles.format_style("+" + str(plus_xp), "progress")} - TOTAL: {styles.format_style(str(new_xp), "progress")}")
     print(f"+1 Win - TOTAL: {styles.format_style(str(new_wins), "yellow")}")
