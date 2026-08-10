@@ -169,15 +169,19 @@ def scr_status() -> bool:
 └───────────────┘\n""", "bold_cyan"))
     print("""1. Career (TBA)
 2. Exhibition
-3. Decks (TBA)
+3. Decks
 4. Main Menu\n""")
 
-    u_input = helper.clean_input("> ", ["1", "2", "3", "4"], ["1", "3"], styles.format_style("Error: That option is not ready yet.", "error"))
+    u_input = helper.clean_input("> ", ["1", "2", "3", "4"], ["1"], styles.format_style("Error: That option is not ready yet.", "error"))
 
     match int(u_input):
         case 2:
             # Start the exhibition script
             exhib.start_exhibition()
+
+            return False
+        case 3:
+            scr_decks()
 
             return False
         case 4:
