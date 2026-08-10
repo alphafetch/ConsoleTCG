@@ -21,7 +21,7 @@ def start_exhibition() -> bool:
         raise ValueError("Difficulty invalid.")
 
     # 3. PLAY THE MATCH
-    opponent = helper.create_opponent(diff)
+    opponent = helper.create_randomized_opponent(diff)
 
     match.start_exhibition(opponent)
 
