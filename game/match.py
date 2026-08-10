@@ -5,7 +5,6 @@ import util.help_func as helper
 import util.sl as sl
 import util.key_vars as keyvars
 
-from typing import Any
 import readchar
 import random
 import time
