@@ -11,6 +11,7 @@ from . import key_vars as keyvars
 from . import styles
 
 from game import exhibition as exhib
+from game import match as matchmaker
 
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
@@ -290,6 +291,86 @@ def scr_career() -> None:
         print(styles.format_style("Press any key to return...", "warn"))
         readchar.readkey()
         return
+
+    return
+
+def scr_win_career(world: int, opp: dict[str, Any], num: int) -> None:
+    '''
+    Win screen after a battle.
+
+    :param world: The world the player just beat an enemy in
+    :type world: int
+
+    :param opp: The opponent dictionary
+    :type opp: dict[str, Any]
+
+    :param num: The enemy number
+    :type num: int
+
+    :rtype: None
+    '''
+
+    # 1. LOAD RELEVANT FILES
+    data = sl.load(imp.user_data_toml)
+    cards = sl.load(imp.cards_toml)
+    career = sl.load(imp.career_toml)
+
+    # Clear the screen
+    helper.clear()
+
+    # 2. GIVE CARD REWARD
+    # Determine whether this is the first time fighting
+    if data["unlocks"]["career"]["progress"]["world" + str(world)][str(num)]:
+        card_data = helper.draw_random_card()
+        id = card_data["key"]
+        card = card_data["value"]
+        cat = id[3:6].upper()
+    else:
+        cat = career["world" + str(world)][str(num)]["reward"][3:6].upper()
+        card = cards[cat][career["world" + str(world)][str(num)]["reward"]]
+
+    # 3. SAVE THE CARD
+    helper.save_card(card, cat)
+
+    # 4. PAYOUT
+    # Tokens
+    plus_toks = opp["tokens"]
+    new_toks = data["user"]["stats"]["tokens"] + plus_toks
+    sl.modify_nested(["user", "stats", "tokens"], new_toks, imp.user_data_toml)
+    # XP
+    plus_xp = round(opp["xp"] * random.uniform(0.8, 1.2))
+    new_xp = data["user"]["stats"]["xp"] + plus_xp
+    sl.modify_nested(["user", "stats", "xp"], new_xp, imp.user_data_toml)
+
+    # 5. INCREMENT WINS
+    new_wins = data["user"]["stats"]["wins"] + 1
+    sl.modify_nested(["user", "stats", "wins"], new_wins, imp.user_data_toml)
+
+    # 6. CHECK FOR A WORLD UNLOCK
+    complete = True
+    for k, v in data["unlocks"]["career"]["progress"]["world" + str(world)].items():
+        if k == "unlocked": continue
+        if v == True:
+            complete = True
+            continue
+        else:
+            complete = False
+            break
+
+    if complete:
+        data["unlocks"]["career"]["progress"]["world" + str(world + 1)]["unlocked"] = True
+        sl.save(data, imp.user_data_toml)
+
+    # 7. PRINT
+    print(styles.format_style("You won!", "success"))
+    print(styles.format_style("Reward:", "bold_cyan"))
+    helper.print_card(card, cat)
+    print(f"Tokens: {styles.format_style("+" + str(plus_toks), "green")} - TOTAL: {styles.format_style(str(new_toks), "green")}")
+    print(f"XP: {styles.format_style("+" + str(plus_xp), "progress")} - TOTAL: {styles.format_style(str(new_xp), "progress")}")
+    print(f"+1 Win - TOTAL: {styles.format_style(str(new_wins), "yellow")}")
+    if complete: print(f"Unlocked {styles.format_style("World " + str(world + 1), "cyan")}!")
+    print("Press any key to continue...")
+    readchar.readkey()
 
     return
 
