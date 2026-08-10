@@ -18,13 +18,15 @@ def clean_input(prompt: str, requirements: list[str], disallowances: list[str] |
     Get output that (if the wrong input is entered) resets the line with a customizable error message.
 
     :param prompt: The prompt used for the input
-    :param requirements: What the user input must satisfy to continue
-    :param disallowances: What the user input cannot be
-    :param disallow_message: What the output is if the user inputs a value that is disallowed
-
     :type prompt: str
+
+    :param requirements: What the user input must satisfy to continue
     :type requirements: list[str]
+
+    :param disallowances: What the user input cannot be
     :type disallowances: list[str]
+
+    :param disallow_message: What the output is if the user inputs a value that is disallowed
     :type disallow_message: str
 
     :return: Returns the correct user input, iterates until it returns this.

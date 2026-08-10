@@ -9,9 +9,9 @@ def save(data, f) -> None:
     Save to a TOML file from a dictionary.
 
     :param data: The dictionary to save to the specified file.
-    :param f: The file to write to.
-
     :type data: dict
+
+    :param f: The file to write to.
     :type f: str
 
     > **Warning:** This will overwrite the file, or create a new file in the current directory.
@@ -32,11 +32,9 @@ def load(f: str) -> dict:
     Loads a TOML file to a dictionary.
 
     :param f: The file to read from.
-
     :type f: str
 
     :return: Dictionary of TOML file.
-
     :rtype: dict
 
     :raises FileNotFoundError: If the file cannot be found at the given location.
@@ -57,15 +55,15 @@ def modify_nested(keys: list[Any], new: Any, f: str) -> bool:
     Can update a key at any depth in TOML.
 
     :param keys: A *list* of keys leading to the target key.
-    :param new: The value to update the targeted key/value with.
-    :param f: The file to read and write to.
-
     :type keys: list
+
+    :param new: The value to update the targeted key/value with.
     :type new: arr | int | str | float | dict
+
+    :param f: The file to read and write to.
     :type f: str
 
     :return: Returns True or False
-
     :rtype: bool
 
     :raises FileNotFoundError: If the file cannot be found at the given location.
