@@ -1,0 +1,76 @@
+names = [
+    "Zephyr",
+    "Nyxon",
+    "Flamebender",
+    "Ashborn",
+    "Thornwake",
+    "Duskveil",
+    "Grimwood",
+    "Stormcaller",
+    "Emberfall",
+    "Frostbite",
+    "Ironclad",
+    "Shadowmere",
+    "Wraithborn",
+    "Sunspire",
+    "Moonfang",
+    "Voidwalker",
+    "Ravenshade",
+    "Bloodfen",
+    "Skyrend",
+    "Earthshaker",
+    "Nightshade",
+    "Wyrmtongue",
+    "Solheart",
+    "Cinderfall",
+    "Galewind",
+    "Thundermaw",
+    "Duneshifter",
+    "Mistrend",
+    "Hollowfang",
+    "Brightspear",
+    "Grimhold",
+    "Ashenclaw",
+    "Stonefist",
+    "Wildroot",
+    "Starfallen",
+    "Crimsonfang",
+    "Umbraflare",
+    "Blazewing",
+    "Riftborn",
+    "Thistlemane",
+]
+
+[health]
+    [health.1]
+        min=50
+        max=100
+    [health.2]
+        min=75
+        max=125
+    [health.3]
+        min=100
+        max=165
+    [health.4]
+        min=200
+        max=250
+    [health.5]
+        min=250
+        max=275
+
+[token]
+    [token.1]
+        min=25
+        max=50
+    [token.2]
+        min=60
+        max=110
+    [token.3]
+        min=150
+        max=210
+    [token.4]
+        min=215
+        max=275
+    [token.5]
+        min=300
+        max=500
