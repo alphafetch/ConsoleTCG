@@ -293,6 +293,98 @@ def scr_career() -> None:
 
     return
 
+def scr_world_select() -> None | bool:
+    '''
+    Select a world to enter.
+
+    :return: The player's win status
+    :rtype: None | bool
+    '''
+
+    # Clear the screen
+    helper.clear()
+
+    # Load relevant files
+    user = sl.load(imp.user_data_toml)
+
+    # Print worlds
+    disallowed_list = []
+    for i in range(7):
+        if user["unlocks"]["career"]["progress"]["world" + str(i + 1)]["unlocked"] == True:
+            print(styles.format_style("World " + str(i + 1), "cyan"))
+        else:
+            print(styles.format_style("World " + str(i + 1), "red"))
+            disallowed_list.append(str(i + 1))
+    print()
+
+    world = helper.clean_input("Select world: ", ["1", "2", "3", "4", "5", "6", "7", "Q", "q"], disallowed_list, "That world is not unlocked yet!")
+
+    if world == "Q" or world == "q":
+        return
+
+    return scr_enemy_select(int(world))
+
+def scr_enemy_select(world: int) -> None | bool:
+    '''
+    Select an enemy to battle.
+
+    :return: Player win status
+    :rtype: None | bool
+    '''
+
+    # Clear the screen
+    helper.clear()
+
+    # Load relevant files
+    user = sl.load(imp.user_data_toml)
+    career = sl.load(imp.career_toml)
+
+    # Print enemies
+    disallowed_list = []
+    allowed_list = []
+    # [*]           V this gets # of enemies in world
+    for index in range(1, len(career["world" + str(world)]) + 1):
+        if index == 1: 
+            allowed_list.append(career["world" + str(world)][str(index)])
+            continue
+        elif user["unlocks"]["career"]["progress"]["world" + str(world)][str(index)] == False\
+            and user["unlocks"]["career"]["progress"]["world" + str(world)][str(index - 1)]: 
+                allowed_list.append(career["world" + str(world)][str(index)])
+                continue
+        else: 
+            disallowed_list.append(str(index))
+
+    for i, enemy in enumerate(allowed_list):
+        formatted_enemy = ""
+
+        formatted_enemy += f"{i + 1}. "
+
+        stars = ""
+        for i in range(enemy["diff"]):
+            stars += "★"
+        for i in range(5 - len(stars)):
+            stars += "☆"
+
+        formatted_enemy += f"[{stars}] "
+        formatted_enemy += enemy["name"]
+
+        match enemy["diff"]:
+            case 1: formatted_enemy = styles.format_style(formatted_enemy, "green")
+            case 2: formatted_enemy = styles.format_style(formatted_enemy, "cyan")
+            case 3: formatted_enemy = styles.format_style(formatted_enemy, "yellow")
+            case 4: formatted_enemy = styles.format_style(formatted_enemy, "progress")
+            case 5: formatted_enemy = styles.format_style(formatted_enemy, "red")
+
+        print(formatted_enemy)
+
+    print()
+
+    enemy = helper.clean_input("Select enemy: ", [(str(x + 1)) for x in range(len(career["world" + str(world)]))], disallowed_list, "Defeat the previous enemy first!")
+
+    opponent = allowed_list[int(enemy) - 1]
+
+    return show_enemy(world, opponent, int(enemy))
+
 def scr_decks() -> None:
     '''
     Customize decks. Empty slots (in a new OR old file) are represented by "empty".
