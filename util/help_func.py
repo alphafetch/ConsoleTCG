@@ -358,11 +358,11 @@ def create_randomized_opponent(diff: int) -> Opponent:
     weaksel = set()
     for type in randomized_weaksel:
         match type:
-            case "water": weaksel.add("water")
-            case "fire": weaksel.add("fire")
-            case "earth": weaksel.add("earth")
-            case "sun": weaksel.add("sun")
-            case "nature": weaksel.add("nature")
+            case 1: weaksel.add("water")
+            case 2: weaksel.add("fire")
+            case 3: weaksel.add("earth")
+            case 4: weaksel.add("sun")
+            case 5: weaksel.add("nature")
     # Material
     randomized_weakmat = set()
     for _ in range(diff + random.randint(-2, -1)) if diff <= 2 else range(diff):
@@ -372,10 +372,10 @@ def create_randomized_opponent(diff: int) -> Opponent:
     weakmat = set()
     for type in randomized_weakmat:
         match type:
-            case "blade": weakmat.add("blade")
-            case "blunt": weakmat.add("blunt")
-            case "hard": weakmat.add("hard")
-            case "wood": weakmat.add("wood")
+            case 1: weakmat.add("blade")
+            case 2: weakmat.add("blunt")
+            case 3: weakmat.add("hard")
+            case 4: weakmat.add("wood")
 
     # 9. RESISTANCES
     # Elemental
@@ -385,11 +385,11 @@ def create_randomized_opponent(diff: int) -> Opponent:
     ressel = set()
     for type in randomized_ressel:
         match type:
-            case "water": ressel.add("water")
-            case "fire": ressel.add("fire")
-            case "earth": ressel.add("earth")
-            case "sun": ressel.add("sun")
-            case "nature": ressel.add("nature")
+            case 1: ressel.add("water")
+            case 2: ressel.add("fire")
+            case 3: ressel.add("earth")
+            case 4: ressel.add("sun")
+            case 5: ressel.add("nature")
     # Material
     randomized_resmat = set()
     for _ in range(diff + random.randint(-2, -1)) if diff <= 2 else range(diff):
@@ -399,10 +399,10 @@ def create_randomized_opponent(diff: int) -> Opponent:
     resmat = set()
     for type in randomized_resmat:
         match type:
-            case "blade": resmat.add("blade")
-            case "blunt": resmat.add("blunt")
-            case "hard": resmat.add("hard")
-            case "wood": resmat.add("wood")
+            case 1: resmat.add("blade")
+            case 2: resmat.add("blunt")
+            case 3: resmat.add("hard")
+            case 4: resmat.add("wood")
 
     # 10. CRIT CHANCE
     crit = random.randint(
