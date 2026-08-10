@@ -353,7 +353,7 @@ def create_randomized_opponent(diff: int) -> Opponent:
     # 8. WEAKNESSES
     # Elemental
     randomized_weaksel = set()
-    for _ in range(diff + random.randint(-1, -2)) if diff <= 3 else range(0):
+    for _ in range(diff + random.randint(-2, -1)) if diff <= 3 else range(0):
         randomized_weaksel.add(random.randint(1, 5))
     weaksel = set()
     for type in randomized_weaksel:
@@ -365,22 +365,22 @@ def create_randomized_opponent(diff: int) -> Opponent:
             case "nature": weaksel.add("nature")
     # Material
     randomized_weakmat = set()
-    for _ in range(diff + random.randint(-1, -2)) if diff <= 2 else range(diff):
+    for _ in range(diff + random.randint(-2, -1)) if diff <= 2 else range(diff):
         num = random.randint(1, 4)
         if num not in randomized_weakmat:
             randomized_weakmat.add(num)
     weakmat = set()
     for type in randomized_weakmat:
         match type:
-            case "blade": weaksel.add("blade")
-            case "blunt": weaksel.add("blunt")
-            case "hard": weaksel.add("hard")
-            case "wood": weaksel.add("wood")
+            case "blade": weakmat.add("blade")
+            case "blunt": weakmat.add("blunt")
+            case "hard": weakmat.add("hard")
+            case "wood": weakmat.add("wood")
 
     # 9. RESISTANCES
     # Elemental
     randomized_ressel = set()
-    for _ in range(diff + random.randint(-1, -2)) if diff <= 3 else range(0):
+    for _ in range(diff + random.randint(-2, -1)) if diff <= 3 else range(0):
         randomized_ressel.add(random.randint(1, 5))
     ressel = set()
     for type in randomized_ressel:
@@ -392,7 +392,7 @@ def create_randomized_opponent(diff: int) -> Opponent:
             case "nature": ressel.add("nature")
     # Material
     randomized_resmat = set()
-    for _ in range(diff + random.randint(-1, -2)) if diff <= 2 else range(diff):
+    for _ in range(diff + random.randint(-2, -1)) if diff <= 2 else range(diff):
         num = random.randint(1, 4)
         if num not in randomized_resmat:
             randomized_resmat.add(num)
