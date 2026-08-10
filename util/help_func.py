@@ -126,6 +126,122 @@ TYPE: {card["type"]}
 └───────────────┘
 DESC: {card["desc"]}""", "bold_cyan"))
 
+def format_card_line(card_id: str, cards: dict) -> str:
+    '''
+    Formats a card into [####] [TYPE] Name format.
+
+    :param card_id: The card ID to format.
+    :type card_id: str,
+
+    :param cards: The cards.
+    :type cards: dict
+    
+    :return: The formatted string literal
+    :rtype: str
+    '''
+
+    # Format the inputted card
+    if card_id in cards["ATK"]:
+        formatted_card = ""
+        
+        id_format = f"[{card_id[7:11]}] "
+        formatted_card += id_format
+
+        type_format = f"[{cards["ATK"][card_id]["type"].capitalize()}] "
+        formatted_card += type_format
+
+        name_format = f"{cards["ATK"][card_id]["name"]}"
+        formatted_card += name_format
+
+        formatted_card = styles.format_style(formatted_card, "red")
+    elif card_id in cards["WPN"]:
+        formatted_card = ""
+                            
+        id_format = f"[{card_id[7:11]}] "
+        formatted_card += id_format
+
+        type_format = f"[{cards["WPN"][card_id]["type"].capitalize()}] "
+        formatted_card += type_format
+
+        name_format = f"{cards["WPN"][card_id]["name"]}"
+        formatted_card += name_format
+
+        formatted_card = styles.format_style(formatted_card, "yellow")
+    elif card_id in cards["AMR"]:
+        formatted_card = ""
+                            
+        id_format = f"[{card_id[7:11]}] "
+        formatted_card += id_format
+
+        type_format = f"[{cards["AMR"][card_id]["type"].capitalize()}] "
+        formatted_card += type_format
+
+        name_format = f"{cards["AMR"][card_id]["name"]}"
+        formatted_card += name_format
+
+        formatted_card = styles.format_style(formatted_card, "cyan")
+    else:
+        formatted_card = "Empty Slot"
+    return formatted_card
+
+def get_category_from_index(i: int) -> str:
+    '''
+    Used for determining a card's category from where it is in a list.
+    
+    :param i: The index to check
+    :type i: int
+
+    :return: Returns the correct 3-letter abbreviated category
+    :rtype: str
+    '''
+    
+    return ( 
+        "ATK" if i in range(0, 4) 
+        else "WPN" if i in range(4, 6) 
+        else "AMR" if i in range(6, 8)
+        else "NAN"
+    )
+
+def get_category_from_id(id: str) -> str:
+    '''
+    Used for determining a card's category from its ID.
+
+    :param id: The card id to check
+    :type id: str
+
+    :return: The category (3-letter abbreviated)
+    :rtype: str
+    '''
+
+    cat = str(id[3] + id[4] + id[5])
+
+    return cat.upper()
+
+def reconstruct_id(four_digit: str, cat: str) -> str:
+    '''
+    Used to reconstruct a card ID from a four digit ID and a category.
+
+    :param four_digit: The four digit ID to reconstruct from
+    :type four_digit: str
+
+    :param cat: The category
+    :type cat: str
+
+    :return: String card ID
+    :rtype: str
+    '''
+
+    # Load the cards
+    cards = sl.load(imp.cards_toml)
+
+    for i in cards[cat.upper()]:
+        if i[7:11] == four_digit:
+            return str(i)
+        else:
+            continue
+
+    return "" # Satisfy type checker
+
 def create_opponent(diff: int) -> Opponent:
     '''
     Create a randomized opponent for exhibition mode.
