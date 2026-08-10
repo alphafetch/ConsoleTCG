@@ -123,7 +123,7 @@ def scr_starter_card() -> None:
     #    TO TAKE IT OR LEAVE IT
     for card in starters:
         helper.clear()
-        helper.print_card(card)
+        helper.print_card(card, "ATK")
         print()
         input(styles.format_style("Press any key to continue to the next card...", "warn"))
         continue
