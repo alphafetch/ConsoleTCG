@@ -329,8 +329,10 @@ def scr_win_career(world: int, opp: dict[str, Any], num: int) -> None:
     else:
         cat = career["world" + str(world)][str(num)]["reward"][3:6].upper()
         card = cards[cat][career["world" + str(world)][str(num)]["reward"]]
+        id = career["world" + str(world)][str(num)]["reward"]
 
     # 3. SAVE THE CARD
+    card["id"] = id
     helper.save_card(card, cat)
 
     # 4. PAYOUT
