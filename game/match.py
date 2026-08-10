@@ -227,9 +227,121 @@ def start_match(world: int, enemy: dict[str, Any], number: int) -> bool:
                 skip_u -= 1
                 time.sleep(1.5)
 
-            # STUB: enemy turn and win/loss detection land here in the next commit
-            win = True
-            break
+            if skip_e: skip_e -= 1; print("Enemy turn was skipped!"); time.sleep(1.5); continue
+
+            # 5. ENEMY TURN
+            # Select the category to play
+            enemy_atks = []
+            enemy_wpns = []
+            enemy_amrs = []
+            # Get how many of each category there is
+            for card_id in enemy["deck"]:
+                match card_id[3:6].upper():
+                    case "ATK": 
+                        if not card_id in used_cards_e: enemy_atks.append(card_id)
+                    case "WPN": 
+                        if not card_id in used_cards_e: enemy_wpns.append(card_id)
+                    case "AMR": 
+                        if not card_id in used_cards_e: enemy_amrs.append(card_id)
+            # Calculate percentages for each category
+            atk_percent = len(enemy_atks) / len(enemy["deck"])
+            wpn_percent = len(enemy_wpns) / len(enemy["deck"]) 
+            amr_percent = len(enemy_amrs) / len(enemy["deck"])
+
+            # Decide which category to use a card from
+            # [*]                                  V This list has the options to select based on the weights
+            # [*]                                                           V These are the weights to select the first list by
+            enemy_card_category = random.choices(["ATK", "WPN", "AMR"], weights=[atk_percent, wpn_percent, amr_percent], k=1)[0] # < This does a weighted selection on what category to choose
+
+            # Select a card from the category
+            match enemy_card_category:
+                case "ATK": enemy_card = random.choice(enemy_atks)
+                case "WPN": enemy_card = random.choice(enemy_wpns)
+                case "AMR": enemy_card = random.choice(enemy_amrs)
+
+            used_cards_e.append(enemy_card)
+            target = cards[enemy_card_category][enemy_card]
+            match enemy_card_category:
+                case "ATK":
+                    # 3. DAMAGE THE PLAYER
+                    damage = int(target["damage"])
+                    name = "You"
+                    e_name = enemy["name"]
+
+                    dmg_random1 = round(damage / 12) - random.randint(-3, 2)
+                    dmg_random2 = round(damage / 10) + random.randint(-2, 3)
+                    crit = True if random.randint(1, 100) <= enemy["crit"] else False
+
+                    # Randomize the damage
+                    damage += random.randint(min(dmg_random1, dmg_random2), max(dmg_random1, dmg_random2))
+                    if crit:
+                        crit_perc = 1.5 + round(random.uniform(-0.2, 0.2), 1)
+                        damage *= crit_perc
+
+                    damage += damage_inc_e + poison_u
+
+                    match enemy["diff"]:
+                        case 1: e_name = styles.format_style(e_name, "green")
+                        case 2: e_name = styles.format_style(e_name, "cyan")
+                        case 3: e_name = styles.format_style(e_name, "yellow")
+                        case 4: e_name = styles.format_style(e_name, "progress")
+                        case 5: e_name = styles.format_style(e_name, "red")
+
+                    helper.clear()
+
+                    damage = ceil(damage)
+
+                    if u_health - damage >= 10: u_health -= damage
+                    else: u_health = 10
+
+                    print(f"{e_name}{styles.clear_styles()} played {helper.format_card_line(enemy_card, cards)}{styles.clear_styles()}!")
+                    print(f"{name} took {styles.format_style(str(damage), "red")} damage!")
+                    if crit: print(f"{e_name}{styles.clear_styles()} hit you with a {styles.format_style("critical hit!", "red")}{styles.clear_styles()} (x{crit_perc})")
+                    time.sleep(1)
+                case "WPN":
+                    # 3. APPLY EFFECTS
+                    effect = target["effect"]
+                    effects = helper.parse_effect(effect)
+
+                    for effect_type, value in effects.items():
+                        match effect_type:
+                            # 3a. Damage Increases
+                            case "damage_increase": 
+                                damage_inc_e += value
+                                helper.clear()
+                                print(f"Enemy damage was increased! (+{value}, total +{damage_inc_e})")
+                                time.sleep(1.5)
+                            # 3b. Poisoning
+                            case "poison": 
+                                poison_u += value
+                                helper.clear()
+                                print(f"Enemy poisoned you! (+{value}, total {poison_u})")
+                                time.sleep(1.5)
+                            # 3c. Player turn skip
+                            case "skip_enemy_turn": skip_u += value
+                case "AMR":
+                    # 3. APPLY EFFECTS
+                    effect = target["effect"]
+                    effects = helper.parse_effect(effect)
+
+            # Enemy reshuffling
+            if set(used_cards_e) == set(enemy["deck"]):
+                # [;] Enemy deck is used up, reshuffle
+                helper.clear()
+                used_cards_e = []
+
+            if u_health <= 0: win = False; break
+        if win:
+            helper.clear()
+            print(styles.format_style("You Won!", "success"))
+            print("Press any key to continue...")
+            sl.modify_nested(["unlocks", "career", "progress", "world" + str(world), str(number)], True, imp.user_data_toml)
+            readchar.readkey()
+        else:
+            helper.clear()
+            print(styles.format_style("You Lost...", "red"))
+            print("Press any key to continue...")
+            readchar.readkey()
 
         return win
     else:
