@@ -6,6 +6,8 @@ from . import help_func as helper
 from . import key_vars as keyvars
 from . import styles
 
+from game import exhibition as exhib
+
 # This contains important variables such as the user data directory
 imp = keyvars.KeyVars()
 
@@ -166,14 +168,41 @@ def scr_status() -> bool:
 │ Max HP: {data["user"]["stats"]["max_hp"]}
 └───────────────┘\n""", "bold_cyan"))
     print("""1. Career (TBA)
-2. Exhibition (WIP)
+2. Exhibition
 3. Decks (TBA)
 4. Main Menu\n""")
 
-    u_input = helper.clean_input("> ", ["1", "2", "3", "4"], ["1", "2", "3"], styles.format_style("Error: That option is not ready yet.", "error"))
+    u_input = helper.clean_input("> ", ["1", "2", "3", "4"], ["1", "3"], styles.format_style("Error: That option is not ready yet.", "error"))
 
     match int(u_input):
+        case 2:
+            # Start the exhibition script
+            exhib.start_exhibition()
+
+            return False
         case 4:
             return True
         case _:
             return False
+
+def scr_diff_select_exhibition() -> int:
+    '''
+    Screen to select a difficulty for an exhibition game.
+
+    :return: Returns the difficulty level as an integer (easy: 1, medium: 2, hard: 3)
+    :rtype: int
+    '''
+
+    # Clear the screen
+    helper.clear()
+
+    print(styles.format_style("""SELECT DIFFICULTY:
+1. Easy
+2. Normal
+3. Medium
+4. Hard
+5. Extreme\n""", "cyan_back"))
+
+    diff = helper.clean_input("> ", ["1", "2", "3", "4", "5"])
+
+    return int(diff)
