@@ -10,7 +10,8 @@ styles = {
     "cyan": Fore.CYAN + Style.NORMAL,
     "red": Fore.RED + Style.NORMAL,
     "yellow": Fore.YELLOW + Style.NORMAL,
-    "green": Fore.GREEN + Style.NORMAL
+    "green": Fore.GREEN + Style.NORMAL,
+    "bright_red": Fore.LIGHTRED_EX + Style.NORMAL
 }
 
 # Used to print a styled message
@@ -29,3 +30,13 @@ def format_style(text: str, style: str) -> str:
     '''
 
     return styles[style] + text
+
+def clear_styles() -> str:
+    '''
+    Clears any remaining styles.
+
+    :return: The reset code
+    :rtype: str
+    '''
+
+    return Style.RESET_ALL
