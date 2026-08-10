@@ -45,7 +45,7 @@ def scr_main_menu() -> str:
 
     return u_input
 
-def scr_collection() -> None:
+def scr_collection() -> None: # TODO Collections
     '''
     Show the collection screen.
 
@@ -67,7 +67,8 @@ def scr_collection() -> None:
     except FileNotFoundError:
         # [;] Function failed, wait for the user to confirm
         print(styles.format_style("The save file could not be found and previous checks returned false.", "error"))
-        input(styles.format_style("Press any key to continue...", "warn"))
+        print(styles.format_style("Press any key to continue...", "warn"))
+        readchar.readkey()
 
         # [^] Return to the main menu
         return
@@ -125,13 +126,14 @@ def scr_starter_card() -> None:
         helper.clear()
         helper.print_card(card, "ATK")
         print()
-        input(styles.format_style("Press any key to continue to the next card...", "warn"))
+        print(styles.format_style("Press any key to continue to the next card...", "warn"))
+        readchar.readkey()
         continue
 
     helper.clear()
 
     # 5. ASK THE USER TO CHOOSE THE CARD THEY WANT
-    card = helper.clean_input("Which card would you like to choose? (1-5): ", ["1", "2", "3", "4", "5"])
+    card = helper.clean_input("Which card would you like to choose? (1-5): ", ["1", "2", "3", "4", "5"]) # REVIEW Cannot have more or less starters, may change
 
     # 6. SAVE THE CARD TO THE USER'S DATA FILE
     helper.clear() 
