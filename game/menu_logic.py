@@ -72,7 +72,8 @@ def new_game() -> None:
                         "1": False,
                         "2": False,
                         "3": False,
-                        "4": False
+                        "4": False,
+                        "5": False
                     },
                     "world5": {
                         "unlocked": False,
