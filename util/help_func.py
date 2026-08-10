@@ -6,6 +6,8 @@ from . import styles
 from . import sl
 from . import key_vars as keyvars
 
+from typing import Any
+
 from game.opponent import Opponent
 
 # This contains important variables such as the user data directory
@@ -63,7 +65,7 @@ def clean_input(prompt: str, requirements: list[str], disallowances: list[str] |
             if u_input in disallowances:
                 # [^] Input was disallowed
                 has_error = True
-                error = str(disallow_message)
+                error = str(styles.format_style(disallow_message, "error"))
 
                 # Print a newline so the error message goes underneath the input
                 sys.stdout.write("\n")
@@ -153,7 +155,9 @@ TYPE: {card["type"]}
 └───────────────┘
 DESC: {card["desc"]}""", "bold_cyan"))
 
-def format_card_line(card_id: str, cards: dict) -> str:
+# ----------------------------------------------------
+
+def format_card_line(card_id: str, cards: dict[str, Any]) -> str:
     '''
     Formats a card into [####] [TYPE] Name format.
 
@@ -161,7 +165,7 @@ def format_card_line(card_id: str, cards: dict) -> str:
     :type card_id: str,
 
     :param cards: The cards.
-    :type cards: dict
+    :type cards: dict[str, Any]
     
     :return: The formatted string literal
     :rtype: str
@@ -356,7 +360,7 @@ def clear() -> None:
 
     subprocess.run("cls", shell=True)
 
-def quit(code:str | int) -> None:
+def quit_game(code: str | int) -> None:
     '''
     Exits with exit code 0
 
