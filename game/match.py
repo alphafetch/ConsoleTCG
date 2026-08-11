@@ -126,6 +126,15 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                         formatted_card += styles.format_style(" [USED]", "error")
                     print(formatted_card)
                 print("-------------------")
+                weaknesses = []
+                for weakness in enemy.weak_el + enemy.weak_mat:
+                    weaknesses.append(weakness)
+                print(styles.format_style(f"WEAKNESSES: {', '.join(weaknesses).capitalize()}", "green"))
+                resistances = []
+                for resistance in enemy.res_el + enemy.res_mat:
+                    resistances.append(resistance)
+                print(styles.format_style(f"RESISTANCES: {', '.join(resistances).capitalize()}", "green"))
+                print("-------------------")
                 print(styles.format_style("YOUR TURN:", "cyan"))
                 playable_cards = []
                 # [*] all_cards is used here to get the correct error 
@@ -168,12 +177,59 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
 
                         damage += damage_inc_u + poison_e
 
+                        # Apply resistances and weaknesses (exclusive to player -> enemy attack)
+                        type_ = target["type"]
+                        weakness_ = False
+                        resistance_ = False
+                        if type_ in enemy.weak_el + enemy.weak_mat:
+                            weakness_ = True
+                            match type_:
+                                case "fire": mult = imp.fire_weak + random.uniform(-0.1, 0.1)
+                                case "water": mult = imp.water_weak + random.uniform(-0.05, 0.05)
+                                case "earth": mult = imp.earth_weak + random.uniform(-0.2, 0.2)
+                                case "sun": mult = imp.sun_weak + random.uniform(-0.3, 0.3)
+                                case "nature": mult = imp.nature_weak + random.uniform(-0.05, 0.05)
+                                case "blade": mult = imp.blade_weak + random.uniform(-0.15, 0.15)
+                                case "blunt": mult = imp.blunt_weak + random.uniform(-0.05, 0.05)
+                                case "hard": mult = imp.hard_weak + random.uniform(-0.4, 0.05)
+                                case "wood": mult = imp.wood_weak + random.uniform(-0.1, 0.1)
+                                case _: mult = 1
+                        elif type_ in enemy.res_el + enemy.res_mat:
+                            resistance_ = True
+                            match type_:
+                                case "fire": mult = imp.fire_res + random.uniform(-0.1, 0.1)
+                                case "water": mult = imp.water_res + random.uniform(-0.05, 0.05)
+                                case "earth": mult = imp.earth_res + random.uniform(-0.2, 0.2)
+                                case "sun": mult = imp.sun_res + random.uniform(-0.3, 0.3)
+                                case "nature": mult = imp.nature_res + random.uniform(-0.05, 0.05)
+                                case "blade": mult = imp.blade_res + random.uniform(-0.15, 0.15)
+                                case "blunt": mult = imp.blunt_res + random.uniform(-0.05, 0.05)
+                                case "hard": mult = imp.hard_res + random.uniform(-0.05, 0.4)
+                                case "wood": mult = imp.wood_res + random.uniform(-0.1, 0.1)
+                                case _: mult = 1
+                        else: mult = 1
+
+                        damage *= mult
+
                         match enemy.diff:
                             case 1: name = styles.format_style(name, "green")
                             case 2: name = styles.format_style(name, "cyan")
                             case 3: name = styles.format_style(name, "yellow")
                             case 4: name = styles.format_style(name, "progress")
                             case 5: name = styles.format_style(name, "red")
+
+                        type_formatted = type_
+                        match type_:
+                            case "fire": type_formatted = styles.format_style(type_formatted, "red")
+                            case "water": type_formatted = styles.format_style(type_formatted, "cyan")
+                            case "earth": type_formatted = styles.format_style(type_formatted, "yellow")
+                            case "sun": type_formatted = styles.format_style(type_formatted, "error")
+                            case "nature": type_formatted = type_formatted
+                            case "blade": type_formatted = type_formatted
+                            case "blunt": type_formatted = styles.format_style(type_formatted, "progress")
+                            case "hard": type_formatted = styles.format_style(type_formatted, "green")
+                            case "wood": type_formatted = styles.format_style(type_formatted, "bright_red")
+                            case _: type_formatted = type_formatted
 
                         helper.clear()
 
@@ -184,6 +240,9 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                         print(f"You played {helper.format_card_line(target_id, cards)}{styles.clear_styles()}!")
                         print(f"{name}{styles.clear_styles()} took {styles.format_style(str(damage), "red")} damage!")
                         if crit: print(f"You got a {styles.format_style("critical hit", "red")}{styles.clear_styles()} on {name}{styles.clear_styles()} (x{crit_perc})")
+                        if weakness_: print(f"You hit {name}'s {styles.format_style("weakness", "green")}! ({type_formatted.capitalize()})")
+                        if resistance_: print(f"You hit {name}'s {styles.format_style("resistance", "red")}... ({type_formatted.capitalize()})")
+
                         time.sleep(1.5)
                     case "WPN":
                         # 3. APPLY EFFECTS
