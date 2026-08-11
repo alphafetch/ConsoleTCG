@@ -148,7 +148,7 @@ MANA: {card["mana_cost"]}
 TOK: {card["cost"]}
 TYPE: {card["type"]}
 └───────────────┘
-DESC: {card["desc"]}""", "bold_cyan")) # TODO ADD MODIFIER DECODER
+DESC: {card["desc"]}""", "bold_cyan"))
     elif cat == "AMR":
         print(styles.format_style(f"""┌───────────────┐
 {card["name"]}

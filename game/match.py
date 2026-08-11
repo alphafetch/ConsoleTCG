@@ -75,6 +75,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
         poison_u = 0
         skip_e = 0
         skip_u = 0
+        defense_u = 0
+        defense_e = 0
 
         # Loop until someone dies
         while True:
@@ -92,6 +94,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
 
             if poison_u > 0: poison_u -= 1
             if poison_e > 0: poison_e -= 1
+            if defense_u > 0: defense_u -= 1
+            if defense_e > 0: defense_e -= 1
 
             if not skip_u:
                 # 1b. Show player health & effects
@@ -233,12 +237,22 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
 
                         helper.clear()
 
+                        def_div = 2 + random.uniform(-0.4, 0.1)
+                        if defense_e: damage /= def_div
+
                         damage = ceil(damage)
 
                         op_health -= damage
 
+                        mods = []
+                        if damage_inc_u: damage_plus = f"+{damage_inc_u} DMG INC."; mods.append(damage_plus)
+                        if poison_e: poison_plus = f"+{poison_e} POISON"; mods.append(poison_plus)
+
+                        modifs: str = ', '.join(mod for mod in mods)
+
                         print(f"You played {helper.format_card_line(target_id, cards)}{styles.clear_styles()}!")
-                        print(f"{name}{styles.clear_styles()} took {styles.format_style(str(damage), "red")} damage!")
+                        print(f"{name}{styles.clear_styles()} took {styles.format_style(str(damage), "red")} damage! ({modifs})")
+                        if defense_e: print(f"The enemy defended! (card base dmg / {def_div})")
                         if crit: print(f"You got a {styles.format_style("critical hit", "red")}{styles.clear_styles()} on {name}{styles.clear_styles()} (x{crit_perc})")
                         if weakness_: print(f"You hit {name}{styles.clear_styles()}'s {styles.format_style("weakness", "green")}{styles.clear_styles()}! ({type_formatted.capitalize()}{styles.clear_styles()})")
                         if resistance_: print(f"You hit {name}{styles.clear_styles()}'s {styles.format_style("resistance", "red")}{styles.clear_styles()}... ({type_formatted.capitalize()}{styles.clear_styles()})")
@@ -248,26 +262,41 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                         # 3. APPLY EFFECTS
                         effect = target["effect"]
                         effects = helper.parse_effect(effect)
-                        
+
+                        helper.clear()
+                        print(f"You played {helper.format_card_line(target_id, cards)}{styles.clear_styles()}!")
                         for effect_type, value in effects.items():
                             match effect_type:
                                 # 3a. Damage Increases
                                 case "damage_increase": 
                                     damage_inc_u += value
-                                    helper.clear()
-                                    print(f"Your damage was increased! (+{value}, total +{damage_inc_u})")
+                                    print(f"Your {styles.format_style("damage", "red")}{styles.clear_styles()} was increased! (+{value}, total +{damage_inc_u})")
                                     time.sleep(1.5)
                                 # 3b. Poisoning
                                 case "poison": 
                                     poison_e += value
-                                    helper.clear()
-                                    print(f"You poisoned the enemy! (+{value} poison, total {poison_e})")
+                                    print(f"You {styles.format_style("poisoned", "progress")}{styles.clear_styles()} the enemy! (+{value} poison, total {poison_e})")
                                     time.sleep(1.5)
                                 # 3c. Player turn skip
                                 case "skip_enemy_turn": skip_e += value
                     case "AMR":
                         # 3. APPLY EFFECTS
                         effect = target["effect"]
+                        effects = helper.parse_effect(effect)
+
+                        helper.clear()
+                        print(f"You played {helper.format_card_line(target_id, cards)}{styles.clear_styles()}!")
+                        for effect_type, value in effects.items():
+                            match effect_type:
+                                # 3a. Health Temp Inc
+                                case "health_temp_increase":
+                                    u_health += value
+                                    print(f"Your health increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}!")
+                                    time.sleep(1.5)
+                                case "defend_round":
+                                    defense_u += value
+                                    print(f"You're now {styles.format_style("defending", "cyan")}{styles.clear_styles()} for {value} rounds!")
+                                    time.sleep(1.5)
 
                 if op_health <= 0: win = True; break
 
@@ -347,13 +376,23 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
 
                     helper.clear()
 
+                    def_div = 2 + random.uniform(-0.4, 0.1)
+                    if defense_u: damage /= def_div
+
+                    mods = []
+                    if damage_inc_e: damage_plus = f"+{damage_inc_e} DMG INC."; mods.append(damage_plus)
+                    if poison_u: poison_plus = f"+{poison_u} POISON"; mods.append(poison_plus)
+
+                    modifs: str = ', '.join(mod for mod in mods)
+
                     damage = ceil(damage)
 
                     if u_health - damage >= 10: u_health -= damage
                     else: u_health = 10
 
                     print(f"{e_name}{styles.clear_styles()} played {helper.format_card_line(enemy_card, cards)}{styles.clear_styles()}!")
-                    print(f"{name} took {styles.format_style(str(damage), "red")} damage!")
+                    print(f"You took {styles.format_style(str(damage), "red")} damage! ({modifs})")
+                    if defense_u: print(f"You defended! (card base dmg / {def_div})")
                     if crit: print(f"{e_name}{styles.clear_styles()} hit you with a {styles.format_style("critical hit!", "red")}{styles.clear_styles()} (x{crit_perc})")
                     time.sleep(1)
                 case "WPN":
@@ -361,18 +400,18 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                     effect = target["effect"]
                     effects = helper.parse_effect(effect)
 
+                    helper.clear()
+                    print(f"Enemy played {helper.format_card_line(enemy_card, cards)}{styles.clear_styles()}!")
                     for effect_type, value in effects.items():
                         match effect_type:
                             # 3a. Damage Increases
                             case "damage_increase": 
                                 damage_inc_e += value
-                                helper.clear()
                                 print(f"Enemy damage was increased! (+{value}, total +{damage_inc_e})")
                                 time.sleep(1.5)
                             # 3b. Poisoning
                             case "poison": 
                                 poison_u += value
-                                helper.clear()
                                 print(f"Enemy poisoned you! (+{value}, total {poison_u})")
                                 time.sleep(1.5)
                             # 3c. Player turn skip
@@ -381,6 +420,20 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                     # 3. APPLY EFFECTS
                     effect = target["effect"]
                     effects = helper.parse_effect(effect)
+                    
+                    helper.clear()
+                    print(f"Enemy played {helper.format_card_line(enemy_card, cards)}{styles.clear_styles()}!")
+                    for effect_type, value in effects.items():
+                        match effect_type:
+                            # 3a. Health Temp Inc
+                            case "health_temp_increase":
+                                op_health += value
+                                print(f"Enemy health increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}!")
+                                time.sleep(1.5)
+                            case "defend_round":
+                                defense_e += value
+                                print(f"Enemy is now {styles.format_style("defending", "cyan")}{styles.clear_styles()} for {value} rounds!")
+                                time.sleep(1.5)
 
             # Enemy reshuffling
             if set(used_cards_e) == set(enemy.deck):
