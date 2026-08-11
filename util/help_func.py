@@ -126,6 +126,8 @@ def print_card(card: dict, cat: str) -> None:
     '''
 
     cat = cat.upper()
+    if cat != "ATK":
+        eff = parse_effect_visual(card, cat)
 
     # This uses the inputted dictionary 
     # to show the card info to the user
@@ -141,7 +143,7 @@ DESC: {card["desc"]}""", "bold_cyan"))
     elif cat == "WPN":
         print(styles.format_style(f"""┌───────────────┐
 {card["name"]}
-MODIF: TBA
+MODIF: {eff}
 MANA: {card["mana_cost"]}
 TOK: {card["cost"]}
 TYPE: {card["type"]}
@@ -150,7 +152,7 @@ DESC: {card["desc"]}""", "bold_cyan")) # TODO ADD MODIFIER DECODER
     elif cat == "AMR":
         print(styles.format_style(f"""┌───────────────┐
 {card["name"]}
-MODIF: TBA
+MODIF: {eff}
 MANA: {card["mana_cost"]}
 TOK: {card["cost"]}
 TYPE: {card["type"]}
@@ -158,6 +160,23 @@ TYPE: {card["type"]}
 DESC: {card["desc"]}""", "bold_cyan"))
 
 # ----------------------------------------------------
+
+def parse_effect_visual(card: dict, cat: str):
+    if cat != "ATK":
+        effects = parse_effect(card["effect"])
+        final = []
+        if effects: 
+            for effect, value in effects.items():
+                match effect:
+                    case "damage_increase": final.append(f"Damage Increase: {value}")
+                    case "poison": final.append(f"Poison: {value}")
+                    case "skip_enemy_turn": final.append(f"Skip Enemy: {value}")
+                    case "health_temp_increase": final.append(f"Health Increase: {value}")
+                    case "defend_round": final.append(f"Defend Rounds: {value}")
+        final_string = ', '.join(e for e in final)
+        return final_string
+    else:
+        print("Failed execution of parse_effect_visual()")
 
 def format_card_line(card_id: str, cards: dict[str, Any]) -> str:
     '''
@@ -425,7 +444,7 @@ def create_randomized_opponent(diff: int) -> Opponent:
     # 12. RETURN THE OPPONENT
     return opponent
 
-def parse_effect(effect_str: str) -> dict[str, Any]:
+def parse_effect(effect_str: str) -> dict[str, int]:
     '''
     Parse an effect from cards.toml.
 
@@ -433,7 +452,7 @@ def parse_effect(effect_str: str) -> dict[str, Any]:
     :type effect_str: str
 
     :return: The dictionary with the effects of the selected card
-    :rtype: dict[str, Any]
+    :rtype: dict[str, int]
     '''
 
     effects = effect_str.split(",")
