@@ -405,7 +405,7 @@ def scr_world_select() -> None | bool:
             disallowed_list.append(str(i + 1))
     print()
 
-    world = helper.clean_input("Select world: ", ["1", "2", "3", "4", "5", "6", "7", "Q", "q"], disallowed_list, "That world is not unlocked yet!")
+    world = helper.clean_input("Select world (Q/q to quit): ", ["1", "2", "3", "4", "5", "6", "7", "Q", "q"], disallowed_list, "That world is not unlocked yet!")
 
     if world == "Q" or world == "q":
         return
