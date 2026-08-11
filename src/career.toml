@@ -54,6 +54,37 @@
 "res-mat"=[]
 "crit"=5
 
+[world1.3]
+"name"="Head-Basher"
+"health"=28
+"tokens"=150
+"reward"="id-wpn-0002"
+"xp"=223
+"id"=13
+"diff"=1
+"deck"=[
+    "id-atk-0005",
+    "id-atk-0007",
+    "id-atk-0010",
+    "id-atk-0011",
+    "id-wpn-0002",
+    "id-wpn-0004",
+    "id-amr-0000"
+]
+"weak-el"=[
+    "water",
+    "nature"
+]
+"res-el"=[]
+"weak-mat"=[
+    "blade"
+]
+"res-mat"=[
+    "blunt",
+    "hard"
+]
+"crit"=4
+
 [world2]
 
 [world3]
