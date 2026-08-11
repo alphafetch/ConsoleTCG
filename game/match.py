@@ -100,8 +100,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
             if not skip_u:
                 # 1b. Show player health & effects
                 print("Health: " + health_colored)
-                print("+DMG: " + str(damage_inc_u))
-                print("Poison: " + str(poison_u))
+                print("+DMG: " + str(damage_inc_u) + "Poison: " + str(poison_u))
                 # 1c. Show player colored deck
                 print(styles.format_style("DECK:", "bold_cyan"))
                 for id, card in enumerate(deck):
@@ -120,8 +119,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
 
                 # 1e. Show enemy health
                 print("Enemy Health: " + health_colored)
-                print("Enemy +DMG: " + str(damage_inc_e))
-                print("Enemy Poison: " + str(poison_e))
+                print("Enemy +DMG: " + str(damage_inc_e) + " | Enemy Poison: " + str(poison_e))
                 # 1f. Show player colored deck
                 print(styles.format_style("ENEMY DECK:", "red"))
                 for card in enemy.deck:
