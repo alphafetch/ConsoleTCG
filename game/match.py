@@ -240,8 +240,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                         print(f"You played {helper.format_card_line(target_id, cards)}{styles.clear_styles()}!")
                         print(f"{name}{styles.clear_styles()} took {styles.format_style(str(damage), "red")} damage!")
                         if crit: print(f"You got a {styles.format_style("critical hit", "red")}{styles.clear_styles()} on {name}{styles.clear_styles()} (x{crit_perc})")
-                        if weakness_: print(f"You hit {name}'s {styles.format_style("weakness", "green")}! ({type_formatted.capitalize()})")
-                        if resistance_: print(f"You hit {name}'s {styles.format_style("resistance", "red")}... ({type_formatted.capitalize()})")
+                        if weakness_: print(f"You hit {name}{styles.clear_styles()}'s {styles.format_style("weakness", "green")}{styles.clear_styles()}! ({type_formatted.capitalize()}{styles.clear_styles()})")
+                        if resistance_: print(f"You hit {name}{styles.clear_styles()}'s {styles.format_style("resistance", "red")}{styles.clear_styles()}... ({type_formatted.capitalize()}{styles.clear_styles()})")
 
                         time.sleep(1.5)
                     case "WPN":
