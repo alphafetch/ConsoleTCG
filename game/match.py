@@ -251,7 +251,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                         modifs: str = ', '.join(mod for mod in mods)
 
                         print(f"You played {helper.format_card_line(target_id, cards)}{styles.clear_styles()}!")
-                        print(f"{name}{styles.clear_styles()} took {styles.format_style(str(damage), "red")} damage! ({modifs})")
+                        print(f"{name}{styles.clear_styles()} took {styles.format_style(str(damage), "red")} damage! {"(" if modifs != "" else ""}{modifs}{")" if modifs != "" else ""}")
                         if defense_e: print(f"The enemy defended! (card base dmg / {def_div})")
                         if crit: print(f"You got a {styles.format_style("critical hit", "red")}{styles.clear_styles()} on {name}{styles.clear_styles()} (x{crit_perc})")
                         if weakness_: print(f"You hit {name}{styles.clear_styles()}'s {styles.format_style("weakness", "green")}{styles.clear_styles()}! ({type_formatted.capitalize()}{styles.clear_styles()})")
@@ -391,7 +391,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                     else: u_health = 10
 
                     print(f"{e_name}{styles.clear_styles()} played {helper.format_card_line(enemy_card, cards)}{styles.clear_styles()}!")
-                    print(f"You took {styles.format_style(str(damage), "red")} damage! ({modifs})")
+                    print(f"You took {styles.format_style(str(damage), "red")} damage! {"(" if modifs != "" else ""}{modifs}{")" if modifs != "" else ""}")
                     if defense_u: print(f"You defended! (card base dmg / {def_div})")
                     if crit: print(f"{e_name}{styles.clear_styles()} hit you with a {styles.format_style("critical hit!", "red")}{styles.clear_styles()} (x{crit_perc})")
                     time.sleep(1)
