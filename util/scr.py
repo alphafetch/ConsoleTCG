@@ -320,19 +320,22 @@ def scr_win_career(world: int, opponent: opp.Opponent, num: int) -> None:
 
     # 2. GIVE CARD REWARD
     # Determine whether this is the first time fighting
-    if data["unlocks"]["career"]["progress"]["world" + str(world)][str(num)]:
+    if data["unlocks"]["career"]["progress"]["world" + str(world)][str(num)] == True:
+        new_win = False
         card_data = helper.draw_random_card()
         id = card_data["key"]
         card = card_data["value"]
         cat = id[3:6].upper()
     else:
+        new_win = True
         cat = career["world" + str(world)][str(num)]["reward"][3:6].upper()
         card = cards[cat][career["world" + str(world)][str(num)]["reward"]]
         id = career["world" + str(world)][str(num)]["reward"]
 
-    # 3. SAVE THE CARD
+    # 3. SAVE THE CARD & SET WIN IF NEW WIN
     card["id"] = id
     helper.save_card(card, cat)
+    if new_win: sl.modify_nested(["unlocks", "career", "progress", "world" + str(world), str(num)], True, imp.user_data_toml)
 
     # 4. PAYOUT
     # Tokens
