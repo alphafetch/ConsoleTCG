@@ -438,6 +438,9 @@ def scr_enemy_select(world: int) -> None | bool:
         if index == 1: 
             allowed_list.append(career["world" + str(world)][str(index)])
             continue
+        elif user["unlocks"]["career"]["progress"]["world" + str(world)][str(index)] == True:
+            allowed_list.append(career["world" + str(world)][str(index)])
+            continue
         elif user["unlocks"]["career"]["progress"]["world" + str(world)][str(index)] == False\
             and user["unlocks"]["career"]["progress"]["world" + str(world)][str(index - 1)]: 
                 allowed_list.append(career["world" + str(world)][str(index)])
