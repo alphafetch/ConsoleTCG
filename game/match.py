@@ -393,7 +393,6 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
             helper.clear()
             print(styles.format_style("You Won!", "success"))
             print("Press any key to continue...")
-            sl.modify_nested(["unlocks", "career", "progress", "world" + str(world), str(number)], True, imp.user_data_toml)
             readchar.readkey()
         else:
             helper.clear()
