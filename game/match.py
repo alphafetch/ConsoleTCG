@@ -129,11 +129,11 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                 weaknesses = []
                 for weakness in enemy.weak_el + enemy.weak_mat:
                     weaknesses.append(weakness)
-                print(styles.format_style(f"WEAKNESSES: {', '.join(weaknesses).capitalize()}", "green"))
+                print(styles.format_style(f"WEAKNESSES: {', '.join(w.capitalize() for w in weaknesses) if weaknesses else styles.format_style("No weaknesses.", "red")}", "green"))
                 resistances = []
                 for resistance in enemy.res_el + enemy.res_mat:
                     resistances.append(resistance)
-                print(styles.format_style(f"RESISTANCES: {', '.join(resistances).capitalize()}", "green"))
+                print(styles.format_style(f"RESISTANCES: {', '.join(r.capitalize() for r in resistances) if resistances else styles.format_style("No resistances.", "green")}", "red"))
                 print("-------------------")
                 print(styles.format_style("YOUR TURN:", "cyan"))
                 playable_cards = []
