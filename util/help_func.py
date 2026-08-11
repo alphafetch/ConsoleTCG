@@ -478,76 +478,23 @@ def draw_random_card(diff: int) -> dict[str, Any]:
     cards = sl.load(imp.cards_toml)
 
     match diff:
-        case 1:
-            randomized = random.choices([1, 2], weights=[80, 20], k=1)[0]
-            allowed_draw = {}
+        case 1: randomized = random.choices([1, 2], weights=[80, 20], k=1)[0]
+        case 2: randomized = random.choices([1, 2, 3], weights=[20, 70, 10], k=1)[0]
+        case 3: randomized = random.choices([1, 2, 3, 4], weights=[15, 30, 45, 10], k=1)[0]
+        case 4: randomized = random.choices([2, 3, 4, 5], weights=[5, 30, 55, 10], k=1)[0]
+        case 5: randomized = random.choices([3, 4, 5], weights=[10, 60, 30], k=1)[0]
+    allowed_draw = {}
 
-            randomized_cat = random.choice(["ATK", "WPN", "AMR"])
+    randomized_cat = random.choice(["ATK", "WPN", "AMR"])
 
-            for id, card in cards[randomized_cat].items():
-                if card["diff"] == randomized:
-                    allowed_draw[id] = card
+    for id, card in cards[randomized_cat].items():
+        if card["diff"] == randomized:
+            allowed_draw[id] = card
 
-            ids = list(allowed_draw.keys())
-            key = random.choice(ids)
-            card = allowed_draw[key]
-            return {"key": key, "value": card}
-        case 2:
-            randomized = random.choices([1, 2, 3], weights=[20, 70, 10], k=1)[0]
-            allowed_draw = {}
-
-            randomized_cat = random.choice(["ATK", "WPN", "AMR"])
-
-            for id, card in cards[randomized_cat].items():
-                if card["diff"] == randomized:
-                    allowed_draw[id] = card
-
-            ids = list(allowed_draw.keys())
-            key = random.choice(ids)
-            card = allowed_draw[key]
-            return {"key": key, "value": card}
-        case 3:
-            randomized = random.choices([1, 2, 3, 4], weights=[15, 30, 45, 10], k=1)[0]
-            allowed_draw = {}
-
-            randomized_cat = random.choice(["ATK", "WPN", "AMR"])
-
-            for id, card in cards[randomized_cat].items():
-                if card["diff"] == randomized:
-                    allowed_draw[id] = card
-
-            ids = list(allowed_draw.keys())
-            key = random.choice(ids)
-            card = allowed_draw[key]
-            return {"key": key, "value": card}
-        case 4:
-            randomized = random.choices([2, 3, 4, 5], weights=[5, 30, 55, 10], k=1)[0]
-            allowed_draw = {}
-
-            randomized_cat = random.choice(["ATK", "WPN", "AMR"])
-
-            for id, card in cards[randomized_cat].items():
-                if card["diff"] == randomized:
-                    allowed_draw[id] = card
-
-            ids = list(allowed_draw.keys())
-            key = random.choice(ids)
-            card = allowed_draw[key]
-            return {"key": key, "value": card}
-        case 5:
-            randomized = random.choices([3, 4, 5], weights=[10, 60, 30], k=1)[0]
-            allowed_draw = {}
-
-            randomized_cat = random.choice(["ATK", "WPN", "AMR"])
-
-            for id, card in cards[randomized_cat].items():
-                if card["diff"] == randomized:
-                    allowed_draw[id] = card
-
-            ids = list(allowed_draw.keys())
-            key = random.choice(ids)
-            card = allowed_draw[key]
-            return {"key": key, "value": card}
+    ids = list(allowed_draw.keys())
+    key = random.choice(ids)
+    card = allowed_draw[key]
+    return {"key": key, "value": card}
 
 def clear() -> None: # REVIEW Spawns subprocess every time, may change
     '''
