@@ -322,7 +322,7 @@ def scr_win_career(world: int, opponent: opp.Opponent, num: int) -> None:
     # Determine whether this is the first time fighting
     if data["unlocks"]["career"]["progress"]["world" + str(world)][str(num)] == True:
         new_win = False
-        card_data = helper.draw_random_card()
+        card_data = helper.draw_random_card(opponent.diff)
         id = card_data["key"]
         card = card_data["value"]
         cat = id[3:6].upper()
