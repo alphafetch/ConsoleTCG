@@ -195,12 +195,6 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                 case "earth": mult = imp.earth_weak + random.uniform(-0.2, 0.2)
                                 case "sun": mult = imp.sun_weak + random.uniform(-0.3, 0.3)
                                 case "nature": mult = imp.nature_weak + random.uniform(-0.05, 0.05)
-                                case "blade": mult = imp.blade_weak + random.uniform(-0.15, 0.15)
-                                case "blunt": mult = imp.blunt_weak + random.uniform(-0.05, 0.05)
-                                case "hard": mult = imp.hard_weak + random.uniform(-0.4, 0.05)
-                                case "wood": mult = imp.wood_weak + random.uniform(-0.1, 0.1)
-                                case "metal": mult = imp.metal_weak + random.uniform(-0.3, 0.1)
-                                case "chain": mult = imp.chain_weak + random.uniform(-0.07, 0.07)
                                 case _: mult = 1
                         elif type_ in enemy.res_el + enemy.res_mat:
                             resistance_ = True
@@ -210,12 +204,6 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                 case "earth": mult = imp.earth_res + random.uniform(-0.2, 0.2)
                                 case "sun": mult = imp.sun_res + random.uniform(-0.3, 0.3)
                                 case "nature": mult = imp.nature_res + random.uniform(-0.05, 0.05)
-                                case "blade": mult = imp.blade_res + random.uniform(-0.15, 0.15)
-                                case "blunt": mult = imp.blunt_res + random.uniform(-0.05, 0.05)
-                                case "hard": mult = imp.hard_res + random.uniform(-0.05, 0.4)
-                                case "wood": mult = imp.wood_res + random.uniform(-0.1, 0.1)
-                                case "metal": mult = imp.metal_res + random.uniform(-0.1, 0.3)
-                                case "chain": mult = imp.chain_res + random.uniform(-0.07, 0.07)
                                 case _: mult = 1
                         else: mult = 1
 
@@ -235,12 +223,6 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                             case "earth": type_formatted = styles.format_style(type_formatted, "yellow")
                             case "sun": type_formatted = styles.format_style(type_formatted, "error")
                             case "nature": type_formatted = type_formatted
-                            case "blade": type_formatted = type_formatted
-                            case "blunt": type_formatted = styles.format_style(type_formatted, "progress")
-                            case "hard": type_formatted = styles.format_style(type_formatted, "green")
-                            case "wood": type_formatted = styles.format_style(type_formatted, "bright_red")
-                            case "metal": type_formatted = styles.format_style(type_formatted, "success")
-                            case "chain": type_formatted = styles.format_style(type_formatted, "green")
                             case _: type_formatted = type_formatted
                         
                         helper.clear()
@@ -290,17 +272,10 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
 
                         if target["type"] in enemy.weak_el + enemy.weak_mat:
                             match target["type"]:
-                                case "fire": additive = 3 * (imp.fire_weak + random.uniform(-0.1, 0.1))
-                                case "water": additive = 3 * (imp.water_weak + random.uniform(-0.05, 0.05))
-                                case "earth": additive = 3 * (imp.earth_weak + random.uniform(-0.2, 0.2))
-                                case "sun": additive = 3 * (imp.sun_weak + random.uniform(-0.3, 0.3))
-                                case "nature": additive = 3 * (imp.nature_weak + random.uniform(-0.05, 0.05))
                                 case "blade": additive = 3 * (imp.blade_weak + random.uniform(-0.15, 0.15))
                                 case "blunt": additive = 3 * (imp.blunt_weak + random.uniform(-0.05, 0.05))
                                 case "hard": additive = 3 * (imp.hard_weak + random.uniform(-0.4, 0.05))
                                 case "wood": additive = 3 * (imp.wood_weak + random.uniform(-0.1, 0.1))
-                                case "metal": additive = 3 * (imp.metal_weak + random.uniform(-0.3, 0.1))
-                                case "chain": additive = 3 * (imp.chain_weak + random.uniform(-0.07, 0.07))
                                 case _: additive = 1
                             additive = ceil(additive)
                             op_health -= additive
@@ -333,6 +308,20 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                     crit_inc_u += value
                                     print(f"Crit % increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
                                     time.sleep(2)
+
+                        if target["type"] in enemy.weak_el + enemy.weak_mat:
+                            match target["type"]:
+                                case "metal": type_formatted = type_formatted
+                                case "chain": type_formatted = styles.format_style(type_formatted, "progress")
+                                case _: additive = 1
+                            additive = ceil(additive)
+                            op_health -= additive
+                            print(f"Opponent took {additive} damage due to being weak to {target["type"]}!")
+                            time.sleep(2)
+                        elif target["type"] in enemy.res_el + enemy.res_mat:
+                            op_health += 5
+                            print(f"Opponent gained {styles.format_style("5 health", "green")}{styles.clear_styles()} due to being resistant of {target["type"]}!")
+                            time.sleep(2)
 
                 if op_health <= 0: win = True; break
 
