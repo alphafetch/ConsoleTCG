@@ -400,7 +400,7 @@ def scr_win_career(world: int, opponent: opp.Opponent, num: int) -> None:
                                                     else "cyan" if data["user"]["stats"]["lvl"] < 8 \
                                                     else "green"
                                                     ))
-            print(f"+ {styles.format_style(str(levels[str(data["user"]["stats"]["lvl"])]["toks"]), "yellow")}")
+            print(f"+ {styles.format_style(str(levels[str(data["user"]["stats"]["lvl"])]["toks"]) + " Tokens", "yellow")}")
             print(f"Crit %: {levels[str(data["user"]["stats"]["lvl"])]["crit"]}%")
             print(f"New Max HP: {styles.format_style(str(levels[str(data["user"]["stats"]["lvl"])]["hp"]), "green")}")
             print("Press any key to continue...")
