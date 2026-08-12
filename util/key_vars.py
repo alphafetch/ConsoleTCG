@@ -38,4 +38,4 @@ class KeyVars():
     chain_weak = 1.2 # * 1.2 + rand (+-0.07)
 
     metal_res = 0.6 # * 0.6 + rand (+0.3, -0.1)
-    chain_res = 0.8 # * 1.2 + rand (+-0.07)
+    chain_res = 0.8 # * 0.8 + rand (+-0.07)
