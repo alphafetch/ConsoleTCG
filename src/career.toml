@@ -87,7 +87,216 @@
 ]
 "crit"=4
 
+[world1.4]
+"name"="Rustjaw"
+"health"=35
+"tokens"=180
+"reward"="id-amr-0001"
+"xp"=260
+"id"=14
+"diff"=1
+"deck"=[
+    "id-atk-0001",
+    "id-atk-0003",
+    "id-atk-0007",
+    "id-atk-0009",
+    "id-wpn-0003",
+    "id-wpn-0052",
+    "id-amr-0004"
+]
+"weak-el"=[
+    "earth",
+    "water"
+]
+"res-el"=[
+    "fire"
+]
+"weak-mat"=[
+    "hard",
+    "wood",
+    "chain"
+]
+"res-mat"=[
+    "blade"
+]
+"crit"=6
+
 [world2]
+
+[world2.1]
+"name"="Grit Hollis"
+"health"=40
+"tokens"=165
+"reward"="id-wpn-0011"
+"xp"=270
+"id"=21
+"diff"=2
+"deck"=[
+    "id-atk-0011",
+    "id-atk-0013",
+    "id-atk-0016",
+    "id-atk-0018",
+    "id-wpn-0012",
+    "id-amr-0011"
+]
+"weak-el"=[
+    "fire",
+    "earth"
+]
+"res-el"=[
+    "water"
+]
+"weak-mat"=[
+    "blunt",
+    "chain"
+]
+"res-mat"=[
+    "hard"
+]
+"crit"=6
+
+[world2.2]
+"name"="Whetstone Mara"
+"health"=48
+"tokens"=185
+"reward"="id-atk-0057"
+"xp"=300
+"id"=22
+"diff"=2
+"deck"=[
+    "id-atk-0012",
+    "id-atk-0015",
+    "id-atk-0017",
+    "id-atk-0019",
+    "id-wpn-0014",
+    "id-amr-0013"
+]
+"weak-el"=[
+    "sun",
+    "nature"
+]
+"res-el"=[
+    "earth"
+]
+"weak-mat"=[
+    "wood",
+    "metal"
+]
+"res-mat"=[
+    "blade"
+]
+"crit"=8
+
+[world2.3]
+"name"="The Tanner"
+"health"=55
+"tokens"=205
+"reward"="id-amr-0058"
+"xp"=330
+"id"=23
+"diff"=2
+"deck"=[
+    "id-atk-0010",
+    "id-atk-0014",
+    "id-atk-0018",
+    "id-atk-0055",
+    "id-wpn-0016",
+    "id-wpn-0057",
+    "id-amr-0015",
+    "id-amr-0018"
+]
+"weak-el"=[
+    "water",
+    "fire"
+]
+"res-el"=[
+    "sun"
+]
+"weak-mat"=[
+    "hard",
+    "chain"
+]
+"res-mat"=[
+    "blunt",
+    "metal"
+]
+"crit"=9
+
+[world2.4]
+"name"="Longshot Wex"
+"health"=62
+"tokens"=230
+"reward"="id-wpn-0059"
+"xp"=370
+"id"=24
+"diff"=2
+"deck"=[
+    "id-atk-0013",
+    "id-atk-0016",
+    "id-atk-0019",
+    "id-atk-0056",
+    "id-wpn-0011",
+    "id-wpn-0018",
+    "id-amr-0016",
+    "id-amr-0017"
+]
+"weak-el"=[
+    "earth",
+    "nature"
+]
+"res-el"=[
+    "fire",
+    "water"
+]
+"weak-mat"=[
+    "blade",
+    "wood"
+]
+"res-mat"=[
+    "chain"
+]
+"crit"=11
+
+[world2.5]
+"name"="Ironbrand"
+"health"=150
+"tokens"=450
+"reward"="id-atk-0064"
+"xp"=700
+"id"=25
+"diff"=3
+"deck"=[
+    "id-atk-0011",
+    "id-atk-0021",
+    "id-atk-0024",
+    "id-atk-0027",
+    "id-atk-0060",
+    "id-atk-0063",
+    "id-wpn-0013",
+    "id-wpn-0062",
+    "id-wpn-0064",
+    "id-amr-0059",
+    "id-amr-0061",
+    "id-amr-0064"
+]
+"weak-el"=[
+    "water"
+]
+"res-el"=[
+    "fire",
+    "sun",
+    "earth"
+]
+"weak-mat"=[
+    "wood"
+]
+"res-mat"=[
+    "hard",
+    "metal",
+    "chain",
+    "blunt"
+]
+"crit"=28
 
 [world3]
 
