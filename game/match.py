@@ -311,17 +311,18 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
 
                         if target["type"] in enemy.weak_el + enemy.weak_mat:
                             match target["type"]:
-                                case "metal": type_formatted = type_formatted
-                                case "chain": type_formatted = styles.format_style(type_formatted, "progress")
+                                case "metal": additive = 3 * (imp.metal_weak + random.uniform(-0.1, 0.3))
+                                case "chain": additive = 3 * (imp.chain_weak + random.uniform(-0.07, 0.07))
                                 case _: additive = 1
                             additive = ceil(additive)
                             op_health -= additive
                             print(f"Opponent took {additive} damage due to being weak to {target["type"]}!")
                             time.sleep(3)
                         elif target["type"] in enemy.res_el + enemy.res_mat:
-                            op_health += 5
-                            print(f"Opponent gained {styles.format_style("5 health", "green")}{styles.clear_styles()} due to being resistant of {target["type"]}!")
-                            time.sleep(2)
+                            additive = 5 + random.randint(-1, 1)
+                            op_health += additive
+                            print(f"Opponent gained {styles.format_style(f"{additive} health", "green")}{styles.clear_styles()} due to being resistant of {target["type"]}!")
+                            time.sleep(3)
 
                 if op_health <= 0: win = True; break
 
