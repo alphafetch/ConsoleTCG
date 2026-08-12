@@ -2,6 +2,7 @@ import os
 import time
 import readchar
 import random
+from math import ceil
 
 from . import sl
 from . import help_func as helper
@@ -179,11 +180,11 @@ def scr_status() -> bool:
     print("""1. Career
 2. Exhibition
 3. Decks
-4. Roll Card (TBA)
+4. Roll Card
 5. Main Menu\n""")
 
     # Get the user's input on what they would like to do
-    u_input = helper.clean_input("> ", ["1", "2", "3", "4", "5"], ["4"], "Error: That option is not ready yet.") 
+    u_input = helper.clean_input("> ", ["1", "2", "3", "4", "5"], [], "Error: That option is not ready yet.") 
 
     u_input = int(u_input)
     if not u_input in [1, 2, 3, 4, 5]:
@@ -204,6 +205,8 @@ def scr_status() -> bool:
 
             return False
         case 4:
+            scr_roll()
+
             return False
         case 5:
             return True
@@ -410,6 +413,67 @@ def scr_win_career(world: int, opponent: opp.Opponent, num: int) -> None:
 
 def scr_lose_career():
     pass
+
+def scr_roll() -> None:
+    '''
+    Roll a card based on the player's difficulty level.
+
+    :rtype: None
+    '''
+
+    # Clear the screen 
+    helper.clear()
+
+    # Load relevant files
+    levels = sl.load(imp.lvls_toml)
+    data = sl.load(imp.user_data_toml)
+    cost = levels[str(data["user"]["stats"]["lvl"])]["roll_cost"] + (data["user"]["stats"]["tokens"] / 3); cost = ceil(cost)
+
+    print(styles.format_style("ROLL CARD\n", "cyan"))
+    print(f"Token Cost: {styles.format_style(str(cost), "yellow")}")
+    if cost > data["user"]["stats"]["tokens"]:
+        print(styles.format_style(f"Cost too great for your current tokens ({str(data["user"]["stats"]["tokens"])}).", "error"))
+        print(styles.format_style("Press any key to continue...", "warn"))
+        readchar.readkey()
+        return
+    u_input = helper.clean_input(f"Would you like to roll a card (diff: {levels[str(data["user"]["stats"]["lvl"])]["roll_diff"]})? (Y/n): ", ["Y", "y", "N", "n"])
+    if u_input.upper() == "Y":
+        # Draw the card
+        card = helper.draw_random_card(levels[str(data["user"]["stats"]["lvl"])]["roll_diff"])
+        card_id = card["key"]
+        card_dict = card["value"]
+
+        # Decrement tokens
+        sl.modify_nested(["user", "stats", "tokens"], data["user"]["stats"]["tokens"] - cost, imp.user_data_toml); data = sl.load(imp.user_data_toml)
+
+        helper.clear()
+
+        # Show rolling text
+        print(styles.format_style("Rolling", "progress"))
+        time.sleep(0.5)
+        helper.clear()
+        print(styles.format_style("Rolling.", "progress"))
+        time.sleep(0.5)
+        helper.clear()
+        print(styles.format_style("Rolling..", "progress"))
+        time.sleep(0.5)
+        helper.clear()
+        print(styles.format_style("Rolling...", "progress"))
+        time.sleep(0.5)
+        helper.clear()
+
+        # Staple ID
+        card_dict["id"] = card_id
+
+        # Output results
+        print(styles.format_style("Rolled this card!:", "bold_cyan"))
+        helper.print_card(card_dict, helper.get_category_from_id(card_id))
+        helper.save_card(card_dict, helper.get_category_from_id(card_id)); sl.load(imp.user_data_toml)
+        print(styles.format_style(f"- {str(cost)} Tokens (new: {str(data["user"]["stats"]["tokens"])})", "red"))
+        print(styles.format_style("Press any key to continue...", "warn"))
+        readchar.readkey()
+    else:
+        return
 
 def scr_world_select() -> None | bool:
     '''

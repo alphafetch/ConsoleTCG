@@ -3,60 +3,80 @@ hp=100
 thresh=0
 crit=1
 toks=0
+roll_diff=1
+roll_cost=120
 
 [2]
 hp=105
 thresh=2250
 crit=3
 toks=80
+roll_diff=1
+roll_cost=200
 
 [3]
 hp=115
 thresh=4000
 crit=8
 toks=170
+roll_diff=2
+roll_cost=600
 
 [4]
 hp=130
 thresh=6200
 crit=15
 toks=300
+roll_diff=2
+roll_cost=1000
 
 [5]
 hp=150
 thresh=10000
 crit=25
 toks=550
+roll_diff=3
+roll_cost=1600
 
 [6]
 hp=175
 thresh=14000
 crit=33
 toks=750
+roll_diff=3
+roll_cost=2500
 
 [7]
 hp=205
 thresh=20000
 crit=45
 toks=1200
+roll_diff=4
+roll_cost=4000
 
 [8]
 hp=235
 thresh=27050
 crit=65
 toks=1500
+roll_diff=4
+roll_cost=7000
 
 [9]
 hp=250
 thresh=35000
 crit=80
 toks=2000
+roll_diff=5
+roll_cost=12000
 
 [10]
 hp=300
 thresh=50000
 crit=90
 toks=2600
+roll_diff=5
+roll_cost=15000
 
 [max]
 max_lvl=10

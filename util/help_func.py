@@ -112,12 +112,12 @@ def save_card(card: dict, cat: str) -> None:
     sl.save(user, imp.user_data_toml)
 
 
-def print_card(card: dict, cat: str) -> None:
+def print_card(card: dict[str, Any], cat: str) -> None:
     '''
     Print a given card to the console.
 
     :param card: A dictionary in the correct format for the card
-    :type card: dict
+    :type card: dict[str, Any]
 
     :param cat: The category in which the card is in.
     :type cat: str
@@ -471,7 +471,7 @@ def draw_random_card(diff: int) -> dict[str, Any]:
     :param diff: The difficulty
     :type diff: int
 
-    :return: A dictionary with the card
+    :return: A dictionary with the card id and dictionary
     :rtype: dict[str, Any]
     '''
 
