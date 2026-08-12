@@ -476,12 +476,12 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
         if win:
             helper.clear()
             print(styles.format_style("You Won!", "success"))
-            print("Press any key to continue...")
+            print(styles.format_style("Press any key to continue...", "warn"))
             readchar.readkey()
         else:
             helper.clear()
             print(styles.format_style("You Lost...", "red"))
-            print("Press any key to continue...")
+            print(styles.format_style("Press any key to continue...", "warn"))
             readchar.readkey()
 
         return win
