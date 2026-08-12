@@ -475,12 +475,12 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
             if u_health <= 0: win = False; break
         if win:
             helper.clear()
-            print(styles.format_style("You Won!", "success"))
+            print(styles.format_style("You won!", "success"))
             print(styles.format_style("Press any key to continue...", "warn"))
             readchar.readkey()
         else:
             helper.clear()
-            print(styles.format_style("You Lost...", "red"))
+            print(styles.format_style("You lost...", "red"))
             print(styles.format_style("Press any key to continue...", "warn"))
             readchar.readkey()
 
