@@ -455,7 +455,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                             # 3a. Health Temp Inc
                             case "health_temp_increase":
                                 op_health += value
-                                print(f"Enemy health increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (HP: {op_health})")
+                                print(f"Enemy {styles.format_style("health", "green")}{styles.clear_styles()} increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (HP: {op_health})")
                                 time.sleep(3)
                             case "defend_round":
                                 defense_e += value
