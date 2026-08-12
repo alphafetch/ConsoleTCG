@@ -247,7 +247,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                         if weakness_: print(f"You hit {name}{styles.clear_styles()}'s {styles.format_style("weakness", "green")}{styles.clear_styles()}! ({type_formatted.capitalize()}{styles.clear_styles()})")
                         if resistance_: print(f"You hit {name}{styles.clear_styles()}'s {styles.format_style("resistance", "red")}{styles.clear_styles()}... ({type_formatted.capitalize()}{styles.clear_styles()})")
 
-                        time.sleep(2)
+                        time.sleep(3)
                     case "WPN":
                         # 3. APPLY EFFECTS
                         effect = target["effect"]
@@ -261,12 +261,12 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                 case "damage_increase": 
                                     damage_inc_u += value
                                     print(f"Your {styles.format_style("damage", "red")}{styles.clear_styles()} was increased! (+{value}, total +{damage_inc_u})")
-                                    time.sleep(2)
+                                    time.sleep(3)
                                 # 3b. Poisoning
                                 case "poison": 
                                     poison_e += value + 1
                                     print(f"You {styles.format_style("poisoned", "progress")}{styles.clear_styles()} the enemy! (+{value} poison, total {poison_e - 1})")
-                                    time.sleep(2)
+                                    time.sleep(3)
                                 # 3c. Player turn skip
                                 case "skip_enemy_turn": skip_e += value
 
@@ -280,11 +280,11 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                             additive = ceil(additive)
                             op_health -= additive
                             print(f"Opponent took {additive} damage due to being weak to {target["type"]}!")
-                            time.sleep(2)
+                            time.sleep(3)
                         elif target["type"] in enemy.res_el + enemy.res_mat:
                             op_health += 5
                             print(f"Opponent gained {styles.format_style("5 health", "green")}{styles.clear_styles()} due to being resistant of {target["type"]}!")
-                            time.sleep(2)
+                            time.sleep(3)
 
                     case "AMR":
                         # 3. APPLY EFFECTS
@@ -299,15 +299,15 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                 case "health_temp_increase":
                                     u_health += value
                                     print(f"Your health increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (HP: {u_health})")
-                                    time.sleep(2)
+                                    time.sleep(3)
                                 case "defend_round":
                                     defense_u += value
                                     print(f"You're now {styles.format_style("defending", "cyan")}{styles.clear_styles()} for {value} rounds!")
-                                    time.sleep(2)
+                                    time.sleep(3)
                                 case "crit_inc":
                                     crit_inc_u += value
                                     print(f"Crit % increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
-                                    time.sleep(2)
+                                    time.sleep(3)
 
                         if target["type"] in enemy.weak_el + enemy.weak_mat:
                             match target["type"]:
@@ -317,7 +317,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                             additive = ceil(additive)
                             op_health -= additive
                             print(f"Opponent took {additive} damage due to being weak to {target["type"]}!")
-                            time.sleep(2)
+                            time.sleep(3)
                         elif target["type"] in enemy.res_el + enemy.res_mat:
                             op_health += 5
                             print(f"Opponent gained {styles.format_style("5 health", "green")}{styles.clear_styles()} due to being resistant of {target["type"]}!")
@@ -419,7 +419,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                     print(f"You took {styles.format_style(str(damage), "red")} damage! {"(" if modifs != "" else ""}{modifs}{")" if modifs != "" else ""}")
                     if defense_u: print(f"You defended! (card base dmg / {def_div})")
                     if crit: print(f"{e_name}{styles.clear_styles()} hit you with a {styles.format_style("critical hit!", "red")}{styles.clear_styles()} (x{crit_perc})")
-                    time.sleep(2)
+                    time.sleep(3)
                 case "WPN":
                     # 3. APPLY EFFECTS
                     effect = target["effect"]
@@ -433,12 +433,12 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                             case "damage_increase": 
                                 damage_inc_e += value
                                 print(f"Enemy damage was increased! (+{value}, total +{damage_inc_e})")
-                                time.sleep(2)
+                                time.sleep(3)
                             # 3b. Poisoning
                             case "poison": 
                                 poison_u += value + 1
                                 print(f"Enemy poisoned you! (+{value}, total {poison_u - 1})")
-                                time.sleep(2)
+                                time.sleep(3)
                             # 3c. Player turn skip
                             case "skip_enemy_turn": skip_u += value
                 case "AMR":
@@ -454,15 +454,15 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                             case "health_temp_increase":
                                 op_health += value
                                 print(f"Enemy health increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (HP: {op_health})")
-                                time.sleep(2)
+                                time.sleep(3)
                             case "defend_round":
                                 defense_e += value
                                 print(f"Enemy is now {styles.format_style("defending", "cyan")}{styles.clear_styles()} for {value} rounds!")
-                                time.sleep(2)
+                                time.sleep(3)
                             case "crit_inc":
                                 crit_inc_e += value
                                 print(f"Enemy crit % increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
-                                time.sleep(2)
+                                time.sleep(3)
 
             # Enemy reshuffling
             if set(used_cards_e) == set(enemy.deck):
