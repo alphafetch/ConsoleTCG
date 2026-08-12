@@ -473,7 +473,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
         win = True
         return win
 
-def start_exhibition(opp: Opponent) -> bool: # TODO Exhibition match
+def start_exhibition(opp: Opponent) -> bool:
     '''
     Play a match using an Opponent class.
 
