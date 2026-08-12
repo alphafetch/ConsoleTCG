@@ -44,7 +44,7 @@ def scr_main_menu() -> str:
         u_input = helper.clean_input("> ", ["1", "2", "3", "4"])
     else:
         # [^] User does not have a save file
-        u_input = helper.clean_input("> ", ["1", "2", "3", "4"], ["1", "3"], styles.format_style(f"Error: No user data. Please select a different option.", "error"))
+        u_input = helper.clean_input("> ", ["1", "2", "3", "4"], ["1", "3"], "Error: No user data. Please select a different option.")
 
     return u_input
 
@@ -183,7 +183,7 @@ def scr_status() -> bool:
 5. Main Menu\n""")
 
     # Get the user's input on what they would like to do
-    u_input = helper.clean_input("> ", ["1", "2", "3", "4", "5"], ["4"], styles.format_style("Error: That option is not ready yet.", "error")) 
+    u_input = helper.clean_input("> ", ["1", "2", "3", "4", "5"], ["4"], "Error: That option is not ready yet.") 
 
     u_input = int(u_input)
     if not u_input in [1, 2, 3, 4, 5]:
