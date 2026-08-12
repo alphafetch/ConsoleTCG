@@ -499,6 +499,256 @@ type="nature"
 starter=false
 diff=5
 
+[ATK.id-atk-0050]
+name="Trickle"
+damage=5
+mana_cost=2
+cost=8
+desc="Barely a stream, but it finds every gap."
+type="water"
+starter=false
+diff=1
+
+[ATK.id-atk-0051]
+name="Spark"
+damage=6
+mana_cost=3
+cost=10
+desc="Gone in an instant, but it leaves a mark."
+type="fire"
+starter=false
+diff=1
+
+[ATK.id-atk-0052]
+name="Clump"
+damage=4
+mana_cost=2
+cost=7
+desc="Just a fistful of dirt, thrown hard enough to matter."
+type="earth"
+starter=false
+diff=1
+
+[ATK.id-atk-0053]
+name="Glimmer"
+damage=6
+mana_cost=4
+cost=12
+desc="A flicker of light with more bite than it looks."
+type="sun"
+starter=false
+diff=1
+
+[ATK.id-atk-0054]
+name="Bramble Nip"
+damage=5
+mana_cost=3
+cost=9
+desc="A quick snag from something that shouldn't move that fast."
+type="nature"
+starter=false
+diff=1
+
+[ATK.id-atk-0055]
+name="Surge"
+damage=10
+mana_cost=5
+cost=26
+desc="A sudden push of current, gone before you brace for it."
+type="water"
+starter=false
+diff=2
+
+[ATK.id-atk-0056]
+name="Scorchmark"
+damage=12
+mana_cost=7
+cost=34
+desc="Leaves a mark that outlasts the pain."
+type="fire"
+starter=false
+diff=2
+
+[ATK.id-atk-0057]
+name="Fissure"
+damage=9
+mana_cost=5
+cost=24
+desc="The ground splits before the sound catches up."
+type="earth"
+starter=false
+diff=2
+
+[ATK.id-atk-0058]
+name="Glare"
+damage=12
+mana_cost=7
+cost=35
+desc="Hard to look at, harder to walk away from."
+type="sun"
+starter=false
+diff=2
+
+[ATK.id-atk-0059]
+name="Thicket Lash"
+damage=9
+mana_cost=5
+cost=26
+desc="Branches that move like they're aiming."
+type="nature"
+starter=false
+diff=2
+
+[ATK.id-atk-0060]
+name="Cascade"
+damage=15
+mana_cost=9
+cost=46
+desc="One wave becomes three before it lands."
+type="water"
+starter=false
+diff=3
+
+[ATK.id-atk-0061]
+name="Firestorm"
+damage=19
+mana_cost=11
+cost=65
+desc="Heat that pulls the air in before it pushes back."
+type="fire"
+starter=false
+diff=3
+
+[ATK.id-atk-0062]
+name="Upheaval"
+damage=14
+mana_cost=8
+cost=44
+desc="What was solid ground a moment ago, isn't anymore."
+type="earth"
+starter=false
+diff=3
+
+[ATK.id-atk-0063]
+name="Blaze Halo"
+damage=18
+mana_cost=11
+cost=60
+desc="A ring of light that closes in fast."
+type="sun"
+starter=false
+diff=3
+
+[ATK.id-atk-0064]
+name="Overgrowth"
+damage=15
+mana_cost=9
+cost=48
+desc="Roots that don't ask for permission."
+type="nature"
+starter=false
+diff=3
+
+[ATK.id-atk-0065]
+name="Squall"
+damage=22
+mana_cost=13
+cost=82
+desc="A storm that arrives before the warning does."
+type="water"
+starter=false
+diff=4
+
+[ATK.id-atk-0066]
+name="Magma Vent"
+damage=26
+mana_cost=15
+cost=100
+desc="What's underneath doesn't stay underneath for long."
+type="fire"
+starter=false
+diff=4
+
+[ATK.id-atk-0067]
+name="Tectonic Shift"
+damage=21
+mana_cost=12
+cost=79
+desc="Plates grinding against each other, and against you."
+type="earth"
+starter=false
+diff=4
+
+[ATK.id-atk-0068]
+name="Aurora Strike"
+damage=25
+mana_cost=15
+cost=96
+desc="Beautiful right up until it connects."
+type="sun"
+starter=false
+diff=4
+
+[ATK.id-atk-0069]
+name="Thornstorm"
+damage=21
+mana_cost=13
+cost=83
+desc="A hundred small cuts, all at once."
+type="nature"
+starter=false
+diff=4
+
+[ATK.id-atk-0070]
+name="Abyssal Wave"
+damage=29
+mana_cost=18
+cost=122
+desc="From somewhere deep enough to have forgotten light."
+type="water"
+starter=false
+diff=5
+
+[ATK.id-atk-0071]
+name="Hellfire Nova"
+damage=35
+mana_cost=22
+cost=155
+desc="Nothing walks away from this unburned."
+type="fire"
+starter=false
+diff=5
+
+[ATK.id-atk-0072]
+name="Continental Crush"
+damage=28
+mana_cost=17
+cost=118
+desc="The weight of a landmass, focused to a point."
+type="earth"
+starter=false
+diff=5
+
+[ATK.id-atk-0073]
+name="Stellar Collapse"
+damage=33
+mana_cost=21
+cost=142
+desc="A star's last act, compressed into one blow."
+type="sun"
+starter=false
+diff=5
+
+[ATK.id-atk-0074]
+name="Primordial Bloom"
+damage=29
+mana_cost=18
+cost=128
+desc="Something ancient, and hungry, finally waking up."
+type="nature"
+starter=false
+diff=5
+
 [WPN]
 [WPN.id-wpn-0000]
 name="Rusty Sword"
@@ -1000,10 +1250,260 @@ type="wood"
 starter=false
 diff=5
 
+[WPN.id-wpn-0050]
+name="Notched Dagger"
+effect="damage_increase+3"
+mana_cost=3
+cost=12
+desc="Chipped, but the chips are where the cuts land."
+type="blade"
+starter=false
+diff=1
+
+[WPN.id-wpn-0051]
+name="Weighted Baton"
+effect="damage_increase+3,poison+1"
+mana_cost=3
+cost=15
+desc="Heavier on one end than you'd expect."
+type="blunt"
+starter=false
+diff=1
+
+[WPN.id-wpn-0052]
+name="Chipped Stone Fist"
+effect="damage_increase+2"
+mana_cost=2
+cost=9
+desc="Blunt, simple, and still standing after all this time."
+type="hard"
+starter=false
+diff=1
+
+[WPN.id-wpn-0053]
+name="Knotted Staff"
+effect="damage_increase+2,poison+1"
+mana_cost=3
+cost=13
+desc="The knots aren't decoration."
+type="wood"
+starter=false
+diff=1
+
+[WPN.id-wpn-0054]
+name="Bent Shiv"
+effect="damage_increase+3"
+mana_cost=2
+cost=10
+desc="Bent on purpose, so it doesn't pull straight back out."
+type="blade"
+starter=false
+diff=1
+
+[WPN.id-wpn-0055]
+name="Serrated Falchion"
+effect="damage_increase+7"
+mana_cost=6
+cost=33
+desc="Every notch catches on the way through."
+type="blade"
+starter=false
+diff=2
+
+[WPN.id-wpn-0056]
+name="Iron Cudgel"
+effect="damage_increase+6,skip_enemy_turn+1"
+mana_cost=6
+cost=29
+desc="Simple, heavy, and effective."
+type="blunt"
+starter=false
+diff=2
+
+[WPN.id-wpn-0057]
+name="Basalt Fist"
+effect="damage_increase+7,poison+4"
+mana_cost=5
+cost=31
+desc="Cracked stone knuckles that leave more than bruises."
+type="hard"
+starter=false
+diff=2
+
+[WPN.id-wpn-0058]
+name="Thornwood Club"
+effect="damage_increase+5,poison+3"
+mana_cost=6
+cost=28
+desc="The bark alone draws blood."
+type="wood"
+starter=false
+diff=2
+
+[WPN.id-wpn-0059]
+name="Whetted Kris"
+effect="damage_increase+8"
+mana_cost=5
+cost=36
+desc="Sharpened past the point of reason."
+type="blade"
+starter=false
+diff=2
+
+[WPN.id-wpn-0060]
+name="Blackened Cutlass"
+effect="damage_increase+10"
+mana_cost=9
+cost=58
+desc="Scorched steel that never lost its edge."
+type="blade"
+starter=false
+diff=3
+
+[WPN.id-wpn-0061]
+name="War Cudgel"
+effect="damage_increase+9,skip_enemy_turn+1"
+mana_cost=9
+cost=52
+desc="Made for one purpose, and good at it."
+type="blunt"
+starter=false
+diff=3
+
+[WPN.id-wpn-0062]
+name="Granite Knuckles"
+effect="damage_increase+11,poison+6"
+mana_cost=10
+cost=61
+desc="Solid stone, sharpened at the edges anyway."
+type="hard"
+starter=false
+diff=3
+
+[WPN.id-wpn-0063]
+name="Petrified Staff"
+effect="damage_increase+9,poison+5"
+mana_cost=9
+cost=55
+desc="Wood that turned to stone and never lost its grip."
+type="wood"
+starter=false
+diff=3
+
+[WPN.id-wpn-0064]
+name="Vicious Kukri"
+effect="damage_increase+12"
+mana_cost=11
+cost=67
+desc="Curved for exactly one purpose."
+type="blade"
+starter=false
+diff=3
+
+[WPN.id-wpn-0065]
+name="Cursed Saber"
+effect="damage_increase+13"
+mana_cost=14
+cost=90
+desc="Nobody remembers who it belonged to first."
+type="blade"
+starter=false
+diff=4
+
+[WPN.id-wpn-0066]
+name="Iron Titan Mace"
+effect="damage_increase+14,skip_enemy_turn+1"
+mana_cost=15
+cost=94
+desc="Too heavy for most, which is the point."
+type="blunt"
+starter=false
+diff=4
+
+[WPN.id-wpn-0067]
+name="Meteoric Gauntlet"
+effect="damage_increase+13,poison+8"
+mana_cost=14
+cost=88
+desc="Forged from something that fell, not something mined."
+type="hard"
+starter=false
+diff=4
+
+[WPN.id-wpn-0068]
+name="Ashbound Club"
+effect="damage_increase+11,poison+9"
+mana_cost=13
+cost=83
+desc="Charred, but the burn never fully left it."
+type="wood"
+starter=false
+diff=4
+
+[WPN.id-wpn-0069]
+name="Ravager's Edge"
+effect="damage_increase+15"
+mana_cost=16
+cost=104
+desc="It doesn't need a second swing."
+type="blade"
+starter=false
+diff=4
+
+[WPN.id-wpn-0070]
+name="Doomforged Blade"
+effect="damage_increase+17,poison+9"
+mana_cost=19
+cost=135
+desc="Forged in something no one wants to talk about."
+type="blade"
+starter=false
+diff=5
+
+[WPN.id-wpn-0071]
+name="Colossal Warmace"
+effect="damage_increase+18"
+mana_cost=21
+cost=140
+desc="Swung once, it decides most things."
+type="blunt"
+starter=false
+diff=5
+
+[WPN.id-wpn-0072]
+name="Void Alloy Fist"
+effect="damage_increase+19,poison+11"
+mana_cost=20
+cost=147
+desc="Cold in a way that has nothing to do with temperature."
+type="hard"
+starter=false
+diff=5
+
+[WPN.id-wpn-0073]
+name="Elderwood Cudgel"
+effect="damage_increase+16,skip_enemy_turn+1"
+mana_cost=18
+cost=126
+desc="Old enough to remember when it was still a tree."
+type="wood"
+starter=false
+diff=5
+
+[WPN.id-wpn-0074]
+name="Apex Cleaver"
+effect="damage_increase+20,poison+13"
+mana_cost=22
+cost=150
+desc="There isn't a tier above this one."
+type="blade"
+starter=false
+diff=5
+
 [AMR]
 [AMR.id-amr-0000]
 name="Metallic Sheet"
-effect="health_temp_increase+4"
+effect="health_temp_increase+4,crit_inc+1"
 mana_cost=5
 cost=18
 desc="Protection if you use it right."
@@ -1023,7 +1523,7 @@ diff=1
 
 [AMR.id-amr-0002]
 name="Tin Plate"
-effect="health_temp_increase+3"
+effect="health_temp_increase+3,crit_inc+1"
 mana_cost=4
 cost=18
 desc="Dented, but dents don't let much through."
@@ -1043,7 +1543,7 @@ diff=1
 
 [AMR.id-amr-0004]
 name="Steel Breastplate"
-effect="health_temp_increase+3,defend_round+1"
+effect="health_temp_increase+3,defend_round+1,crit_inc+2"
 mana_cost=4
 cost=14
 desc="Held on with wire and hope."
@@ -1063,7 +1563,7 @@ diff=1
 
 [AMR.id-amr-0006]
 name="Iron Guard"
-effect="health_temp_increase+4"
+effect="health_temp_increase+4,crit_inc+2"
 mana_cost=3
 cost=13
 desc="Cold to the touch, colder to strike."
@@ -1083,7 +1583,7 @@ diff=1
 
 [AMR.id-amr-0008]
 name="Riveted Plate"
-effect="health_temp_increase+4,defend_round+1"
+effect="health_temp_increase+4,defend_round+1,crit_inc+2"
 mana_cost=2
 cost=10
 desc="Heavier than it looks, in a good way."
@@ -1103,7 +1603,7 @@ diff=1
 
 [AMR.id-amr-0010]
 name="Alloy Vest"
-effect="health_temp_increase+8,defend_round+1"
+effect="health_temp_increase+8,defend_round+1,crit_inc+2"
 mana_cost=7
 cost=36
 desc="Rattles when you move. Still stops things."
@@ -1123,7 +1623,7 @@ diff=2
 
 [AMR.id-amr-0012]
 name="Reinforced Plating"
-effect="health_temp_increase+11"
+effect="health_temp_increase+11,crit_inc+3"
 mana_cost=5
 cost=40
 desc="Lost a couple chains in its life, but it might help."
@@ -1143,7 +1643,7 @@ diff=2
 
 [AMR.id-amr-0014]
 name="Battleforged Cuirass"
-effect="health_temp_increase+9,defend_round+1"
+effect="health_temp_increase+9,defend_round+1,crit_inc+3"
 mana_cost=8
 cost=31
 desc="Smells like it's seen a fight or two."
@@ -1163,7 +1663,7 @@ diff=2
 
 [AMR.id-amr-0016]
 name="Adamant Shell"
-effect="health_temp_increase+11"
+effect="health_temp_increase+11,crit_inc+4"
 mana_cost=8
 cost=37
 desc="Better than nothing, probably."
@@ -1183,7 +1683,7 @@ diff=2
 
 [AMR.id-amr-0018]
 name="Bulwark Plate"
-effect="health_temp_increase+12"
+effect="health_temp_increase+12,crit_inc+4"
 mana_cost=6
 cost=25
 desc="Patched in more places than not."
@@ -1203,7 +1703,7 @@ diff=2
 
 [AMR.id-amr-0020]
 name="Hammered Plate"
-effect="health_temp_increase+15"
+effect="health_temp_increase+15,crit_inc+4"
 mana_cost=10
 cost=60
 desc="Someone else's armor. They didn't need it anymore."
@@ -1223,7 +1723,7 @@ diff=3
 
 [AMR.id-amr-0022]
 name="Sentinel Plating"
-effect="health_temp_increase+18"
+effect="health_temp_increase+18,crit_inc+4"
 mana_cost=8
 cost=68
 desc="Protection if you use it right."
@@ -1243,7 +1743,7 @@ diff=3
 
 [AMR.id-amr-0024]
 name="Forged Cuirass"
-effect="health_temp_increase+14,defend_round+1"
+effect="health_temp_increase+14,defend_round+1,crit_inc+5"
 mana_cost=9
 cost=72
 desc="Dented, but dents don't let much through."
@@ -1263,7 +1763,7 @@ diff=3
 
 [AMR.id-amr-0026]
 name="Ironclad Vest"
-effect="health_temp_increase+18,defend_round+1"
+effect="health_temp_increase+18,defend_round+1,crit_inc+5"
 mana_cost=10
 cost=55
 desc="Held on with wire and hope."
@@ -1283,7 +1783,7 @@ diff=3
 
 [AMR.id-amr-0028]
 name="Plated Guard"
-effect="health_temp_increase+20"
+effect="health_temp_increase+20,crit_inc+6"
 mana_cost=12
 cost=59
 desc="Cold to the touch, colder to strike."
@@ -1303,7 +1803,7 @@ diff=3
 
 [AMR.id-amr-0030]
 name="Girded Steel"
-effect="health_temp_increase+19"
+effect="health_temp_increase+19,crit_inc+6"
 mana_cost=16
 cost=108
 desc="Heavier than it looks, in a good way."
@@ -1323,7 +1823,7 @@ diff=4
 
 [AMR.id-amr-0032]
 name="Rampart Plate"
-effect="health_temp_increase+21,defend_round+2"
+effect="health_temp_increase+21,defend_round+2,crit_inc+8"
 mana_cost=13
 cost=84
 desc="Rattles when you move. Still stops things."
@@ -1343,7 +1843,7 @@ diff=4
 
 [AMR.id-amr-0034]
 name="Vanguard Shell"
-effect="health_temp_increase+27,defend_round+2"
+effect="health_temp_increase+27,defend_round+2,crit_inc+9"
 mana_cost=16
 cost=108
 desc="Lost a couple chains in its life, but it might help."
@@ -1363,7 +1863,7 @@ diff=4
 
 [AMR.id-amr-0036]
 name="Warforged Plate"
-effect="health_temp_increase+20"
+effect="health_temp_increase+20,crit_inc+5"
 mana_cost=12
 cost=92
 desc="Smells like it's seen a fight or two."
@@ -1383,7 +1883,7 @@ diff=4
 
 [AMR.id-amr-0038]
 name="Anvilheart Guard"
-effect="health_temp_increase+27,defend_round+2"
+effect="health_temp_increase+27,defend_round+2,crit_inc+10"
 mana_cost=16
 cost=114
 desc="Better than nothing, probably."
@@ -1403,7 +1903,7 @@ diff=4
 
 [AMR.id-amr-0040]
 name="Ironwrought Vest"
-effect="health_temp_increase+27"
+effect="health_temp_increase+27,crit_inc+12"
 mana_cost=21
 cost=145
 desc="Patched in more places than not."
@@ -1423,7 +1923,7 @@ diff=5
 
 [AMR.id-amr-0042]
 name="Bastion Plate"
-effect="health_temp_increase+25,defend_round+2"
+effect="health_temp_increase+25,defend_round+2,crit_inc+15"
 mana_cost=20
 cost=123
 desc="Someone else's armor. They didn't need it anymore."
@@ -1443,7 +1943,7 @@ diff=5
 
 [AMR.id-amr-0044]
 name="Kiln-forged Shell"
-effect="health_temp_increase+34,defend_round+2"
+effect="health_temp_increase+34,defend_round+2,crit_inc+17"
 mana_cost=18
 cost=119
 desc="Protection if you use it right."
@@ -1463,7 +1963,7 @@ diff=5
 
 [AMR.id-amr-0046]
 name="Siegeplate"
-effect="health_temp_increase+29,defend_round+2"
+effect="health_temp_increase+29,defend_round+2,crit_inc+14"
 mana_cost=22
 cost=156
 desc="Dented, but dents don't let much through."
@@ -1483,7 +1983,7 @@ diff=5
 
 [AMR.id-amr-0048]
 name="Anchorplate Guard"
-effect="health_temp_increase+31,defend_round+2"
+effect="health_temp_increase+31,defend_round+2,crit_inc+19"
 mana_cost=20
 cost=121
 desc="Held on with wire and hope."
@@ -1498,5 +1998,255 @@ mana_cost=23
 cost=157
 desc="Better than nothing, probably."
 type="chain"
+starter=false
+diff=5
+
+[AMR.id-amr-0050]
+name="Dented Cap"
+effect="health_temp_increase+4,crit_inc+3"
+mana_cost=3
+cost=12
+desc="Already dented, so the next hit has less to do."
+type="metal"
+starter=false
+diff=1
+
+[AMR.id-amr-0051]
+name="Frayed Coif"
+effect="health_temp_increase+4,defend_round+1"
+mana_cost=3
+cost=14
+desc="Held together by more hope than metal."
+type="chain"
+starter=false
+diff=1
+
+[AMR.id-amr-0052]
+name="Scrap Guard"
+effect="health_temp_increase+3,crit_inc+3"
+mana_cost=2
+cost=9
+desc="Whatever was lying around, strapped on tight enough."
+type="metal"
+starter=false
+diff=1
+
+[AMR.id-amr-0053]
+name="Loose Links"
+effect="health_temp_increase+5"
+mana_cost=4
+cost=11
+desc="Rattles constantly. Still holds."
+type="chain"
+starter=false
+diff=1
+
+[AMR.id-amr-0054]
+name="Patchwork Plate"
+effect="health_temp_increase+4,defend_round+1"
+mana_cost=3
+cost=13
+desc="No two pieces match, but none of them give."
+type="metal"
+starter=false
+diff=1
+
+[AMR.id-amr-0055]
+name="Forged Pauldrons"
+effect="health_temp_increase+10,crit_inc+5"
+mana_cost=6
+cost=34
+desc="Wide enough to catch what's meant for your neck."
+type="metal"
+starter=false
+diff=2
+
+[AMR.id-amr-0056]
+name="Whipcord Mail"
+effect="health_temp_increase+9,defend_round+1"
+mana_cost=6
+cost=30
+desc="Flexes without ever really giving way."
+type="chain"
+starter=false
+diff=2
+
+[AMR.id-amr-0057]
+name="Tempered Shell"
+effect="health_temp_increase+11,crit_inc+5"
+mana_cost=7
+cost=38
+desc="Hardened slow, which is why it holds."
+type="metal"
+starter=false
+diff=2
+
+[AMR.id-amr-0058]
+name="Rivermail Vest"
+effect="health_temp_increase+10,defend_round+1"
+mana_cost=7
+cost=33
+desc="Cold and quiet, like the water it's named for."
+type="chain"
+starter=false
+diff=2
+
+[AMR.id-amr-0059]
+name="Hardened Cuirass"
+effect="health_temp_increase+9"
+mana_cost=5
+cost=28
+desc="It's been through worse than this."
+type="metal"
+starter=false
+diff=2
+
+[AMR.id-amr-0060]
+name="Ironflame Plate"
+effect="health_temp_increase+17,crit_inc+6"
+mana_cost=9
+cost=55
+desc="Quenched in something that left a permanent mark."
+type="metal"
+starter=false
+diff=3
+
+[AMR.id-amr-0061]
+name="Braidlink Vest"
+effect="health_temp_increase+16,defend_round+1"
+mana_cost=9
+cost=52
+desc="Each link braided twice, just to be sure."
+type="chain"
+starter=false
+diff=3
+
+[AMR.id-amr-0062]
+name="Fortified Guard"
+effect="health_temp_increase+19,defend_round+1,crit_inc+7"
+mana_cost=10
+cost=63
+desc="Built to be the last thing standing."
+type="metal"
+starter=false
+diff=3
+
+[AMR.id-amr-0063]
+name="Woven Barrier"
+effect="health_temp_increase+15"
+mana_cost=8
+cost=50
+desc="Thin, but it doesn't tear the way you'd expect."
+type="chain"
+starter=false
+diff=3
+
+[AMR.id-amr-0064]
+name="Runeforged Cuirass"
+effect="health_temp_increase+18"
+mana_cost=11
+cost=66
+desc="The markings aren't just for show."
+type="metal"
+starter=false
+diff=3
+
+[AMR.id-amr-0065]
+name="Stalwart Plate"
+effect="health_temp_increase+22,defend_round+2,crit_inc+7"
+mana_cost=14
+cost=95
+desc="Doesn't bend. Never has."
+type="metal"
+starter=false
+diff=4
+
+[AMR.id-amr-0066]
+name="Ironmesh Wrap"
+effect="health_temp_increase+20,defend_round+2"
+mana_cost=13
+cost=87
+desc="A thousand small links doing one big job."
+type="chain"
+starter=false
+diff=4
+
+[AMR.id-amr-0067]
+name="Bulwark Vanguard"
+effect="health_temp_increase+25,crit_inc+9"
+mana_cost=15
+cost=104
+desc="Meant to be worn by whoever goes first."
+type="metal"
+starter=false
+diff=4
+
+[AMR.id-amr-0068]
+name="Serpentcoil Mail"
+effect="health_temp_increase+21"
+mana_cost=14
+cost=90
+desc="Coils tighter the harder it's struck."
+type="chain"
+starter=false
+diff=4
+
+[AMR.id-amr-0069]
+name="Adamant Bastion"
+effect="health_temp_increase+24,defend_round+2"
+mana_cost=16
+cost=109
+desc="Nothing about this gives an inch."
+type="metal"
+starter=false
+diff=4
+
+[AMR.id-amr-0070]
+name="Aegis Plate"
+effect="health_temp_increase+30,defend_round+2,crit_inc+16"
+mana_cost=19
+cost=128
+desc="Named for what it's meant to be, not what it looks like."
+type="metal"
+starter=false
+diff=5
+
+[AMR.id-amr-0071]
+name="Wyrmscale Wrap"
+effect="health_temp_increase+28,defend_round+2"
+mana_cost=18
+cost=122
+desc="Scales that turned aside worse than this."
+type="chain"
+starter=false
+diff=5
+
+[AMR.id-amr-0072]
+name="Colossus Shell"
+effect="health_temp_increase+33,crit_inc+20"
+mana_cost=21
+cost=140
+desc="Wearing it changes how you walk. Worth it."
+type="metal"
+starter=false
+diff=5
+
+[AMR.id-amr-0073]
+name="Riftbound Chain"
+effect="health_temp_increase+29"
+mana_cost=20
+cost=131
+desc="Forged somewhere the light doesn't reach."
+type="chain"
+starter=false
+diff=5
+
+[AMR.id-amr-0074]
+name="Eternium Guard"
+effect="health_temp_increase+32,defend_round+2"
+mana_cost=22
+cost=148
+desc="The last piece of armor most fighters will ever need."
+type="metal"
 starter=false
 diff=5

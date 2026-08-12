@@ -77,6 +77,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
         skip_u = 0
         defense_u = 0
         defense_e = 0
+        crit_inc_u = 0
+        crit_inc_e = 0
 
         # Loop until someone dies
         while True:
@@ -101,6 +103,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                 # 1b. Show player health & effects
                 print("Health: " + health_colored)
                 print("+DMG: " + str(damage_inc_u) + " | Poison: " + str(poison_u))
+                print("+ Crit %: " + str(crit_inc_u)) 
                 # 1c. Show player colored deck
                 print(styles.format_style("DECK:", "bold_cyan"))
                 for id, card in enumerate(deck):
@@ -120,6 +123,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                 # 1e. Show enemy health
                 print("Enemy Health: " + health_colored)
                 print("Enemy +DMG: " + str(damage_inc_e) + " | Enemy Poison: " + str(poison_e))
+                print("+ Crit %: " + str(crit_inc_e)) 
                 # 1f. Show player colored deck
                 print(styles.format_style("ENEMY DECK:", "red"))
                 for card in enemy.deck:
@@ -169,7 +173,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
 
                         dmg_random1 = round(damage / 12) - random.randint(-3, 2)
                         dmg_random2 = round(damage / 10) + random.randint(-2, 3)
-                        crit = True if random.randint(1, 100) <= user["user"]["stats"]["crit"] else False
+                        crit = True if random.randint(1, 100) <= user["user"]["stats"]["crit"] + crit_inc_u else False
 
                         # Randomize the damage
                         damage += random.randint(min(dmg_random1, dmg_random2), max(dmg_random1, dmg_random2))
@@ -295,6 +299,10 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                     defense_u += value
                                     print(f"You're now {styles.format_style("defending", "cyan")}{styles.clear_styles()} for {value} rounds!")
                                     time.sleep(1.5)
+                                case "crit_inc":
+                                    crit_inc_u += value
+                                    print(f"Crit % increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
+                                    time.sleep(1.5)
 
                 if op_health <= 0: win = True; break
 
@@ -355,7 +363,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
 
                     dmg_random1 = round(damage / 12) - random.randint(-3, 2)
                     dmg_random2 = round(damage / 10) + random.randint(-2, 3)
-                    crit = True if random.randint(1, 100) <= enemy.crit else False
+                    crit = True if random.randint(1, 100) <= enemy.crit + crit_inc_e else False
 
                     # Randomize the damage
                     damage += random.randint(min(dmg_random1, dmg_random2), max(dmg_random1, dmg_random2))
@@ -431,6 +439,10 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                             case "defend_round":
                                 defense_e += value
                                 print(f"Enemy is now {styles.format_style("defending", "cyan")}{styles.clear_styles()} for {value} rounds!")
+                                time.sleep(1.5)
+                            case "crit_inc":
+                                crit_inc_e += value
+                                print(f"Enemy crit % increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
                                 time.sleep(1.5)
 
             # Enemy reshuffling
