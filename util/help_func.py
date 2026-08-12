@@ -399,7 +399,7 @@ def create_randomized_opponent(diff: int) -> Opponent:
             ressel = random.sample(elements, random.randint(3, len(elements)))
 
     # 8. MATERIAL WEAK/RES
-    materials = ["blade", "blunt", "hard", "wood"]
+    materials = ["blade", "blunt", "hard", "wood", "metal", "chain"]
     match diff:
         case 1:
             weakmat = random.sample(materials, random.randint(2, 4))

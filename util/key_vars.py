@@ -33,3 +33,9 @@ class KeyVars():
     blunt_weak = 1.1 # * 1.1 + rand (+-0.05)
     hard_weak = 1.6 # * 1.6 + rand (-0.4, +0.05)
     wood_weak = 1.2 # * 1.2 + rand (+-0.1)
+
+    metal_weak = 1.4 # * 1.4 + rand (+0.1, -0.3)
+    chain_weak = 1.2 # * 1.2 + rand (+-0.07)
+
+    metal_res = 0.6 # * 0.6 + rand (+0.3, -0.1)
+    chain_res = 0.8 # * 1.2 + rand (+-0.07)

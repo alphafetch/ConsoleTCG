@@ -199,6 +199,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                 case "blunt": mult = imp.blunt_weak + random.uniform(-0.05, 0.05)
                                 case "hard": mult = imp.hard_weak + random.uniform(-0.4, 0.05)
                                 case "wood": mult = imp.wood_weak + random.uniform(-0.1, 0.1)
+                                case "metal": mult = imp.metal_weak + random.uniform(-0.3, 0.1)
+                                case "chain": mult = imp.chain_weak + random.uniform(-0.07, 0.07)
                                 case _: mult = 1
                         elif type_ in enemy.res_el + enemy.res_mat:
                             resistance_ = True
@@ -212,6 +214,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                 case "blunt": mult = imp.blunt_res + random.uniform(-0.05, 0.05)
                                 case "hard": mult = imp.hard_res + random.uniform(-0.05, 0.4)
                                 case "wood": mult = imp.wood_res + random.uniform(-0.1, 0.1)
+                                case "metal": mult = imp.metal_res + random.uniform(-0.1, 0.3)
+                                case "chain": mult = imp.chain_res + random.uniform(-0.07, 0.07)
                                 case _: mult = 1
                         else: mult = 1
 
@@ -235,8 +239,10 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                             case "blunt": type_formatted = styles.format_style(type_formatted, "progress")
                             case "hard": type_formatted = styles.format_style(type_formatted, "green")
                             case "wood": type_formatted = styles.format_style(type_formatted, "bright_red")
+                            case "metal": type_formatted = styles.format_style(type_formatted, "success")
+                            case "chain": type_formatted = styles.format_style(type_formatted, "green")
                             case _: type_formatted = type_formatted
-
+                        
                         helper.clear()
 
                         def_div = 2 + random.uniform(-0.4, 0.1)
