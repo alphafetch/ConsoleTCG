@@ -35,6 +35,7 @@ def new_game() -> None:
             ],
             "stats": {
                 "new_game": True,
+                "lvl": 1,
                 "xp": 0,
                 "wins": 0,
                 "losses": 0,

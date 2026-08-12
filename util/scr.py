@@ -173,6 +173,8 @@ def scr_status() -> bool:
 │ XP: {data["user"]["stats"]["xp"]}
 │ Max HP: {data["user"]["stats"]["max_hp"]}
 │ Crit %: {data["user"]["stats"]["crit"]}
+│ Level: {data["user"]["stats"]["lvl"]}
+│ Tokens: {data["user"]["stats"]["tokens"]}
 └───────────────┘\n""", "bold_cyan"))
     print("""1. Career
 2. Exhibition
@@ -314,6 +316,7 @@ def scr_win_career(world: int, opponent: opp.Opponent, num: int) -> None:
     data = sl.load(imp.user_data_toml)
     cards = sl.load(imp.cards_toml)
     career = sl.load(imp.career_toml)
+    levels = sl.load(imp.lvls_toml)
 
     # Clear the screen
     helper.clear()
@@ -378,6 +381,30 @@ def scr_win_career(world: int, opponent: opp.Opponent, num: int) -> None:
     if complete: print(f"Unlocked {styles.format_style("World " + str(world + 1), "cyan")}!")
     print("Press any key to continue...")
     readchar.readkey()
+
+    data = sl.load(imp.user_data_toml)
+
+    # 8. CHECK FOR LEVEL UP
+    if data["user"]["stats"]["lvl"] + 1 <= levels["max"]["max_lvl"]:
+        if data["user"]["stats"]["xp"] >= levels[str(data["user"]["stats"]["lvl"] + 1)]["thresh"]:
+            sl.modify_nested(["user", "stats", "lvl"], data["user"]["stats"]["lvl"] + 1, imp.user_data_toml); data = sl.load(imp.user_data_toml)
+            sl.modify_nested(["user", "stats", "crit"], levels[str(data["user"]["stats"]["lvl"])]["crit"], imp.user_data_toml); data = sl.load(imp.user_data_toml)
+            sl.modify_nested(["user", "stats", "tokens"], data["user"]["stats"]["tokens"] + levels[str(data["user"]["stats"]["lvl"])]["toks"], imp.user_data_toml); data = sl.load(imp.user_data_toml)
+            sl.modify_nested(["user", "stats", "max_hp"], levels[str(data["user"]["stats"]["lvl"])]["hp"], imp.user_data_toml); data = sl.load(imp.user_data_toml)
+
+            # 9. PRINT LEVEL UP
+            helper.clear()
+            print(styles.format_style("LEVEL UP", "success"))
+            print("New Level: " + styles.format_style(str(data["user"]["stats"]["lvl"]), 
+                                                    "progress" if data["user"]["stats"]["lvl"] < 4 \
+                                                    else "cyan" if data["user"]["stats"]["lvl"] < 8 \
+                                                    else "green"
+                                                    ))
+            print(f"+ {styles.format_style(str(levels[str(data["user"]["stats"]["lvl"])]["toks"]), "yellow")}")
+            print(f"Crit %: {levels[str(data["user"]["stats"]["lvl"])]["crit"]}%")
+            print(f"New Max HP: {styles.format_style(str(levels[str(data["user"]["stats"]["lvl"])]["hp"]), "green")}")
+            print("Press any key to continue...")
+            readchar.readkey()
 
     return
 
