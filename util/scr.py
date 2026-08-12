@@ -584,6 +584,8 @@ def scr_show_enemy(world: int, opponent: opp.Opponent, enemy: int) -> None | boo
                 case "Blunt": weakness_formatted = styles.format_style(weakness_formatted, "red")
                 case "Hard": weakness_formatted = styles.format_style(weakness_formatted, "cyan")
                 case "Wood":  weakness_formatted = styles.format_style(weakness_formatted, "progress")
+                case "Metal": weakness_formatted = weakness_formatted
+                case "Chain": weakness_formatted = styles.format_style(weakness_formatted, "success")
             print(weakness_formatted)
     else:
         print(styles.format_style("No elemental/material weaknesses.", "red"))
@@ -602,6 +604,8 @@ def scr_show_enemy(world: int, opponent: opp.Opponent, enemy: int) -> None | boo
                 case "Blunt": res_formatted = styles.format_style(res_formatted, "red")
                 case "Hard": res_formatted = styles.format_style(res_formatted, "cyan")
                 case "Wood":  res_formatted = styles.format_style(res_formatted, "progress")
+                case "Metal": weakness_formatted = weakness_formatted
+                case "Chain": weakness_formatted = styles.format_style(weakness_formatted, "success")
             print(res_formatted)
     else:
         print(styles.format_style("No elemental/material resistances.", "green"))
