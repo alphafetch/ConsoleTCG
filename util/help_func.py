@@ -176,7 +176,7 @@ def parse_effect_visual(card: dict, cat: str):
         final_string = ', '.join(e for e in final)
         return final_string
     else:
-        print("Failed execution of parse_effect_visual()")
+        print(styles.format_style("Failed execution of parse_effect_visual()", "error"))
 
 def format_card_line(card_id: str, cards: dict[str, Any]) -> str:
     '''
