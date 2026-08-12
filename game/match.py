@@ -287,6 +287,30 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                     time.sleep(2)
                                 # 3c. Player turn skip
                                 case "skip_enemy_turn": skip_e += value
+
+                        if target["type"] in enemy.weak_el + enemy.weak_mat:
+                            match target["type"]:
+                                case "fire": additive = 3 * (imp.fire_weak + random.uniform(-0.1, 0.1))
+                                case "water": additive = 3 * (imp.water_weak + random.uniform(-0.05, 0.05))
+                                case "earth": additive = 3 * (imp.earth_weak + random.uniform(-0.2, 0.2))
+                                case "sun": additive = 3 * (imp.sun_weak + random.uniform(-0.3, 0.3))
+                                case "nature": additive = 3 * (imp.nature_weak + random.uniform(-0.05, 0.05))
+                                case "blade": additive = 3 * (imp.blade_weak + random.uniform(-0.15, 0.15))
+                                case "blunt": additive = 3 * (imp.blunt_weak + random.uniform(-0.05, 0.05))
+                                case "hard": additive = 3 * (imp.hard_weak + random.uniform(-0.4, 0.05))
+                                case "wood": additive = 3 * (imp.wood_weak + random.uniform(-0.1, 0.1))
+                                case "metal": additive = 3 * (imp.metal_weak + random.uniform(-0.3, 0.1))
+                                case "chain": additive = 3 * (imp.chain_weak + random.uniform(-0.07, 0.07))
+                                case _: additive = 1
+                            additive = ceil(additive)
+                            op_health -= additive
+                            print(f"Opponent took {additive} damage due to being weak to {target["type"]}!")
+                            time.sleep(2)
+                        elif target["type"] in enemy.res_el + enemy.res_mat:
+                            op_health += 5
+                            print(f"Opponent gained {styles.format_style("5 health", "green")}{styles.clear_styles()} due to being resistant of {target["type"]}!")
+                            time.sleep(2)
+
                     case "AMR":
                         # 3. APPLY EFFECTS
                         effect = target["effect"]
