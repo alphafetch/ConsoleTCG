@@ -147,7 +147,7 @@ def scr_starter_card() -> None:
     helper.save_card(starters[int(card) - 1], "ATK")
 
     # Sleep so the user sees the "Saving card..." line
-    time.sleep(0.5)
+    time.sleep(2)
 
     return
 
@@ -886,7 +886,7 @@ def scr_edit_card_in_deck(card_id: str, deck: str, index: int) -> None:
     helper.clear()
 
     print(styles.format_style("Card saved!", "progress"))
-    time.sleep(1)
+    time.sleep(2)
     return
 
 def scr_delete_card_in_deck(card: int, deck: str) -> None:
@@ -910,5 +910,5 @@ def scr_delete_card_in_deck(card: int, deck: str) -> None:
 
     # Give output to the user
     print(styles.format_style("Card removed from deck!", "progress"))
-    time.sleep(1)
+    time.sleep(2)
     return
