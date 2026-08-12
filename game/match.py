@@ -272,8 +272,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                     time.sleep(1.5)
                                 # 3b. Poisoning
                                 case "poison": 
-                                    poison_e += value
-                                    print(f"You {styles.format_style("poisoned", "progress")}{styles.clear_styles()} the enemy! (+{value} poison, total {poison_e})")
+                                    poison_e += value + 1
+                                    print(f"You {styles.format_style("poisoned", "progress")}{styles.clear_styles()} the enemy! (+{value} poison, total {poison_e - 1})")
                                     time.sleep(1.5)
                                 # 3c. Player turn skip
                                 case "skip_enemy_turn": skip_e += value
@@ -409,8 +409,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                 time.sleep(1.5)
                             # 3b. Poisoning
                             case "poison": 
-                                poison_u += value
-                                print(f"Enemy poisoned you! (+{value}, total {poison_u})")
+                                poison_u += value + 1
+                                print(f"Enemy poisoned you! (+{value}, total {poison_u - 1})")
                                 time.sleep(1.5)
                             # 3c. Player turn skip
                             case "skip_enemy_turn": skip_u += value
