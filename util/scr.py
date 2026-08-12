@@ -406,7 +406,7 @@ def scr_win_career(world: int, opponent: opp.Opponent, num: int) -> None:
             print(f"+ {styles.format_style(str(levels[str(data["user"]["stats"]["lvl"])]["toks"]) + " Tokens", "yellow")}")
             print(f"Crit %: {levels[str(data["user"]["stats"]["lvl"])]["crit"]}%")
             print(f"New Max HP: {styles.format_style(str(levels[str(data["user"]["stats"]["lvl"])]["hp"]), "green")}")
-            print("Press any key to continue...")
+            print(styles.format_style("Press any key to continue...", "warn"))
             readchar.readkey()
 
     return
