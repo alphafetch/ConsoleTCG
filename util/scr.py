@@ -468,7 +468,7 @@ def scr_roll() -> None:
         # Output results
         print(styles.format_style("Rolled this card!:", "bold_cyan"))
         helper.print_card(card_dict, helper.get_category_from_id(card_id))
-        helper.save_card(card_dict, helper.get_category_from_id(card_id)); sl.load(imp.user_data_toml)
+        helper.save_card(card_dict, helper.get_category_from_id(card_id)); data = sl.load(imp.user_data_toml)
         print(styles.format_style(f"- {str(cost)} Tokens (new: {str(data["user"]["stats"]["tokens"])})", "red"))
         print(styles.format_style("Press any key to continue...", "warn"))
         readchar.readkey()
