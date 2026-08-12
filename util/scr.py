@@ -358,6 +358,7 @@ def scr_win_career(world: int, opponent: opp.Opponent, num: int) -> None:
     sl.modify_nested(["user", "stats", "wins"], new_wins, imp.user_data_toml)
 
     # 6. CHECK FOR A WORLD UNLOCK
+    data = sl.load(imp.user_data_toml)
     complete = True
     for k, v in data["unlocks"]["career"]["progress"]["world" + str(world)].items():
         if k == "unlocked": continue
