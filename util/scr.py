@@ -33,7 +33,7 @@ def scr_main_menu() -> str:
     print(styles.format_style("│ Welcome to Console TCG! │", "bold_cyan"))
     print(styles.format_style("└─────────────────────────┘\n", "bold_cyan"))
     print("1. Play Game")
-    print("2. New Game (OVERWRITES)")
+    print("2. New Game")
     print("3. View Collection")
     print("4. Quit")
 
