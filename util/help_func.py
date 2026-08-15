@@ -134,25 +134,25 @@ def print_card(card: dict[str, Any], cat: str) -> None:
     if cat == "ATK":
         print(styles.format_style(f"""┌───────────────┐
 {card["name"]}
-DMG: {card["damage"]}
-TOK: {card["cost"]}
-TYPE: {card["type"]}
+| DMG: {card["damage"]}
+| TOK: {card["cost"]}
+| TYPE: {card["type"]}
 └───────────────┘
 DESC: {card["desc"]}""", "red"))
     elif cat == "WPN":
         print(styles.format_style(f"""┌───────────────┐
 {card["name"]}
-MODIF: {eff}
-TOK: {card["cost"]}
-TYPE: {card["type"]}
+| MODIF: {eff}
+| TOK: {card["cost"]}
+| TYPE: {card["type"]}
 └───────────────┘
 DESC: {card["desc"]}""", "yellow"))
     elif cat == "AMR":
         print(styles.format_style(f"""┌───────────────┐
 {card["name"]}
-MODIF: {eff}
-TOK: {card["cost"]}
-TYPE: {card["type"]}
+| MODIF: {eff}
+| TOK: {card["cost"]}
+| TYPE: {card["type"]}
 └───────────────┘
 DESC: {card["desc"]}""", "cyan"))
 
