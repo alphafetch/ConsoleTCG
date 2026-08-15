@@ -178,6 +178,16 @@ def parse_effect_visual(card: dict, cat: str):
     else:
         print(styles.format_style("Failed execution of parse_effect_visual()", "error"))
 
+def get_name_colored(enemy: Opponent):
+    name = enemy.name
+    match enemy.diff:
+        case 1: name = styles.format_style(name, "green")
+        case 2: name = styles.format_style(name, "cyan")
+        case 3: name = styles.format_style(name, "yellow")
+        case 4: name = styles.format_style(name, "progress")
+        case 5: name = styles.format_style(name, "red")
+    return name
+
 def format_card_line(card_id: str, cards: dict[str, Any]) -> str:
     '''
     Formats a card into [####] [TYPE] Name format.
