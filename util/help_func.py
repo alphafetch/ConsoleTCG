@@ -135,7 +135,6 @@ def print_card(card: dict[str, Any], cat: str) -> None:
         print(styles.format_style(f"""┌───────────────┐
 {card["name"]}
 DMG: {card["damage"]}
-MANA: {card["mana_cost"]}
 TOK: {card["cost"]}
 TYPE: {card["type"]}
 └───────────────┘
@@ -144,7 +143,6 @@ DESC: {card["desc"]}""", "red"))
         print(styles.format_style(f"""┌───────────────┐
 {card["name"]}
 MODIF: {eff}
-MANA: {card["mana_cost"]}
 TOK: {card["cost"]}
 TYPE: {card["type"]}
 └───────────────┘
@@ -153,7 +151,6 @@ DESC: {card["desc"]}""", "yellow"))
         print(styles.format_style(f"""┌───────────────┐
 {card["name"]}
 MODIF: {eff}
-MANA: {card["mana_cost"]}
 TOK: {card["cost"]}
 TYPE: {card["type"]}
 └───────────────┘
