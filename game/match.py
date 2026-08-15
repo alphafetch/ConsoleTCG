@@ -877,6 +877,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                         # 3. APPLY EFFECTS
                         effect = target["effect"]
                         effects = helper.parse_effect(effect)
+
+                        name = helper.get_name_colored(enemy)
             
                         helper.clear()
                         print(f"{name}{styles.clear_styles()} played {helper.format_card_line(enemy_card, cards)}{styles.clear_styles()}!")
@@ -885,15 +887,15 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                 # 3a. Health Temp Inc
                                 case "health_temp_increase":
                                     op_health += value
-                                    print(f"Enemy {styles.format_style("health", "green")}{styles.clear_styles()} increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (HP: {op_health})")
+                                    print(f"{name}{styles.clear_styles()} {styles.format_style("health", "green")}{styles.clear_styles()} increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (HP: {op_health})")
                                     time.sleep(3)
                                 case "defend_round":
                                     defense_e += value
-                                    print(f"Enemy is now {styles.format_style("defending", "cyan")}{styles.clear_styles()} for {value} rounds!")
+                                    print(f"{name}{styles.clear_styles()} is now {styles.format_style("defending", "cyan")}{styles.clear_styles()} for {value} rounds!")
                                     time.sleep(3)
                                 case "crit_inc":
                                     crit_inc_e += value
-                                    print(f"Enemy {styles.format_style("crit %", "yellow")}{styles.clear_styles()} increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
+                                    print(f"{name}{styles.clear_styles()} {styles.format_style("crit %", "yellow")}{styles.clear_styles()} increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
                                     time.sleep(3)
             
                 # Enemy reshuffling
