@@ -139,7 +139,7 @@ MANA: {card["mana_cost"]}
 TOK: {card["cost"]}
 TYPE: {card["type"]}
 └───────────────┘
-DESC: {card["desc"]}""", "bold_cyan"))
+DESC: {card["desc"]}""", "red"))
     elif cat == "WPN":
         print(styles.format_style(f"""┌───────────────┐
 {card["name"]}
@@ -148,7 +148,7 @@ MANA: {card["mana_cost"]}
 TOK: {card["cost"]}
 TYPE: {card["type"]}
 └───────────────┘
-DESC: {card["desc"]}""", "bold_cyan"))
+DESC: {card["desc"]}""", "yellow"))
     elif cat == "AMR":
         print(styles.format_style(f"""┌───────────────┐
 {card["name"]}
@@ -157,7 +157,7 @@ MANA: {card["mana_cost"]}
 TOK: {card["cost"]}
 TYPE: {card["type"]}
 └───────────────┘
-DESC: {card["desc"]}""", "bold_cyan"))
+DESC: {card["desc"]}""", "cyan"))
 
 # ----------------------------------------------------
 
