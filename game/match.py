@@ -94,16 +94,10 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
             else:
                 health_colored = styles.format_style(str(u_health), "red")
 
-            if poison_u > 0: poison_u -= 1
-            if poison_e > 0: poison_e -= 1
-            if defense_u > 0: defense_u -= 1
-            if defense_e > 0: defense_e -= 1
-
             if not skip_u:
                 # 1b. Show player health & effects
                 print("Health: " + health_colored)
-                print("+DMG: " + str(damage_inc_u) + " | Poison: " + str(poison_u))
-                print("+ Crit %: " + str(crit_inc_u)) 
+                print("+DMG: " + str(damage_inc_u) + " | Poison: " + str(poison_u) + " | + Crit %: " + str(crit_inc_u))
                 # 1c. Show player colored deck
                 print(styles.format_style("DECK:", "bold_cyan"))
                 for id, card in enumerate(deck):
@@ -182,6 +176,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                             damage *= crit_perc
 
                         damage += damage_inc_u + poison_e
+                        if poison_e > 0: poison_e -= 1
 
                         # Apply resistances and weaknesses (exclusive to player -> enemy attack)
                         type_ = target["type"]
@@ -264,8 +259,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                     time.sleep(3)
                                 # 3b. Poisoning
                                 case "poison": 
-                                    poison_e += value + 1
-                                    print(f"You {styles.format_style("poisoned", "progress")}{styles.clear_styles()} the enemy! (+{value} poison, total {poison_e - 1})")
+                                    poison_e += value
+                                    print(f"You {styles.format_style("poisoned", "progress")}{styles.clear_styles()} {name}{styles.clear_styles()}! (+{value} poison, total {poison_e})")
                                     time.sleep(3)
                                 # 3c. Player turn skip
                                 case "skip_enemy_turn": skip_e += value
@@ -393,13 +388,9 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                         damage *= crit_perc
 
                     damage += damage_inc_e + poison_u
+                    if poison_u > 0: poison_u -= 1
 
-                    match enemy.diff:
-                        case 1: e_name = styles.format_style(e_name, "green")
-                        case 2: e_name = styles.format_style(e_name, "cyan")
-                        case 3: e_name = styles.format_style(e_name, "yellow")
-                        case 4: e_name = styles.format_style(e_name, "progress")
-                        case 5: e_name = styles.format_style(e_name, "red")
+                    name = helper.get_name_colored(enemy)
 
                     helper.clear()
 
@@ -483,16 +474,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
             print(styles.format_style("You lost...", "red"))
             print(styles.format_style("Press any key to continue...", "warn"))
             readchar.readkey()
-
-        return win
-    else:
-        for i in range(3):
-            # Loop until someone dies
-            while True:
-                break # STUB
-
-        win = True
-        return win
+            
+    return win
 
 def start_exhibition(opp: Opponent) -> bool:
     '''
