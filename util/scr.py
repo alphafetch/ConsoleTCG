@@ -66,11 +66,20 @@ def scr_collection() -> None: # TODO Collections
     try:
         # 3. LOAD THE USER DATA FROM THE USERDATA.TOML FILE
         data = sl.load(path)
+        cards = sl.load(imp.cards_toml)
 
-        pass # [^] Stub
+        # 4. DISPLAY COLLECTION
+        for card in data["user"]["ATK"]:
+            print(f"{helper.format_card_line(card["id"], cards)}")
+        for card in data["user"]["WPN"]:
+            print(f"{helper.format_card_line(card["id"], cards)}")
+        for card in data["user"]["AMR"]:
+            print(f"{helper.format_card_line(card["id"], cards)}")
+        print(styles.format_style("Press any key to continue...", "warn"))
+        readchar.readkey()
     except FileNotFoundError:
         # [;] Function failed, wait for the user to confirm
-        print(styles.format_style("The save file could not be found and previous checks returned false.", "error"))
+        print(styles.format_style("The save file could not be found.", "error"))
         print(styles.format_style("Press any key to continue...", "warn"))
         readchar.readkey()
 
