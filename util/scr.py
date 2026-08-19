@@ -412,8 +412,27 @@ def scr_win_career(world: int, opponent: opp.Opponent, num: int) -> None:
 
     return
 
-def scr_lose_career():
-    pass
+def scr_lose_career() -> None:
+    '''
+    Lose screen after a battle.
+    
+    :rtype: None
+    '''
+
+    # 1. LOAD RELEVANT FILES
+    data = sl.load(imp.user_data_toml)
+
+    # 2. INCREMENT LOSSES
+    new_l = data["user"]["stats"]["losses"] + 1
+    sl.modify_nested(["user", "stats", "losses"], new_l, imp.user_data_toml)
+
+    print(styles.format_style("You lost...", "error"))
+    print("------------------")
+    print(f"+1 Loss - TOTAL: {styles.format_style(str(new_l), "yellow")}")
+    print("Press any key to continue...")
+    readchar.readkey()
+
+    return
 
 def scr_roll() -> None:
     '''
