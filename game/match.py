@@ -79,6 +79,8 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
         defense_e = 0
         crit_inc_u = 0
         crit_inc_e = 0
+        u_temp_health = 0
+        e_temp_health = 0
 
         # Loop until someone dies
         while True:
@@ -96,7 +98,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
 
             if not skip_u:
                 # 1b. Show player health & effects
-                print("Health: " + health_colored)
+                print("Health: " + health_colored + " | Temp Health: " + str(u_temp_health))
                 print("+DMG: " + str(damage_inc_u) + " | Poison: " + str(poison_u) + " | + Crit %: " + str(crit_inc_u))
                 # 1c. Show player colored deck
                 print(styles.format_style("DECK:", "bold_cyan"))
@@ -123,7 +125,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                     case 4: name = styles.format_style(name, "progress")
                     case 5: name = styles.format_style(name, "red")
                 print(name)
-                print("Enemy Health: " + health_colored)
+                print("Enemy Health: " + health_colored + " | Enemy Temp Health: " + str(e_temp_health))
                 print("Enemy +DMG: " + str(damage_inc_e) + " | Enemy Poison: " + str(poison_e) + " | + Crit %: " + str(crit_inc_e))
                 # 1f. Show player colored deck
                 print(styles.format_style("ENEMY DECK:", "red"))
@@ -311,6 +313,11 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                     crit_inc_u += value
                                     print(f"{styles.format_style("Crit %", "yellow")}{styles.clear_styles()} increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
                                     time.sleep(3)
+                                case "temp_health_inc":
+                                    u_temp_health += value
+                                    u_health += value
+                                    print(f"Your {styles.format_style("temporary health", "yellow")}{styles.clear_styles()} increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (THP: {u_temp_health})")
+                                    time.sleep(3)
 
                         if target["type"] in enemy.weak_el + enemy.weak_mat:
                             match target["type"]:
@@ -326,6 +333,9 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                             op_health += additive
                             print(f"{name}{styles.clear_styles()} gained {styles.format_style(f"{additive} health", "green")}{styles.clear_styles()} due to being resistant of {target["type"]}!")
                             time.sleep(3)
+
+                if u_temp_health > 1: u_health -= 2; u_temp_health -= 2
+                elif u_temp_health == 1: u_health -= 1; u_temp_health = 0
 
                 if op_health <= 0: win = True; break
 
@@ -466,6 +476,13 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                 crit_inc_e += value
                                 print(f"{name}{styles.clear_styles()} {styles.format_style("crit %", "yellow")}{styles.clear_styles()} increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
                                 time.sleep(3)
+                            case "temp_health_inc":
+                                e_temp_health += value
+                                print(f"{name}{styles.clear_styles()}'s {styles.format_style("temporary health", "yellow")}{styles.clear_styles()} increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (THP: {e_temp_health})")
+                                time.sleep(3)
+
+            if e_temp_health > 1: op_health -= 2; e_temp_health -= 2
+            elif e_temp_health == 1: op_health -= 1; e_temp_health = 0
 
             # Enemy reshuffling
             if set(used_cards_e) == set(enemy.deck):
@@ -734,6 +751,11 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                         crit_inc_u += value
                                         print(f"{styles.format_style("Crit %", "yellow")}{styles.clear_styles()} increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
                                         time.sleep(3)
+                                    case "temp_health_inc":
+                                        u_temp_health += value
+                                        u_health += value
+                                        print(f"Your {styles.format_style("temporary health", "yellow")}{styles.clear_styles()} increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (THP: {u_temp_health})")
+                                        time.sleep(3)
             
                             if target["type"] in enemy.weak_el + enemy.weak_mat:
                                 match target["type"]:
@@ -749,6 +771,9 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                 op_health += additive
                                 print(f"{name}{styles.clear_styles()} gained {styles.format_style(f"{additive} health", "green")}{styles.clear_styles()} due to being resistant of {target["type"]}!")
                                 time.sleep(3)
+
+                    if u_temp_health > 1: u_health -= 2; u_temp_health -= 2
+                    elif u_temp_health == 1: u_health -= 1; u_temp_health = 0
             
                     if op_health <= 0: wins[c_round] = 1; break
             
@@ -897,7 +922,14 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                     crit_inc_e += value
                                     print(f"{name}{styles.clear_styles()} {styles.format_style("crit %", "yellow")}{styles.clear_styles()} increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
                                     time.sleep(3)
+                                case "temp_health_inc":
+                                    e_temp_health += value
+                                    print(f"{name}{styles.clear_styles()}'s {styles.format_style("temporary health", "yellow")}{styles.clear_styles()} increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (THP: {e_temp_health})")
+                                    time.sleep(3)
             
+                if e_temp_health > 1: op_health -= 2; e_temp_health -= 2
+                elif e_temp_health == 1: op_health -= 1; e_temp_health = 0
+
                 # Enemy reshuffling
                 if set(used_cards_e) == set(enemy.deck):
                     # [;] Enemy deck is used up, reshuffle

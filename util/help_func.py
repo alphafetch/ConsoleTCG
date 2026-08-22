@@ -170,6 +170,7 @@ def parse_effect_visual(card: dict, cat: str):
                     case "skip_enemy_turn": final.append(f"Skip Enemy: {value}")
                     case "health_inc": final.append(f"Health Increase: {value}")
                     case "defend_round": final.append(f"Defend Rounds: {value}")
+                    case "temp_health_inc": final.append(f"Temp. Health Increase: {value}")
         final_string = ', '.join(e for e in final)
         return final_string
     else:
