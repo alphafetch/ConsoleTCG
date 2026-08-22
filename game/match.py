@@ -268,6 +268,11 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                     time.sleep(3)
                                 # 3c. Player turn skip
                                 case "skip_enemy_turn": skip_e += value
+                                # 3d. Crit chance
+                                case "crit_inc":
+                                    crit_inc_u += value
+                                    print(f"{styles.format_style("Crit %", "yellow")}{styles.clear_styles()} increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
+                                    time.sleep(3)
 
                         if target["type"] in enemy.weak_el + enemy.weak_mat:
                             match target["type"]:
@@ -454,6 +459,11 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                 time.sleep(3)
                             # 3c. Player turn skip
                             case "skip_enemy_turn": skip_u += value
+                            # 3d. Crit chance
+                            case "crit_inc":
+                                crit_inc_e += value
+                                print(f"{name}{styles.clear_styles()} {styles.format_style("crit %", "yellow")}{styles.clear_styles()} increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
+                                time.sleep(3)
                 case "AMR":
                     # 3. APPLY EFFECTS
                     effect = target["effect"]
@@ -706,6 +716,11 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                         time.sleep(3)
                                     # 3c. Player turn skip
                                     case "skip_enemy_turn": skip_e += value
+                                    # 3d. Crit chance
+                                    case "crit_inc":
+                                        crit_inc_u += value
+                                        print(f"{styles.format_style("Crit %", "yellow")}{styles.clear_styles()} increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
+                                        time.sleep(3)
             
                             if target["type"] in enemy.weak_el + enemy.weak_mat:
                                 match target["type"]:
@@ -898,6 +913,11 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                                     time.sleep(3)
                                 # 3c. Player turn skip
                                 case "skip_enemy_turn": skip_u += value
+                                # 3d. Crit chance
+                                case "crit_inc":
+                                    crit_inc_e += value
+                                    print(f"{name}{styles.clear_styles()} {styles.format_style("crit %", "yellow")}{styles.clear_styles()} increased by {styles.format_style(str(value), "green")}{styles.clear_styles()}!")
+                                    time.sleep(3)
                     case "AMR":
                         # 3. APPLY EFFECTS
                         effect = target["effect"]

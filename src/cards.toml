@@ -677,7 +677,7 @@ diff=5
 [WPN]
 [WPN.id-wpn-0000]
 name="Rusty Sword"
-effect="damage_increase+2"
+effect="damage_increase+2,crit_inc+1"
 cost=14
 desc="It works, I guess."
 type="blade"
@@ -686,7 +686,7 @@ diff=1
 
 [WPN.id-wpn-0001]
 name="Aluminum Ball"
-effect="damage_increase+1,skip_enemy_turn+1"
+effect="damage_increase+1,skip_enemy_turn+1,crit_inc+3"
 cost=14
 desc="Pretty heavy and could definitely induce some head trauma."
 type="hard"
@@ -704,7 +704,7 @@ diff=1
 
 [WPN.id-wpn-0003]
 name="Iron Shortblade"
-effect="damage_increase+4"
+effect="damage_increase+4,crit_inc+1"
 cost=15
 desc="Sharper than it has any right to be."
 type="blade"
@@ -731,7 +731,7 @@ diff=1
 
 [WPN.id-wpn-0006]
 name="Granite Fist"
-effect="damage_increase+1"
+effect="damage_increase+1,crit_inc+3"
 cost=11
 desc="Somebody's grandfather swore by it."
 type="hard"
@@ -740,7 +740,7 @@ diff=1
 
 [WPN.id-wpn-0007]
 name="Serrated Cleaver"
-effect="damage_increase+2"
+effect="damage_increase+2,crit_inc+2"
 cost=10
 desc="Balanced, if you don't think too hard about it."
 type="blade"
@@ -767,7 +767,7 @@ diff=1
 
 [WPN.id-wpn-0010]
 name="Iron Knuckle"
-effect="damage_increase+8,poison+5"
+effect="damage_increase+8,poison+5,crit_inc+5"
 cost=42
 desc="Held together by spite and rust."
 type="hard"
@@ -776,7 +776,7 @@ diff=2
 
 [WPN.id-wpn-0011]
 name="Twin Fangs"
-effect="damage_increase+8"
+effect="damage_increase+8,crit_inc+2"
 cost=30
 desc="Not pretty, but neither is losing."
 type="blade"
@@ -794,7 +794,7 @@ diff=2
 
 [WPN.id-wpn-0013]
 name="Honed Saber"
-effect="damage_increase+8,poison+5"
+effect="damage_increase+8,poison+5,crit_inc+3"
 cost=27
 desc="It works, I guess."
 type="blade"
@@ -821,7 +821,7 @@ diff=2
 
 [WPN.id-wpn-0016]
 name="Stone Gauntlet"
-effect="damage_increase+8,poison+4"
+effect="damage_increase+8,poison+4,crit_inc+5"
 cost=32
 desc="Sharper than it has any right to be."
 type="hard"
@@ -830,7 +830,7 @@ diff=2
 
 [WPN.id-wpn-0017]
 name="Widow's Edge"
-effect="damage_increase+6"
+effect="damage_increase+6,crit_inc+3"
 cost=35
 desc="Found in a ditch. Still swings true."
 type="blade"
@@ -857,7 +857,7 @@ diff=2
 
 [WPN.id-wpn-0020]
 name="Alloy Bludgeon"
-effect="damage_increase+11"
+effect="damage_increase+11,crit_inc+6"
 cost=75
 desc="Balanced, if you don't think too hard about it."
 type="hard"
@@ -866,7 +866,7 @@ diff=3
 
 [WPN.id-wpn-0021]
 name="Reaper's Kris"
-effect="damage_increase+9"
+effect="damage_increase+9,crit_inc+4"
 cost=73
 desc="Cracked, but the crack holds."
 type="blade"
@@ -884,7 +884,7 @@ diff=3
 
 [WPN.id-wpn-0023]
 name="Obsidian Rapier"
-effect="damage_increase+9,skip_enemy_turn+1"
+effect="damage_increase+9,skip_enemy_turn+1,crit_inc+4"
 cost=47
 desc="Held together by spite and rust."
 type="blade"
@@ -911,7 +911,7 @@ diff=3
 
 [WPN.id-wpn-0026]
 name="Tungsten Core"
-effect="damage_increase+12,poison+8"
+effect="damage_increase+12,poison+8,crit_inc+7"
 cost=54
 desc="It works, I guess."
 type="hard"
@@ -920,7 +920,7 @@ diff=3
 
 [WPN.id-wpn-0027]
 name="Bloodletter"
-effect="damage_increase+11,poison+5"
+effect="damage_increase+11,poison+5,crit_inc+5"
 cost=56
 desc="Pretty heavy and could definitely induce some head trauma."
 type="blade"
@@ -947,7 +947,7 @@ diff=3
 
 [WPN.id-wpn-0030]
 name="Diamond Knuckles"
-effect="damage_increase+12"
+effect="damage_increase+12,crit_inc+9"
 cost=100
 desc="Found in a ditch. Still swings true."
 type="hard"
@@ -956,7 +956,7 @@ diff=4
 
 [WPN.id-wpn-0031]
 name="Crescent Blade"
-effect="damage_increase+12"
+effect="damage_increase+12,crit_inc+6"
 cost=102
 desc="Smells faintly of copper."
 type="blade"
@@ -974,7 +974,7 @@ diff=4
 
 [WPN.id-wpn-0033]
 name="Void Cutter"
-effect="damage_increase+11,poison+8"
+effect="damage_increase+11,poison+8,crit_inc+7"
 cost=84
 desc="Balanced, if you don't think too hard about it."
 type="blade"
@@ -1001,7 +1001,7 @@ diff=4
 
 [WPN.id-wpn-0036]
 name="Meteor Shard"
-effect="damage_increase+12"
+effect="damage_increase+12,crit_inc+10"
 cost=114
 desc="Held together by spite and rust."
 type="hard"
@@ -1010,7 +1010,7 @@ diff=4
 
 [WPN.id-wpn-0037]
 name="Sundering Edge"
-effect="damage_increase+15"
+effect="damage_increase+15,crit_inc+7"
 cost=107
 desc="Not pretty, but neither is losing."
 type="blade"
@@ -1037,7 +1037,7 @@ diff=4
 
 [WPN.id-wpn-0040]
 name="Hardened Core"
-effect="damage_increase+19,poison+9"
+effect="damage_increase+19,poison+9,crit_inc+18"
 cost=121
 desc="Pretty heavy and could definitely induce some head trauma."
 type="hard"
@@ -1046,7 +1046,7 @@ diff=5
 
 [WPN.id-wpn-0041]
 name="Jagged Falchion"
-effect="damage_increase+15,poison+13"
+effect="damage_increase+15,poison+13,crit_inc+12"
 cost=128
 desc="Really old. Trust me."
 type="blade"
@@ -1064,7 +1064,7 @@ diff=5
 
 [WPN.id-wpn-0043]
 name="Ashen Rapier"
-effect="damage_increase+18"
+effect="damage_increase+18,crit_inc+13"
 cost=149
 desc="Found in a ditch. Still swings true."
 type="blade"
@@ -1091,7 +1091,7 @@ diff=5
 
 [WPN.id-wpn-0046]
 name="Compressed Slab"
-effect="damage_increase+20,poison+12"
+effect="damage_increase+20,poison+12,crit_inc+20"
 cost=153
 desc="Balanced, if you don't think too hard about it."
 type="hard"
@@ -1100,7 +1100,7 @@ diff=5
 
 [WPN.id-wpn-0047]
 name="Duskfang Blade"
-effect="damage_increase+20,poison+10"
+effect="damage_increase+20,poison+10,crit_inc+14"
 cost=144
 desc="Cracked, but the crack holds."
 type="blade"
@@ -1127,7 +1127,7 @@ diff=5
 
 [WPN.id-wpn-0050]
 name="Notched Dagger"
-effect="damage_increase+3"
+effect="damage_increase+3,crit_inc+2"
 cost=12
 desc="Chipped, but the chips are where the cuts land."
 type="blade"
@@ -1172,7 +1172,7 @@ diff=1
 
 [WPN.id-wpn-0055]
 name="Serrated Falchion"
-effect="damage_increase+7"
+effect="damage_increase+7,crit_inc+4"
 cost=33
 desc="Every notch catches on the way through."
 type="blade"
@@ -1217,7 +1217,7 @@ diff=2
 
 [WPN.id-wpn-0060]
 name="Blackened Cutlass"
-effect="damage_increase+10"
+effect="damage_increase+10,crit_inc+5"
 cost=58
 desc="Scorched steel that never lost its edge."
 type="blade"
@@ -1262,7 +1262,7 @@ diff=3
 
 [WPN.id-wpn-0065]
 name="Cursed Saber"
-effect="damage_increase+13"
+effect="damage_increase+13,crit_inc+8"
 cost=90
 desc="Nobody remembers who it belonged to first."
 type="blade"
@@ -1307,7 +1307,7 @@ diff=4
 
 [WPN.id-wpn-0070]
 name="Doomforged Blade"
-effect="damage_increase+17,poison+9"
+effect="damage_increase+17,poison+9,crit_inc+15"
 cost=135
 desc="Forged in something no one wants to talk about."
 type="blade"
