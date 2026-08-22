@@ -1353,7 +1353,7 @@ diff=5
 [AMR]
 [AMR.id-amr-0000]
 name="Metallic Sheet"
-effect="health_temp_increase+4,crit_inc+1"
+effect="health_inc+4,crit_inc+1"
 cost=18
 desc="Protection if you use it right."
 type="metal"
@@ -1362,7 +1362,7 @@ diff=1
 
 [AMR.id-amr-0001]
 name="Chainmail without Chains"
-effect="health_temp_increase+3,defend_round+1"
+effect="health_inc+3,defend_round+1,temp_health_inc+1"
 cost=27
 desc="Lost a couple chains in its life, but it might help."
 type="chain"
@@ -1371,7 +1371,7 @@ diff=1
 
 [AMR.id-amr-0002]
 name="Tin Plate"
-effect="health_temp_increase+3,crit_inc+1"
+effect="health_inc+3,crit_inc+1"
 cost=18
 desc="Dented, but dents don't let much through."
 type="metal"
@@ -1380,7 +1380,7 @@ diff=1
 
 [AMR.id-amr-0003]
 name="Rusty Links"
-effect="health_temp_increase+5"
+effect="health_inc+5,temp_health_inc+1"
 cost=10
 desc="Smells like it's seen a fight or two."
 type="chain"
@@ -1389,7 +1389,7 @@ diff=1
 
 [AMR.id-amr-0004]
 name="Steel Breastplate"
-effect="health_temp_increase+3,defend_round+1,crit_inc+2"
+effect="health_inc+3,defend_round+1,crit_inc+2"
 cost=14
 desc="Held on with wire and hope."
 type="metal"
@@ -1398,7 +1398,7 @@ diff=1
 
 [AMR.id-amr-0005]
 name="Woven Chain Vest"
-effect="health_temp_increase+5,defend_round+1"
+effect="health_inc+5,defend_round+1,temp_health_inc+2"
 cost=13
 desc="Better than nothing, probably."
 type="chain"
@@ -1407,7 +1407,7 @@ diff=1
 
 [AMR.id-amr-0006]
 name="Iron Guard"
-effect="health_temp_increase+4,crit_inc+2"
+effect="health_inc+4,crit_inc+2"
 cost=13
 desc="Cold to the touch, colder to strike."
 type="metal"
@@ -1416,7 +1416,7 @@ diff=1
 
 [AMR.id-amr-0007]
 name="Ringmail Wrap"
-effect="health_temp_increase+5,defend_round+1"
+effect="health_inc+5,defend_round+1,temp_health_inc+2"
 cost=13
 desc="Patched in more places than not."
 type="chain"
@@ -1425,7 +1425,7 @@ diff=1
 
 [AMR.id-amr-0008]
 name="Riveted Plate"
-effect="health_temp_increase+4,defend_round+1,crit_inc+2"
+effect="health_inc+4,defend_round+1,crit_inc+2"
 cost=10
 desc="Heavier than it looks, in a good way."
 type="metal"
@@ -1434,7 +1434,7 @@ diff=1
 
 [AMR.id-amr-0009]
 name="Ironlink Hauberk"
-effect="health_temp_increase+4"
+effect="health_inc+4,temp_health_inc+2"
 cost=13
 desc="Someone else's armor. They didn't need it anymore."
 type="chain"
@@ -1443,7 +1443,7 @@ diff=1
 
 [AMR.id-amr-0010]
 name="Alloy Vest"
-effect="health_temp_increase+8,defend_round+1,crit_inc+2"
+effect="health_inc+8,defend_round+1,crit_inc+2"
 cost=36
 desc="Rattles when you move. Still stops things."
 type="metal"
@@ -1452,7 +1452,7 @@ diff=2
 
 [AMR.id-amr-0011]
 name="Serpent Chain"
-effect="health_temp_increase+9,defend_round+1"
+effect="health_inc+9,defend_round+1,temp_health_inc+3"
 cost=32
 desc="Protection if you use it right."
 type="chain"
@@ -1461,7 +1461,7 @@ diff=2
 
 [AMR.id-amr-0012]
 name="Reinforced Plating"
-effect="health_temp_increase+11,crit_inc+3"
+effect="health_inc+11,crit_inc+3"
 cost=40
 desc="Lost a couple chains in its life, but it might help."
 type="metal"
@@ -1470,7 +1470,7 @@ diff=2
 
 [AMR.id-amr-0013]
 name="Fractured Mail"
-effect="health_temp_increase+8"
+effect="health_inc+8,temp_health_inc+4"
 cost=36
 desc="Dented, but dents don't let much through."
 type="chain"
@@ -1479,7 +1479,7 @@ diff=2
 
 [AMR.id-amr-0014]
 name="Battleforged Cuirass"
-effect="health_temp_increase+9,defend_round+1,crit_inc+3"
+effect="health_inc+9,defend_round+1,crit_inc+3"
 cost=31
 desc="Smells like it's seen a fight or two."
 type="metal"
@@ -1488,7 +1488,7 @@ diff=2
 
 [AMR.id-amr-0015]
 name="Dragonlink Weave"
-effect="health_temp_increase+8"
+effect="health_inc+8,temp_health_inc+4"
 cost=45
 desc="Held on with wire and hope."
 type="chain"
@@ -1497,7 +1497,7 @@ diff=2
 
 [AMR.id-amr-0016]
 name="Adamant Shell"
-effect="health_temp_increase+11,crit_inc+4"
+effect="health_inc+11,crit_inc+4"
 cost=37
 desc="Better than nothing, probably."
 type="metal"
@@ -1506,7 +1506,7 @@ diff=2
 
 [AMR.id-amr-0017]
 name="Sovereign Chainguard"
-effect="health_temp_increase+9"
+effect="health_inc+9,temp_health_inc+5"
 cost=27
 desc="Cold to the touch, colder to strike."
 type="chain"
@@ -1515,7 +1515,7 @@ diff=2
 
 [AMR.id-amr-0018]
 name="Bulwark Plate"
-effect="health_temp_increase+12,crit_inc+4"
+effect="health_inc+12,crit_inc+4"
 cost=25
 desc="Patched in more places than not."
 type="metal"
@@ -1524,7 +1524,7 @@ diff=2
 
 [AMR.id-amr-0019]
 name="Titan Links"
-effect="health_temp_increase+12"
+effect="health_inc+12,temp_health_inc+5"
 cost=45
 desc="Heavier than it looks, in a good way."
 type="chain"
@@ -1533,7 +1533,7 @@ diff=2
 
 [AMR.id-amr-0020]
 name="Hammered Plate"
-effect="health_temp_increase+15,crit_inc+4"
+effect="health_inc+15,crit_inc+4"
 cost=60
 desc="Someone else's armor. They didn't need it anymore."
 type="metal"
@@ -1542,7 +1542,7 @@ diff=3
 
 [AMR.id-amr-0021]
 name="Coiled Hauberk"
-effect="health_temp_increase+14"
+effect="health_inc+14,temp_health_inc+5"
 cost=49
 desc="Rattles when you move. Still stops things."
 type="chain"
@@ -1551,7 +1551,7 @@ diff=3
 
 [AMR.id-amr-0022]
 name="Sentinel Plating"
-effect="health_temp_increase+18,crit_inc+4"
+effect="health_inc+18,crit_inc+4"
 cost=68
 desc="Protection if you use it right."
 type="metal"
@@ -1560,7 +1560,7 @@ diff=3
 
 [AMR.id-amr-0023]
 name="Linked Ward"
-effect="health_temp_increase+20,defend_round+1"
+effect="health_inc+20,defend_round+1,temp_health_inc+6"
 cost=49
 desc="Lost a couple chains in its life, but it might help."
 type="chain"
@@ -1569,7 +1569,7 @@ diff=3
 
 [AMR.id-amr-0024]
 name="Forged Cuirass"
-effect="health_temp_increase+14,defend_round+1,crit_inc+5"
+effect="health_inc+14,defend_round+1,crit_inc+5"
 cost=72
 desc="Dented, but dents don't let much through."
 type="metal"
@@ -1578,7 +1578,7 @@ diff=3
 
 [AMR.id-amr-0025]
 name="Linkweave Vest"
-effect="health_temp_increase+15"
+effect="health_inc+15,temp_health_inc+6"
 cost=54
 desc="Smells like it's seen a fight or two."
 type="chain"
@@ -1587,7 +1587,7 @@ diff=3
 
 [AMR.id-amr-0026]
 name="Ironclad Vest"
-effect="health_temp_increase+18,defend_round+1,crit_inc+5"
+effect="health_inc+18,defend_round+1,crit_inc+5"
 cost=55
 desc="Held on with wire and hope."
 type="metal"
@@ -1596,7 +1596,7 @@ diff=3
 
 [AMR.id-amr-0027]
 name="Rustbound Chain"
-effect="health_temp_increase+19,defend_round+1"
+effect="health_inc+19,defend_round+1,temp_health_inc+7"
 cost=49
 desc="Better than nothing, probably."
 type="chain"
@@ -1605,7 +1605,7 @@ diff=3
 
 [AMR.id-amr-0028]
 name="Plated Guard"
-effect="health_temp_increase+20,crit_inc+6"
+effect="health_inc+20,crit_inc+6"
 cost=59
 desc="Cold to the touch, colder to strike."
 type="metal"
@@ -1614,7 +1614,7 @@ diff=3
 
 [AMR.id-amr-0029]
 name="Serpentine Mail"
-effect="health_temp_increase+15"
+effect="health_inc+15,temp_health_inc+8"
 cost=58
 desc="Patched in more places than not."
 type="chain"
@@ -1623,7 +1623,7 @@ diff=3
 
 [AMR.id-amr-0030]
 name="Girded Steel"
-effect="health_temp_increase+19,crit_inc+6"
+effect="health_inc+19,crit_inc+6"
 cost=108
 desc="Heavier than it looks, in a good way."
 type="metal"
@@ -1632,7 +1632,7 @@ diff=4
 
 [AMR.id-amr-0031]
 name="Ironthread Hauberk"
-effect="health_temp_increase+19"
+effect="health_inc+19,temp_health_inc+7"
 cost=86
 desc="Someone else's armor. They didn't need it anymore."
 type="chain"
@@ -1641,7 +1641,7 @@ diff=4
 
 [AMR.id-amr-0032]
 name="Rampart Plate"
-effect="health_temp_increase+21,defend_round+2,crit_inc+8"
+effect="health_inc+21,defend_round+2,crit_inc+8"
 cost=84
 desc="Rattles when you move. Still stops things."
 type="metal"
@@ -1650,7 +1650,7 @@ diff=4
 
 [AMR.id-amr-0033]
 name="Wovensteel Vest"
-effect="health_temp_increase+19,defend_round+2"
+effect="health_inc+19,defend_round+2,temp_health_inc+8"
 cost=82
 desc="Protection if you use it right."
 type="chain"
@@ -1659,7 +1659,7 @@ diff=4
 
 [AMR.id-amr-0034]
 name="Vanguard Shell"
-effect="health_temp_increase+27,defend_round+2,crit_inc+9"
+effect="health_inc+27,defend_round+2,crit_inc+9"
 cost=108
 desc="Lost a couple chains in its life, but it might help."
 type="metal"
@@ -1668,7 +1668,7 @@ diff=4
 
 [AMR.id-amr-0035]
 name="Chainforged Wrap"
-effect="health_temp_increase+19,defend_round+2"
+effect="health_inc+19,defend_round+2,temp_health_inc+9"
 cost=81
 desc="Dented, but dents don't let much through."
 type="chain"
@@ -1677,7 +1677,7 @@ diff=4
 
 [AMR.id-amr-0036]
 name="Warforged Plate"
-effect="health_temp_increase+20,crit_inc+5"
+effect="health_inc+20,crit_inc+5"
 cost=92
 desc="Smells like it's seen a fight or two."
 type="metal"
@@ -1686,7 +1686,7 @@ diff=4
 
 [AMR.id-amr-0037]
 name="Draketh Mail"
-effect="health_temp_increase+20,defend_round+2"
+effect="health_inc+20,defend_round+2,temp_health_inc+10"
 cost=110
 desc="Held on with wire and hope."
 type="chain"
@@ -1695,7 +1695,7 @@ diff=4
 
 [AMR.id-amr-0038]
 name="Anvilheart Guard"
-effect="health_temp_increase+27,defend_round+2,crit_inc+10"
+effect="health_inc+27,defend_round+2,crit_inc+10"
 cost=114
 desc="Better than nothing, probably."
 type="metal"
@@ -1704,7 +1704,7 @@ diff=4
 
 [AMR.id-amr-0039]
 name="Shackled Guard"
-effect="health_temp_increase+27"
+effect="health_inc+27,temp_health_inc+11"
 cost=92
 desc="Cold to the touch, colder to strike."
 type="chain"
@@ -1713,7 +1713,7 @@ diff=4
 
 [AMR.id-amr-0040]
 name="Ironwrought Vest"
-effect="health_temp_increase+27,crit_inc+12"
+effect="health_inc+27,crit_inc+12"
 cost=145
 desc="Patched in more places than not."
 type="metal"
@@ -1722,7 +1722,7 @@ diff=5
 
 [AMR.id-amr-0041]
 name="Meshguard Vest"
-effect="health_temp_increase+27"
+effect="health_inc+27,temp_health_inc+10"
 cost=131
 desc="Heavier than it looks, in a good way."
 type="chain"
@@ -1731,7 +1731,7 @@ diff=5
 
 [AMR.id-amr-0042]
 name="Bastion Plate"
-effect="health_temp_increase+25,defend_round+2,crit_inc+15"
+effect="health_inc+25,defend_round+2,crit_inc+15"
 cost=123
 desc="Someone else's armor. They didn't need it anymore."
 type="metal"
@@ -1740,7 +1740,7 @@ diff=5
 
 [AMR.id-amr-0043]
 name="Braided Hauberk"
-effect="health_temp_increase+34,defend_round+2"
+effect="health_inc+34,defend_round+2,temp_health_inc+11"
 cost=135
 desc="Rattles when you move. Still stops things."
 type="chain"
@@ -1749,7 +1749,7 @@ diff=5
 
 [AMR.id-amr-0044]
 name="Kiln-forged Shell"
-effect="health_temp_increase+34,defend_round+2,crit_inc+17"
+effect="health_inc+34,defend_round+2,crit_inc+17"
 cost=119
 desc="Protection if you use it right."
 type="metal"
@@ -1758,7 +1758,7 @@ diff=5
 
 [AMR.id-amr-0045]
 name="Ashen Chainwrap"
-effect="health_temp_increase+26"
+effect="health_inc+26,temp_health_inc+12"
 cost=122
 desc="Lost a couple chains in its life, but it might help."
 type="chain"
@@ -1767,7 +1767,7 @@ diff=5
 
 [AMR.id-amr-0046]
 name="Siegeplate"
-effect="health_temp_increase+29,defend_round+2,crit_inc+14"
+effect="health_inc+29,defend_round+2,crit_inc+14"
 cost=156
 desc="Dented, but dents don't let much through."
 type="metal"
@@ -1776,7 +1776,7 @@ diff=5
 
 [AMR.id-amr-0047]
 name="Tarnished Links"
-effect="health_temp_increase+27"
+effect="health_inc+27,temp_health_inc+13"
 cost=123
 desc="Smells like it's seen a fight or two."
 type="chain"
@@ -1785,7 +1785,7 @@ diff=5
 
 [AMR.id-amr-0048]
 name="Anchorplate Guard"
-effect="health_temp_increase+31,defend_round+2,crit_inc+19"
+effect="health_inc+31,defend_round+2,crit_inc+19"
 cost=121
 desc="Held on with wire and hope."
 type="metal"
@@ -1794,7 +1794,7 @@ diff=5
 
 [AMR.id-amr-0049]
 name="Riftlink Mail"
-effect="health_temp_increase+27,defend_round+2"
+effect="health_inc+27,defend_round+2,temp_health_inc+14"
 cost=157
 desc="Better than nothing, probably."
 type="chain"
@@ -1803,7 +1803,7 @@ diff=5
 
 [AMR.id-amr-0050]
 name="Dented Cap"
-effect="health_temp_increase+4,crit_inc+3"
+effect="health_inc+4,crit_inc+3"
 cost=12
 desc="Already dented, so the next hit has less to do."
 type="metal"
@@ -1812,7 +1812,7 @@ diff=1
 
 [AMR.id-amr-0051]
 name="Frayed Coif"
-effect="health_temp_increase+4,defend_round+1"
+effect="health_inc+4,defend_round+1,temp_health_inc+3"
 cost=14
 desc="Held together by more hope than metal."
 type="chain"
@@ -1821,7 +1821,7 @@ diff=1
 
 [AMR.id-amr-0052]
 name="Scrap Guard"
-effect="health_temp_increase+3,crit_inc+3"
+effect="health_inc+3,crit_inc+3"
 cost=9
 desc="Whatever was lying around, strapped on tight enough."
 type="metal"
@@ -1830,7 +1830,7 @@ diff=1
 
 [AMR.id-amr-0053]
 name="Loose Links"
-effect="health_temp_increase+5"
+effect="health_inc+5"
 cost=11
 desc="Rattles constantly. Still holds."
 type="chain"
@@ -1839,7 +1839,7 @@ diff=1
 
 [AMR.id-amr-0054]
 name="Patchwork Plate"
-effect="health_temp_increase+4,defend_round+1"
+effect="health_inc+4,defend_round+1"
 cost=13
 desc="No two pieces match, but none of them give."
 type="metal"
@@ -1848,7 +1848,7 @@ diff=1
 
 [AMR.id-amr-0055]
 name="Forged Pauldrons"
-effect="health_temp_increase+10,crit_inc+5"
+effect="health_inc+10,crit_inc+5"
 cost=34
 desc="Wide enough to catch what's meant for your neck."
 type="metal"
@@ -1857,7 +1857,7 @@ diff=2
 
 [AMR.id-amr-0056]
 name="Whipcord Mail"
-effect="health_temp_increase+9,defend_round+1"
+effect="health_inc+9,defend_round+1,temp_health_inc+6"
 cost=30
 desc="Flexes without ever really giving way."
 type="chain"
@@ -1866,7 +1866,7 @@ diff=2
 
 [AMR.id-amr-0057]
 name="Tempered Shell"
-effect="health_temp_increase+11,crit_inc+5"
+effect="health_inc+11,crit_inc+5"
 cost=38
 desc="Hardened slow, which is why it holds."
 type="metal"
@@ -1875,7 +1875,7 @@ diff=2
 
 [AMR.id-amr-0058]
 name="Rivermail Vest"
-effect="health_temp_increase+10,defend_round+1"
+effect="health_inc+10,defend_round+1"
 cost=33
 desc="Cold and quiet, like the water it's named for."
 type="chain"
@@ -1884,7 +1884,7 @@ diff=2
 
 [AMR.id-amr-0059]
 name="Hardened Cuirass"
-effect="health_temp_increase+9"
+effect="health_inc+9"
 cost=28
 desc="It's been through worse than this."
 type="metal"
@@ -1893,7 +1893,7 @@ diff=2
 
 [AMR.id-amr-0060]
 name="Ironflame Plate"
-effect="health_temp_increase+17,crit_inc+6"
+effect="health_inc+17,crit_inc+6"
 cost=55
 desc="Quenched in something that left a permanent mark."
 type="metal"
@@ -1902,7 +1902,7 @@ diff=3
 
 [AMR.id-amr-0061]
 name="Braidlink Vest"
-effect="health_temp_increase+16,defend_round+1"
+effect="health_inc+16,defend_round+1,temp_health_inc+9"
 cost=52
 desc="Each link braided twice, just to be sure."
 type="chain"
@@ -1911,7 +1911,7 @@ diff=3
 
 [AMR.id-amr-0062]
 name="Fortified Guard"
-effect="health_temp_increase+19,defend_round+1,crit_inc+7"
+effect="health_inc+19,defend_round+1,crit_inc+7"
 cost=63
 desc="Built to be the last thing standing."
 type="metal"
@@ -1920,7 +1920,7 @@ diff=3
 
 [AMR.id-amr-0063]
 name="Woven Barrier"
-effect="health_temp_increase+15"
+effect="health_inc+15"
 cost=50
 desc="Thin, but it doesn't tear the way you'd expect."
 type="chain"
@@ -1929,7 +1929,7 @@ diff=3
 
 [AMR.id-amr-0064]
 name="Runeforged Cuirass"
-effect="health_temp_increase+18"
+effect="health_inc+18"
 cost=66
 desc="The markings aren't just for show."
 type="metal"
@@ -1938,7 +1938,7 @@ diff=3
 
 [AMR.id-amr-0065]
 name="Stalwart Plate"
-effect="health_temp_increase+22,defend_round+2,crit_inc+7"
+effect="health_inc+22,defend_round+2,crit_inc+7"
 cost=95
 desc="Doesn't bend. Never has."
 type="metal"
@@ -1947,7 +1947,7 @@ diff=4
 
 [AMR.id-amr-0066]
 name="Ironmesh Wrap"
-effect="health_temp_increase+20,defend_round+2"
+effect="health_inc+20,defend_round+2,temp_health_inc+12"
 cost=87
 desc="A thousand small links doing one big job."
 type="chain"
@@ -1956,7 +1956,7 @@ diff=4
 
 [AMR.id-amr-0067]
 name="Bulwark Vanguard"
-effect="health_temp_increase+25,crit_inc+9"
+effect="health_inc+25,crit_inc+9"
 cost=104
 desc="Meant to be worn by whoever goes first."
 type="metal"
@@ -1965,7 +1965,7 @@ diff=4
 
 [AMR.id-amr-0068]
 name="Serpentcoil Mail"
-effect="health_temp_increase+21"
+effect="health_inc+21"
 cost=90
 desc="Coils tighter the harder it's struck."
 type="chain"
@@ -1974,7 +1974,7 @@ diff=4
 
 [AMR.id-amr-0069]
 name="Adamant Bastion"
-effect="health_temp_increase+24,defend_round+2"
+effect="health_inc+24,defend_round+2"
 cost=109
 desc="Nothing about this gives an inch."
 type="metal"
@@ -1983,7 +1983,7 @@ diff=4
 
 [AMR.id-amr-0070]
 name="Aegis Plate"
-effect="health_temp_increase+30,defend_round+2,crit_inc+16"
+effect="health_inc+30,defend_round+2,crit_inc+16"
 cost=128
 desc="Named for what it's meant to be, not what it looks like."
 type="metal"
@@ -1992,7 +1992,7 @@ diff=5
 
 [AMR.id-amr-0071]
 name="Wyrmscale Wrap"
-effect="health_temp_increase+28,defend_round+2"
+effect="health_inc+28,defend_round+2,temp_health_inc+16"
 cost=122
 desc="Scales that turned aside worse than this."
 type="chain"
@@ -2001,7 +2001,7 @@ diff=5
 
 [AMR.id-amr-0072]
 name="Colossus Shell"
-effect="health_temp_increase+33,crit_inc+20"
+effect="health_inc+33,crit_inc+20"
 cost=140
 desc="Wearing it changes how you walk. Worth it."
 type="metal"
@@ -2010,7 +2010,7 @@ diff=5
 
 [AMR.id-amr-0073]
 name="Riftbound Chain"
-effect="health_temp_increase+29"
+effect="health_inc+29"
 cost=131
 desc="Forged somewhere the light doesn't reach."
 type="chain"
@@ -2019,7 +2019,7 @@ diff=5
 
 [AMR.id-amr-0074]
 name="Eternium Guard"
-effect="health_temp_increase+32,defend_round+2"
+effect="health_inc+32,defend_round+2"
 cost=148
 desc="The last piece of armor most fighters will ever need."
 type="metal"

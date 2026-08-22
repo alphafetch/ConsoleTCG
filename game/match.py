@@ -299,7 +299,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                         for effect_type, value in effects.items():
                             match effect_type:
                                 # 3a. Health Temp Inc
-                                case "health_temp_increase":
+                                case "health_inc":
                                     u_health += value
                                     print(f"Your {styles.format_style("health", "green")}{styles.clear_styles()} increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (HP: {u_health})")
                                     time.sleep(3)
@@ -454,7 +454,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                     for effect_type, value in effects.items():
                         match effect_type:
                             # 3a. Health Temp Inc
-                            case "health_temp_increase":
+                            case "health_inc":
                                 op_health += value
                                 print(f"{name}{styles.clear_styles()} {styles.format_style("health", "green")}{styles.clear_styles()} increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (HP: {op_health})")
                                 time.sleep(3)
@@ -722,7 +722,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                             for effect_type, value in effects.items():
                                 match effect_type:
                                     # 3a. Health Temp Inc
-                                    case "health_temp_increase":
+                                    case "health_inc":
                                         u_health += value
                                         print(f"Your {styles.format_style("health", "green")}{styles.clear_styles()} increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (HP: {u_health})")
                                         time.sleep(3)
@@ -885,7 +885,7 @@ def start_match(world: int, enemy: Opponent, number: int) -> bool:
                         for effect_type, value in effects.items():
                             match effect_type:
                                 # 3a. Health Temp Inc
-                                case "health_temp_increase":
+                                case "health_inc":
                                     op_health += value
                                     print(f"{name}{styles.clear_styles()} {styles.format_style("health", "green")}{styles.clear_styles()} increased by {styles.format_style("+", "green")}{styles.format_style(str(value), "green")}{styles.clear_styles()}! (HP: {op_health})")
                                     time.sleep(3)
