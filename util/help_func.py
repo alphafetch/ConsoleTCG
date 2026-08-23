@@ -136,7 +136,7 @@ def print_card(card: dict[str, Any], cat: str) -> None:
 {card["name"]}
 | DMG: {card["damage"]}
 | TOK: {card["cost"]}
-| TYPE: {card["type"]}
+| TYPE: {card["type"].capitalize()}
 └───────────────┘
 DESC: {card["desc"]}""", "red"))
     elif cat == "WPN":
@@ -144,7 +144,7 @@ DESC: {card["desc"]}""", "red"))
 {card["name"]}
 | MODIF: {eff}
 | TOK: {card["cost"]}
-| TYPE: {card["type"]}
+| TYPE: {card["type"].capitalize()}
 └───────────────┘
 DESC: {card["desc"]}""", "yellow"))
     elif cat == "AMR":
@@ -152,7 +152,7 @@ DESC: {card["desc"]}""", "yellow"))
 {card["name"]}
 | MODIF: {eff}
 | TOK: {card["cost"]}
-| TYPE: {card["type"]}
+| TYPE: {card["type"].capitalize()}
 └───────────────┘
 DESC: {card["desc"]}""", "cyan"))
 
